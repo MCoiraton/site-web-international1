@@ -18,6 +18,9 @@ echo("<br>Adresse mail : ");
 echo(session("mail"));
 echo("<br>Identifiant UL : ");
 echo(session("uid"));
+echo("<br>Elève polytech ? ");
+if(session("isPolytech")) echo("Oui");
+else echo("Non");
 ?>
 </body>
 <footer>

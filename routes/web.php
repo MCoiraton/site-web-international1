@@ -31,6 +31,14 @@ Route::get('/auth/login', function(){
     if(!phpCAS::checkAuthentication()){
         phpCAS::forceAuthentication();
     }
+    $isPolytech=false;
+    $myfile = fopen("userlist.txt", "r") or die("Unable to open file!");
+    while(!feof($myfile)) {
+        $currentUser=fgets($myfile);
+        if($currentUser==phpCAS::getAttribute("uid")) $isPolytech=true;
+    }
+    fclose($myfile);
+    session()->put('isPolytech',$isPolytech);
     session()->put('uid',phpCAS::getAttribute("uid"));
     session()->put('prenom',phpCAS::getAttribute("givenname"));
     session()->put('nom',phpCAS::getAttribute("sn"));
