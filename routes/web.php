@@ -22,20 +22,26 @@ Route::get('/Destinations', function () {
 Route::get('/CV', function () {
     return view('generateurcv');
 });
-Route::get('/test', function () {
-    return view('testscas');
+Route::get('/Profil', function () {
+    return view('profil');
 });
 Route::get('/auth/login', function(){
     phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
     phpCAS::setNoCasServerValidation();
-    phpCAS::forceAuthentication();
-    echo(phpCAS::getUser());
-});
-Route::get('/auth/logout', [
-    'middleware' => 'cas.auth', 
-    function(){ 
-        cas()->logout(); 
+    if(!phpCAS::checkAuthentication()){
+        phpCAS::forceAuthentication();
     }
-]);
+    session()->put('uid',phpCAS::getAttribute("uid"));
+    session()->put('prenom',phpCAS::getAttribute("givenname"));
+    session()->put('nom',phpCAS::getAttribute("sn"));
+    session()->put('mail',phpCAS::getAttribute("mail"));
+    return redirect('/');
+});
+Route::get('/auth/logout', function(){
+    session()->forget(['uid','nom','prenom','mail']);
+    session()->save();
+    phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
+    phpCAS::logoutWithRedirectService("http://polytech-international.univ-lorraine.fr:8000");
+});
 
 
