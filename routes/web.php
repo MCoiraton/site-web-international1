@@ -23,6 +23,12 @@ Route::get('/Destinations', function () {
 Route::get('/Destination', function () {
     return view('destination');
 });
+Route::get('/NouvelleDestination', function () {
+    return view('newdestination');
+});
+Route::post('/NouvelleDestination', function () {
+    return view('newdestination');
+});
 Route::get('/CV', function () {
     return view('generateurcv');
 });

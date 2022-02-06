@@ -8,6 +8,7 @@
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
               <a href="/" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
+              <a href="/NouvelleDestination" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ajouter une destination</a>
               <a href="/Destinations" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Destinations</a>
               <a href="/CV" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Générateur de CV</a>
             </div>
