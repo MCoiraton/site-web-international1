@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ Route::get('/', function () {
 });
 Route::get('/Destinations', function () {
     return view('destinations');
+});
+Route::get('/Destination', function () {
+    return view('destination');
 });
 Route::get('/CV', function () {
     return view('generateurcv');
@@ -45,8 +49,8 @@ Route::get('/auth/login', function(){
     session()->put('mail',phpCAS::getAttribute("mail"));
     $admins=DB::select("select * from admin");
     $isAdmin=false;
-    for($i=0;$i<count($admins);$i++){
-        if($admins[$i]->uid==session("uid")) $isAdmin=true;
+    foreach($admins as $admin){
+        if($admin->uid==session("uid")) $isAdmin=true;
     }
     session()->put('isAdmin',$isAdmin);
     return redirect('/');
