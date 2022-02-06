@@ -43,13 +43,19 @@ Route::get('/auth/login', function(){
     session()->put('prenom',phpCAS::getAttribute("givenname"));
     session()->put('nom',phpCAS::getAttribute("sn"));
     session()->put('mail',phpCAS::getAttribute("mail"));
+    $admins=DB::select("select * from admin");
+    $isAdmin=false;
+    for($i=0;$i<count($admins);$i++){
+        if($admins[$i]->uid==session("uid")) $isAdmin=true;
+    }
+    session()->put('isAdmin',$isAdmin);
     return redirect('/');
 });
 Route::get('/auth/logout', function(){
     session()->forget(['uid','nom','prenom','mail']);
     session()->save();
     phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
-    phpCAS::logoutWithRedirectService("http://polytech-international.univ-lorraine.fr:8000");
+    phpCAS::logoutWithRedirectService("http://pive-site-web-international.univ-lorraine.fr");
 });
 
 

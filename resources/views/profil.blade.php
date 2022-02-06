@@ -21,6 +21,10 @@ echo(session("uid"));
 echo("<br>Elève polytech ? ");
 if(session("isPolytech")) echo("Oui");
 else echo("Non");
+echo("<br>Admin ? ");
+if(session("isAdmin")) echo("Oui");
+else echo("Non");
+
 ?>
 </body>
 <footer>
