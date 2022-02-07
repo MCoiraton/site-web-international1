@@ -7,6 +7,80 @@
     <title>Polytech Nancy International</title>
     <link rel ="stylesheet" href ="{{ asset('css/app.css')}}">
     @include("nav")
+    <script>
+      nbreCours=-1;
+      function newCours(){
+        nbreCours+=1;
+        var newdiv=document.createElement('div');
+        newdiv.innerHTML="<div class=\"grid grid-cols-4 mt-5 mx-7\">"+
+          "<div class=\"grid grid-cols-1\">"+
+          "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Semestre :</label>"+
+            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"semestre["+nbreCours+"]\" type=\"text\"/>"+
+            "</div>"+
+            "<div class=\"grid grid-cols-1 ml-1\">"+
+              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Code :</label>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"code["+nbreCours+"]\" type=\"text\"/>"+
+            "</div>"+
+            "<div class=\"grid grid-cols-1 ml-1\">"+
+              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Titre</label>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"titre["+nbreCours+"]\" type=\"text\"/>"+
+            "</div>"+
+            "<div class=\"grid grid-cols-1 ml-1\">"+
+              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nombre d'échanges</label>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nombre["+nbreCours+"]\" type=\"text\"/>"+
+            "</div></div>"+
+            "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
+              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Contenu</label>"+
+              "<textarea style=\"white-space: pre-wrap\" class=\"h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"contenu["+nbreCours+"]\" type=\"text\"></textarea>"+
+              "</div>"+
+            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppCours(this)\">Supprmier ce cours</button>";
+          document.getElementById('cours').appendChild(newdiv);
+      };
+      function suppCours(btn){
+        nbreCours-=1;
+        btn.parentNode.remove();
+      };
+      nbreBlog=-1;
+      function newBlog(){
+        nbreBlog+=1;
+        var newdiv=document.createElement('div');
+        newdiv.innerHTML="<div class=\"grid grid-cols-2 mt-5 mx-7\">"+
+          "<div class=\"grid grid-cols-1\">"+
+          "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom :</label>"+
+            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomblog["+nbreBlog+"]\" type=\"text\"/>"+
+            "</div>"+
+            "<div class=\"grid grid-cols-1 ml-1\">"+
+              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lien :</label>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienblog["+nbreBlog+"]\" type=\"text\"/>"+
+            "</div><div>"+
+            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppBlog(this)\">Supprmier ce blog</button>";
+          document.getElementById('blog').appendChild(newdiv);
+      };
+      function suppBlog(btn){
+        nbreBlog-=1;
+        btn.parentNode.remove();
+      };
+      nbreLien=-1;
+      function newLien(){
+        nbreLien+=1;
+        var newdiv=document.createElement('div');
+        newdiv.innerHTML="<div class=\"grid grid-cols-2 mt-5 mx-7\">"+
+          "<div class=\"grid grid-cols-1\">"+
+          "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom :</label>"+
+            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomlien["+nbreBlog+"]\" type=\"text\"/>"+
+            "</div>"+
+            "<div class=\"grid grid-cols-1 ml-1\">"+
+              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lien :</label>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienlien["+nbreBlog+"]\" type=\"text\"/>"+
+            "</div><div>"+
+            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppLien(this)\">Supprmier ce lien</button>";
+          document.getElementById('lien').appendChild(newdiv);
+      };
+      function suppLien(btn){
+        nbreLien-=1;
+        btn.parentNode.remove();
+      };
+      </script>
 </head>
 <body>
     <form method="post">
@@ -43,6 +117,28 @@
               <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Ajouter des images</label>
               <input name="introphotos" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file" multiple>
           </div>
+          <div id="cours" div class="grid grid-cols-1 mt-5 mx-7">
+            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Liste des cours choisis par les étudiants</label>
+          </div>
+          <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+            <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' type="button" onclick="newCours()">Ajouter un cours</button>
+          </div>
+          <div id="blog" div class="grid grid-cols-1 mt-5 mx-7">
+            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Blogs réalisés par les étudiants</label>
+          </div>
+          <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+            <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' type="button" onclick="newBlog()">Ajouter un blog</button>
+          </div>
+          <div id="lien" div class="grid grid-cols-1 mt-5 mx-7">
+            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Liens utiles</label>
+          </div>
+          <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+            <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' type="button" onclick="newLien()">Ajouter un lien</button>
+          </div>
+          <div class="grid grid-cols-1 mt-5 mx-7">
+            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Astuces et informations complémentaires</label>
+            <textarea name="astucesinfos" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required></textarea>
+          </div>
           
 
           <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
@@ -61,7 +157,7 @@
 <?php
 if(!isset($_POST["nom"])){}
 else{
-    echo($_POST["intro"]);
+    var_dump($_POST["semestre"]);
 }
 ?>
 
