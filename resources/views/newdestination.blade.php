@@ -83,7 +83,7 @@
       </script>
 </head>
 <body>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         @csrf
     <div class="flex items-center justify-center  mt-10 mb-10">
         <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12 lg:w-1/2">
@@ -158,6 +158,7 @@ use Illuminate\Support\Facades\DB;
 if(!isset($_POST["nom"])){}
 else{
   $nom=$_POST["nom"];
+  /*
   $intro=$_POST["intro"];
   $temoignages=$_POST["temoignages"];
   $astucesinfos=$_POST["astucesinfos"];
@@ -185,7 +186,27 @@ else{
     for($i=0;$i<count($semestre);$i++){
       DB::insert('insert into assocours (nomdestination,semestre,code,titre,nombre,contenu) values (?,?,?,?,?,?)',[$nom,$semestre[$i],$code[$i],$titre[$i],$nombre[$i],$contenu[$i]]);
     }
+  } */
+  $i=0;
+  var_dump($_FILES["introphotos"]);
+  foreach($_FILES["introphotos"]["name"] as $nomimage){
+    $info = pathinfo($nomimage);
+    $ext = $info['extension'];
+    $newname = "$i.".$ext; 
+    $target = "img/destinations/$nom".$newname;
+    move_uploaded_file( $nomimage, $target);
+    $i+=1;
   }
+  foreach($_FILES["temoignagesphotos"]["tmp_name"] as $nomimage){
+    $info = pathinfo($nomimage);
+    $ext = $info['extension'];
+    $newname = "$i.".$ext; 
+    $target = "img/destinations/$nom".$newname;
+    move_uploaded_file( $nomimage, $target);
+    $i+=1;
+  }
+
+
 }
     
 ?>
