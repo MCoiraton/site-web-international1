@@ -105,7 +105,7 @@
 
           <div class="grid grid-cols-1 mt-5 mx-7">
               <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Ajouter des images</label>
-              <input name="introphotos" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file" multiple>
+              <input name="introphotos[]" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file" multiple>
           </div>
 
           <div class="grid grid-cols-1 mt-5 mx-7">
@@ -115,7 +115,7 @@
 
           <div class="grid grid-cols-1 mt-5 mx-7">
               <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Ajouter des images</label>
-              <input name="introphotos" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file" multiple>
+              <input name="temoignagesphotos[]" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file" multiple>
           </div>
           <div id="cours" div class="grid grid-cols-1 mt-5 mx-7">
             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Liste des cours choisis par les étudiants</label>
@@ -161,18 +161,18 @@ else{
   $intro=$_POST["intro"];
   $temoignages=$_POST["temoignages"];
   $astucesinfos=$_POST["astucesinfos"];
-  DB::insert('insert into destinations (nom,intro,temoignages,astucesinfos) values (?,?,?,?)',[$nom,$intro,$temoignages,$astucesinfos]);
+  DB::insert('insert into destination (nom,intro,temoignages,astucesinfos) values (?,?,?,?)',[$nom,$intro,$temoignages,$astucesinfos]);
   if(isset($_POST["nomblog"])){
     $nomsblog=$_POST["nomblog"];
     $liensblog=$_POST["lienblog"];
-    for($i=0;=i<count($nomsblog);$i++){
+    for($i=0;$i<count($nomsblog);$i++){
       DB::insert('insert into assoblog (nomdestination,nom,lien) values (?,?,?)',[$nom,$nomsblog[$i],$liensblog[$i]]);
     }
   }
   if(isset($_POST["nomlien"])){
     $nomslien=$_POST["nomlien"];
     $lienslien=$_POST["lienlien"];
-    for($i=0;=i<count($nomslien);$i++){
+    for($i=0;$i<count($nomslien);$i++){
       DB::insert('insert into assolien (nomdestination,nom,lien) values (?,?,?)',[$nom,$nomslien[$i],$lienslien[$i]]);
     }
   }
@@ -182,10 +182,11 @@ else{
     $titre=$_POST["titre"];
     $nombre=$_POST["nombre"];
     $contenu=$_POST["contenu"];
-    for($i=0;=i<count($semestre);$i++){
+    for($i=0;$i<count($semestre);$i++){
       DB::insert('insert into assocours (nomdestination,semestre,code,titre,nombre,contenu) values (?,?,?,?,?,?)',[$nom,$semestre[$i],$code[$i],$titre[$i],$nombre[$i],$contenu[$i]]);
     }
   }
+}
     
 ?>
 
