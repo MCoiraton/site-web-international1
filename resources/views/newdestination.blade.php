@@ -12,7 +12,7 @@
       function newCours(){
         nbreCours+=1;
         var newdiv=document.createElement('div');
-        newdiv.innerHTML="<div class=\"grid grid-cols-4 mt-5 mx-7\">"+
+        newdiv.innerHTML="<div><div class=\"grid grid-cols-4 mt-5 mx-7\">"+
           "<div class=\"grid grid-cols-1\">"+
           "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Semestre :</label>"+
             "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"semestre["+nbreCours+"]\" type=\"text\"/>"+
@@ -33,7 +33,7 @@
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Contenu</label>"+
               "<textarea style=\"white-space: pre-wrap\" class=\"h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"contenu["+nbreCours+"]\" type=\"text\"></textarea>"+
               "</div>"+
-            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppCours(this)\">Supprimer ce cours</button>";
+            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppCours(this)\">Supprimer ce cours</button></div>";
           document.getElementById('cours').appendChild(newdiv);
       };
       function suppCours(btn){
@@ -44,7 +44,7 @@
       function newBlog(){
         nbreBlog+=1;
         var newdiv=document.createElement('div');
-        newdiv.innerHTML="<div class=\"grid grid-cols-2 mt-5 mx-7\">"+
+        newdiv.innerHTML="<div><div class=\"grid grid-cols-2 mt-5 mx-7\">"+
           "<div class=\"grid grid-cols-1\">"+
           "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom :</label>"+
             "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomblog["+nbreBlog+"]\" type=\"text\"/>"+
@@ -52,8 +52,8 @@
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lien :</label>"+
               "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienblog["+nbreBlog+"]\" type=\"text\"/>"+
-            "</div><div>"+
-            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppBlog(this)\">Supprimer ce blog</button>";
+            "</div></div>"+
+            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppBlog(this)\">Supprimer ce blog</button></div>";
           document.getElementById('blog').appendChild(newdiv);
       };
       function suppBlog(btn){
@@ -64,16 +64,16 @@
       function newLien(){
         nbreLien+=1;
         var newdiv=document.createElement('div');
-        newdiv.innerHTML="<div class=\"grid grid-cols-2 mt-5 mx-7\">"+
+        newdiv.innerHTML="<div><div class=\"grid grid-cols-2 mt-5 mx-7\">"+
           "<div class=\"grid grid-cols-1\">"+
           "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom :</label>"+
-            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomlien["+nbreBlog+"]\" type=\"text\"/>"+
+            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomlien["+nbreLien+"]\" type=\"text\"/>"+
             "</div>"+
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lien :</label>"+
-              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienlien["+nbreBlog+"]\" type=\"text\"/>"+
-            "</div><div>"+
-            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppLien(this)\">Supprimer ce lien</button>";
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienlien["+nbreLien+"]\" type=\"text\"/>"+
+            "</div></div>"+
+            "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppLien(this)\">Supprimer ce lien</button></div>";
           document.getElementById('lien').appendChild(newdiv);
       };
       function suppLien(btn){
@@ -150,14 +150,42 @@
     </form>
 </body>
 <footer>
-<script src="{{ asset('js/generateur_cv.js')}}"></script>
 @include("footer")
 </footer>
 </html>
 <?php
+use Illuminate\Support\Facades\DB;
 if(!isset($_POST["nom"])){}
 else{
-    var_dump($nomblog);
-}
+  $nom=$_POST["nom"];
+  $intro=$_POST["intro"];
+  $temoignages=$_POST["temoignages"];
+  $astucesinfos=$_POST["astucesinfos"];
+  DB::insert('insert into destinations (nom,intro,temoignages,astucesinfos) values (?,?,?,?)',[$nom,$intro,$temoignages,$astucesinfos]);
+  if(isset($_POST["nomblog"])){
+    $nomsblog=$_POST["nomblog"];
+    $liensblog=$_POST["lienblog"];
+    for($i=0;=i<count($nomsblog);$i++){
+      DB::insert('insert into assoblog (nomdestination,nom,lien) values (?,?,?)',[$nom,$nomsblog[$i],$liensblog[$i]]);
+    }
+  }
+  if(isset($_POST["nomlien"])){
+    $nomslien=$_POST["nomlien"];
+    $lienslien=$_POST["lienlien"];
+    for($i=0;=i<count($nomslien);$i++){
+      DB::insert('insert into assolien (nomdestination,nom,lien) values (?,?,?)',[$nom,$nomslien[$i],$lienslien[$i]]);
+    }
+  }
+  if(isset($_POST["semestre"])){
+    $semestre=$_POST["semestre"];
+    $code=$_POST["code"];
+    $titre=$_POST["titre"];
+    $nombre=$_POST["nombre"];
+    $contenu=$_POST["contenu"];
+    for($i=0;=i<count($semestre);$i++){
+      DB::insert('insert into assocours (nomdestination,semestre,code,titre,nombre,contenu) values (?,?,?,?,?,?)',[$nom,$semestre[$i],$code[$i],$titre[$i],$nombre[$i],$contenu[$i]]);
+    }
+  }
+    
 ?>
 
