@@ -16,19 +16,8 @@ $nom=Route::getCurrentRoute()->uri();
 <body>
     <main class="relative container mx-auto bg-white px-4">
 
-        <div id="main_image_blur" class="relative -mx-4 top-0 pt-[17%] overflow-hidden">
-            <img class="absolute inset-0 z-0 object-cover object-top w-full h-full filter blur" src="../../img/glasgow.jpeg" alt="" />
-        </div>
-
-        <div id="main_image" class="mt-[-10%] w-1/2 mx-auto">
-            <div class="relative pt-[56.25%] overflow-hidden rounded-2xl">
-            <img class="w-full h-full absolute inset-0 object-cover" src="../../img/glasgow.jpeg" alt="" />
-            </div>
-        </div>
-
-        <article class="max-w-prose mx-auto py-8">
-            <h1 class="text-3xl font-bold">Nom Complet de l'Université.</h1>
-            <h2 class="mt-2 text-sm text-gray-500 mb-2">Lien web.</h2>
+        <article class="max-w-4xl mx-auto py-8">
+            <h1 class="text-3xl font-bold"><?php echo($nom); ?></h1>
 
             <h3 class="text-2xl font-semibold">Introduction</h3>
             <p class="mt-4 mb-6">Introduction et courte présentation de l'université avec photos</p>
@@ -45,7 +34,7 @@ $nom=Route::getCurrentRoute()->uri();
                 </div>
             </div>
 
-            <h3 class="text-2xl font-semibold">Our students at the university:</h3>
+            <h3 class="text-2xl font-semibold">Nos étudiants sur place</h3>
             <p class="mt-4 mb-6">Retour des expériences des étudiants de Polytech Nancy dans cette université.(Avec photos)</p>
             <div class="flex flex-col items-center">
                 <div class="flex flex-col items-center">
@@ -68,8 +57,8 @@ $nom=Route::getCurrentRoute()->uri();
                     <th class="px-4 py-3">Code</th>
                     <th class="px-4 py-3">Titre Cours</th>
                     <th class="px-4 py-3">ECTS</th>
-                    <th class="px-4 py-3">Contenu</th>
                     <th class="px-4 py-3">Nombre d'échanges</th>
+                    <th class="px-4 py-3">Contenu</th>
                 </tr>
                 
                 <tr class="bg-gray-100 border-b border-gray-200">
@@ -77,8 +66,8 @@ $nom=Route::getCurrentRoute()->uri();
                     <td class="px-4 py-3">AAAA</td>
                     <td class="px-4 py-3">Cours numero 1</td>
                     <td class="px-4 py-3">5</td>
-                    <td class="px-4 py-3">Chapitre x<br>TD y<br>TP z</td>
                     <td class="px-4 py-3">2</td>
+                    <td class="px-4 py-3">Chapitre x<br>TD y<br>TP z</td>
                 </tr>
             </table>
 
