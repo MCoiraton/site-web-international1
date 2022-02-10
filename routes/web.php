@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CandidatureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +53,4 @@ Route::get('/auth/logout', function(){
     phpCAS::logoutWithRedirectService("http://polytech-international.univ-lorraine.fr:8000");
 });
 
-
+Route::get('/fiche_candidature', [CandidatureController::class, 'show']);
