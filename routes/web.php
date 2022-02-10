@@ -54,3 +54,7 @@ Route::get('/auth/logout', function(){
 });
 
 Route::get('/fiche_candidature', [CandidatureController::class, 'show']);
+
+Route::get('/fiche_candidature1', function(){
+    return view('fiche_candidature1');
+});
