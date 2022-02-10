@@ -20,7 +20,12 @@ $nom=Route::getCurrentRoute()->uri();
             <h1 class="text-3xl font-bold"><?php echo($nom); ?></h1>
 
             <h3 class="text-2xl font-semibold">Introduction</h3>
-            <p class="mt-4 mb-6">Introduction et courte présentation de l'université avec photos</p>
+            <p class="mt-4 mb-6">
+                <?php
+                $intro=DB::select('select intro from destination where nom = ?',[$nom]);
+                echo($intro[0]->intro);
+                ?>
+            </p>
             <div class="flex flex-col items-center">
                 <div class="flex flex-col items-center">
                     <div class="swiper flex overflow-x-scroll w-5/6">
@@ -35,7 +40,12 @@ $nom=Route::getCurrentRoute()->uri();
             </div>
 
             <h3 class="text-2xl font-semibold">Nos étudiants sur place</h3>
-            <p class="mt-4 mb-6">Retour des expériences des étudiants de Polytech Nancy dans cette université.(Avec photos)</p>
+            <p class="mt-4 mb-6">
+                <?php
+                $temoignages=DB::select('select temoignages from destination where nom = ?',[$nom]);
+                echo($temoignages[0]->temoignages);
+                ?>
+            </p>
             <div class="flex flex-col items-center">
                 <div class="flex flex-col items-center">
                     <div class="swiper flex overflow-x-scroll w-5/6">
@@ -68,6 +78,7 @@ $nom=Route::getCurrentRoute()->uri();
                     <td class="px-4 py-3">5</td>
                     <td class="px-4 py-3">2</td>
                     <td class="px-4 py-3">Chapitre x<br>TD y<br>TP z</td>
+                    
                 </tr>
             </table>
 
@@ -82,7 +93,12 @@ $nom=Route::getCurrentRoute()->uri();
             </a>
             
             <h3 class="text-2xl mt-6 font-semibold">Astuces et informations complémentaires</h3>
-            <p class="mt-4 mb-6">Informations...</p>
+            <p class="mt-4 mb-6">
+                <?php
+                $astucesinfos=DB::select('select astucesinfos from destination where nom = ?',[$nom]);
+                echo($astucesinfos[0]->astucesinfos);
+                ?>
+            </p>
         </article>
     </main>
 </body>
