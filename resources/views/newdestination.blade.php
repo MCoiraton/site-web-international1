@@ -12,7 +12,7 @@
       function newCours(){
         nbreCours+=1;
         var newdiv=document.createElement('div');
-        newdiv.innerHTML="<div><div class=\"grid grid-cols-4 mt-5 mx-7\">"+
+        newdiv.innerHTML="<div><div class=\"grid grid-cols-5 mt-5 mx-7\">"+
           "<div class=\"grid grid-cols-1\">"+
           "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Semestre :</label>"+
             "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"semestre["+nbreCours+"]\" type=\"text\"/>"+
@@ -24,6 +24,10 @@
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Titre</label>"+
               "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"titre["+nbreCours+"]\" type=\"text\"/>"+
+            "</div>"+
+            "<div class=\"grid grid-cols-1 ml-1\">"+
+              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">ECTS</label>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"ects["+nbreCours+"]\" type=\"text\"/>"+
             "</div>"+
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nombre d'échanges</label>"+
@@ -158,9 +162,9 @@ use Illuminate\Support\Facades\DB;
 if(!isset($_POST["nom"])){}
 else{
   $nom=$_POST["nom"];
-  $intro=$_POST["intro"];
-  $temoignages=$_POST["temoignages"];
-  $astucesinfos=$_POST["astucesinfos"];
+  $intro=nl2br($_POST["intro"]);
+  $temoignages=nl2br($_POST["temoignages"]);
+  $astucesinfos=nl2br($_POST["astucesinfos"]);
   DB::insert('insert into destination (nom,intro,temoignages,astucesinfos) values (?,?,?,?)',[$nom,$intro,$temoignages,$astucesinfos]);
   if(isset($_POST["nomblog"])){
     $nomsblog=$_POST["nomblog"];
@@ -180,10 +184,11 @@ else{
     $semestre=$_POST["semestre"];
     $code=$_POST["code"];
     $titre=$_POST["titre"];
+    $ects=$_POST["ects"];
     $nombre=$_POST["nombre"];
     $contenu=$_POST["contenu"];
     for($i=0;$i<count($semestre);$i++){
-      DB::insert('insert into assocours (nomdestination,semestre,code,titre,nombre,contenu) values (?,?,?,?,?,?)',[$nom,$semestre[$i],$code[$i],$titre[$i],$nombre[$i],$contenu[$i]]);
+      DB::insert('insert into assocours (nomdestination,semestre,code,titre,ects,nombre,contenu) values (?,?,?,?,?,?,?)',[$nom,$semestre[$i],$code[$i],$titre[$i],$ects[$i],$nombre[$i],nl2br($contenu[$i])]);
     }
   }
   $j=0;

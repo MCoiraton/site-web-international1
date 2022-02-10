@@ -7,6 +7,10 @@
     <title>Polytech Nancy International</title>
     <link rel ="stylesheet" href ="{{ asset('css/app.css')}}">
     @include("nav")
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
 </head>
 <?php
 use Illuminate\Support\Facades\DB;
@@ -26,19 +30,25 @@ $nom=Route::getCurrentRoute()->uri();
                 echo($intro[0]->intro);
                 ?>
             </p>
-            <div class="flex flex-col items-center">
-                <div class="flex flex-col items-center">
-                    <div class="swiper flex overflow-x-scroll w-5/6">
-                        <img class="w-full bg-cover h-full object-cover bg-gray-300" src="../../img/prague1.jpeg" id="slide1">
-                        <img class="w-full bg-cover h-full object-cover bg-gray-300" src="../../img/prague3.jpeg" id="slide2">
-                    </div>
+            <div class="swiper intro">
+                <div class="swiper-wrapper">
+                    <?php
+                    $photos=DB::select('select * from assoimage where nom = ? and categorie = ?',[$nom,'intro']);
+                    foreach($photos as $photo){
+                        $url=$photo->url;
+                        echo("<div class=\"swiper-slide\">
+                    <img
+                      class=\"object-contain w-full h-96\"
+                      src=\"$url\"
+                      alt=\"image\"
+                    />
+                  </div>");
+                    }
+                    ?>
                 </div>
-                <div class="flex mt-4">
-                    <a href="#slide1" class="w-3 h-3 mx-1 bg-gray-300 rounded-full"></a>
-                    <a href="#slide2" class="w-3 h-3 mx-1 bg-gray-300 rounded-full"></a>
-                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-
             <h3 class="text-2xl font-semibold">Nos étudiants sur place</h3>
             <p class="mt-4 mb-6">
                 <?php
@@ -46,19 +56,25 @@ $nom=Route::getCurrentRoute()->uri();
                 echo($temoignages[0]->temoignages);
                 ?>
             </p>
-            <div class="flex flex-col items-center">
-                <div class="flex flex-col items-center">
-                    <div class="swiper flex overflow-x-scroll w-5/6">
-                        <img class="w-full bg-cover h-full object-cover bg-gray-300" src="../../img/prague1.jpeg" id="slide1">
-                        <img class="w-full bg-cover h-full object-cover bg-gray-300" src="../../img/prague3.jpeg" id="slide2">
-                    </div>
+            <div class="swiper temoignages">
+                <div class="swiper-wrapper">
+                    <?php
+                    $photos=DB::select('select * from assoimage where nom = ? and categorie = ?',[$nom,'temoignages']);
+                    foreach($photos as $photo){
+                        $url=$photo->url;
+                        echo("<div class=\"swiper-slide\">
+                    <img
+                      class=\"object-contain w-full h-96\"
+                      src=\"$url\"
+                      alt=\"image\"
+                    />
+                  </div>");
+                    }
+                    ?>
                 </div>
-                <div class="flex mt-4">
-                    <a href="#slide1" class="w-3 h-3 mx-1 bg-gray-300 rounded-full"></a>
-                    <a href="#slide2" class="w-3 h-3 mx-1 bg-gray-300 rounded-full"></a>
-                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-
             <h3 class="text-2xl mt-6 font-semibold">Liste des cours</h3>
             <p class="mt-4 mb-6">Tableau récapitulatif des cours par filières.</p>
             <table class="rounded-t-lg m-5 w-full mx-auto bg-gray-200 text-gray-800">
@@ -70,27 +86,50 @@ $nom=Route::getCurrentRoute()->uri();
                     <th class="px-4 py-3">Nombre d'échanges</th>
                     <th class="px-4 py-3">Contenu</th>
                 </tr>
-                
-                <tr class="bg-gray-100 border-b border-gray-200">
-                    <td class="px-4 py-3">1</td>
-                    <td class="px-4 py-3">AAAA</td>
-                    <td class="px-4 py-3">Cours numero 1</td>
-                    <td class="px-4 py-3">5</td>
-                    <td class="px-4 py-3">2</td>
-                    <td class="px-4 py-3">Chapitre x<br>TD y<br>TP z</td>
-                    
-                </tr>
+                <?php
+                $cours=DB::select('select * from assocours where nomdestination = ?',[$nom]);
+                for($i=0;$i<count($cours);$i++){
+                    $semestre=$cours[$i]->semestre;
+                    $code=$cours[$i]->code;
+                    $titre=$cours[$i]->titre;
+                    $nombre=$cours[$i]->nombre;
+                    $ects=$cours[$i]->ects;
+                    $contenu=$cours[$i]->contenu;
+                    echo("<tr class=\"bg-gray-100 border-b border-gray-200\">
+                    <td class=\"px-4 py-3\">$semestre</td>
+                    <td class=\"px-4 py-3\">$code</td>
+                    <td class=\"px-4 py-3\">$titre</td>
+                    <td class=\"px-4 py-3\">$ects</td>
+                    <td class=\"px-4 py-3\">$nombre</td>
+                    <td class=\"px-4 py-3\">$contenu</td>
+                </tr>");
+                }
+                ?>
             </table>
-
             <h3 class="text-2xl mt-6 font-semibold">Blogs/Presentations réalisés par nos étudiants</h3>
-            <a href="#">
-                <p class="mt-4 mb-6 underline">Telecharger Blog étudiant n°1</p>
-            </a>
+            <?php
+                $blogs=DB::select('select * from assoblog where nomdestination = ?',[$nom]);
+                for($i=0;$i<count($blogs);$i++){
+                    $nomb=$blogs[$i]->nom;
+                    $lien=$blogs[$i]->lien;
+                    echo("<a href=\"$lien\">
+                    <p class=\"mt-4 mb-6 underline\">$nomb</p>
+                    </a>");
+                }
+            ?>
+            
 
             <h3 class="text-2xl mt-6 font-semibold">Documentation, liens utiles.</h3>
-            <a href="#">
-                <p class="mt-4 mb-6 underline">Doc utile.</p>
-            </a>
+            <?php
+                $liens=DB::select('select * from assolien where nomdestination = ?',[$nom]);
+                for($i=0;$i<count($blogs);$i++){
+                    $noml=$liens[$i]->nom;
+                    $lien=$liens[$i]->lien;
+                    echo("<a href=\"$lien\">
+                    <p class=\"mt-4 mb-6 underline\">$noml</p>
+                    </a>");
+                }
+            ?>
             
             <h3 class="text-2xl mt-6 font-semibold">Astuces et informations complémentaires</h3>
             <p class="mt-4 mb-6">
@@ -101,6 +140,21 @@ $nom=Route::getCurrentRoute()->uri();
             </p>
         </article>
     </main>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper('.intro', {
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+      var swiper = new Swiper('.temoignages', {
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    </script>
 </body>
 <footer>
 @include("footer")

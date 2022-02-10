@@ -10,7 +10,7 @@
               <a href="/" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
               <a href="/NouvelleDestination" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ajouter une destination</a>
               <button id="dropdownButton" data-dropdown-toggle="dropdown"  class="inline-flex items-center text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" type="button">Destinations <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-              <div id="dropdown" class="hidden z-10 w-auto text-base list-none bg-blue-600 rounded">
+              <div id="dropdown" class="hidden z-10 w-auto bg-blue-600 rounded px-1 py-1 my-4">
                   <ul class="py-1" aria-labelledby="dropdownButton">
                     <?php
                     $destinations=DB::select('select nom from destination');
