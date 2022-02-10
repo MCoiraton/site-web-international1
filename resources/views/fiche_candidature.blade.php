@@ -10,28 +10,35 @@
 </head>
 
 <body>
+    <script>console.log("salut2");
+        document.getElementsByName('tel_portable').addEventListener(onchange, function () {
+            if(document.getElementsByName('tel_portable').value!='') document.getElementsByName('tel_fixe').required=false;
+            else document.getElementsByName('tel_fixe').required=true;
+            console.log("salut");
+        });
+    </script>
     <h1> Fiche candidature à un échange international </h1>
     <form action="#" method="post">
         <p><label for="prenom">Prénom</label>
-        <input type="text" name="prenom" class="border-black-600 border-2"> </p>
+        <input type="text" name="prenom" required class="border-black-600 border-2"> </p>
         <p><label for="nom">Nom</label>
-        <input type="text" name="nom" class="border-black-600 border-2"> </p>
+        <input type="text" name="nom" required class="border-black-600 border-2"> </p>
         <p><label for="date_naissance">Date de naissance</label>
-        <input type="date" name="date_naissance" class="border-black-600 border-2"> </p>
+        <input type="date" name="date_naissance" required class="border-black-600 border-2"> </p>
         <p><label for="nationalite">Nationalité</label>
-        <input type="text" name="nationalite" class="border-black-600 border-2"> </p>
+        <input type="text" name="nationalite" required class="border-black-600 border-2"> </p>
         <p><label for="rue_adresse">Adresse fixe</label>
-        <input type="text" name="rue_adresse" class="border-black-600 border-2"></p>
+        <input type="text" name="rue_adresse" required class="border-black-600 border-2"></p>
         <p><label for="code_postal">Code Postal</label>
         <input type="number" name="code_postal" class="border-black-600 border-2"></p>
         <p><label for="ville">Ville</label>
-        <input type="text" name="ville" class="border-black-600 border-2"></p>
+        <input type="text" name="ville" required class="border-black-600 border-2"></p>
         <p><label for="tel_fixe">Tél fixe</label>
-        <input type="tel" name="tel_fixe" class="border-black-600 border-2"></p>
+        <input type="tel" name="tel_fixe" required class="border-black-600 border-2"></p>
         <p><label for="tel_portable">Portable</label>
         <input type="tel" name="tel_portable" class="border-black-600 border-2"></p>
         <p><label for="mail">E-mail</label>
-        <input type="mail" name="mail" class="border-black-600 border-2"></p>
+        <input type="mail" name="mail" required class="border-black-600 border-2"></p>
         <p><label for="boursier">Boursier national : </label>
             <label for="Oui">Oui (échelon 0 inclus)</label>
             <input type="radio" name="boursier" value="Oui" class="border-black-600 border-2">
@@ -82,9 +89,9 @@
             </p>
         </p>
         <p><label for="langues">Langues étrangères :</label>
-        <p><input type="text" name="langues1" class="border-black-600 border-2">
+        <p><input type="text" name="langues1" required class="border-black-600 border-2">
         <label for="annee_langues1">Nbre d'années d'études :</label>
-        <input type="number" name="annee_langues1" class="border-black-600 border-2"></p>
+        <input type="number" name="annee_langues1" required class="border-black-600 border-2"></p>
         <p><input type="text" name="langues2" class="border-black-600 border-2">
         <label for="annee_langues2">Nbre d'années d'études :</label>
         <input type="number" name="annee_langues2" class="border-black-600 border-2"></p>
@@ -93,7 +100,7 @@
         <input type="number" name="annee_langues3" class="border-black-600 border-2"></p>
         </p>
         <p><label for="toeic">Score TOEIC :</label>
-        <input type="number" name="toeic" class="border-black-600 border-2">
+        <input type="number" name="toeic" required class="border-black-600 border-2">
         <label for="annee_toeic">Année :</label>
         <input type="number" name="annee_toeic" class="border-black-600 border-2">
         </p>
@@ -110,7 +117,7 @@
         <p>*Liste disponible sur le Site Web de Polytech Nancy, menu "INTERNATIONAL", "Etudes à l’étranger", et dans l’Intranet
             de Polytech Nancy menu "9. International"</p>
         <p><label for="choix1">Choix 1 :</label>
-            <input type="text" name="choix1" class="border-black-600 border-2">
+            <input type="text" name="choix1" required class="border-black-600 border-2">
             <label for="S5">S5</label>
             <input type="radio" name="semestre_choix1" value="S5" class="border-black-600 border-2">
             <label for="S7">S7</label>
@@ -156,12 +163,11 @@
         </p>
         <p>Fiche à renvoyer par mail au Service International au plus tard le : </p>
         <p><label for="date_signature">Date :</label>
-        <input type="date" name="date_signature" class="border-black-600 border-2">
+        <input type="date" name="date_signature" required class="border-black-600 border-2">
         <label for="signature">Signature (mettre ses initiales) :</label>
-        <input type="text" name="signature" class="border-black-600 border-2"></p>
+        <input type="text" name="signature" required class="border-black-600 border-2"></p>
         <button type="submit"> Sauvegarder </button>
     </form>
-
 </body>
 <footer>
 @include("footer")
