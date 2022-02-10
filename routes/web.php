@@ -29,6 +29,12 @@ Route::get('/CV', function () {
 Route::get('/Profil', function () {
     return view('profil');
 });
+Route::get('/GestionDestinations', function () {
+    return view('gestiondestinations');
+});
+Route::post('/GestionDestinations', function () {
+    return view('gestiondestinations');
+});
 Route::get('/auth/login', function(){
     phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
     phpCAS::setNoCasServerValidation();
@@ -66,6 +72,9 @@ foreach($destinations as $destination){
     $destination=$destination->nom;
     Route::get("/$destination", function () {
         return view('destination');
+    });
+    Route::get("/edit/$destination", function () {
+        return view('editdestination');
     });
 }
 
