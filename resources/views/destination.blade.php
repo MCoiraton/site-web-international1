@@ -8,7 +8,11 @@
     <link rel ="stylesheet" href ="{{ asset('css/app.css')}}">
     @include("nav")
 </head>
-
+<?php
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
+$nom=Route::getCurrentRoute()->uri();
+?>
 <body>
     <main class="relative container mx-auto bg-white px-4">
 

@@ -158,7 +158,6 @@ use Illuminate\Support\Facades\DB;
 if(!isset($_POST["nom"])){}
 else{
   $nom=$_POST["nom"];
-  /*
   $intro=$_POST["intro"];
   $temoignages=$_POST["temoignages"];
   $astucesinfos=$_POST["astucesinfos"];
@@ -186,24 +185,29 @@ else{
     for($i=0;$i<count($semestre);$i++){
       DB::insert('insert into assocours (nomdestination,semestre,code,titre,nombre,contenu) values (?,?,?,?,?,?)',[$nom,$semestre[$i],$code[$i],$titre[$i],$nombre[$i],$contenu[$i]]);
     }
-  } */
-  $i=0;
-  var_dump($_FILES["introphotos"]);
-  foreach($_FILES["introphotos"]["name"] as $nomimage){
-    $info = pathinfo($nomimage);
-    $ext = $info['extension'];
-    $newname = "$i.".$ext; 
-    $target = "img/destinations/$nom".$newname;
-    move_uploaded_file( $nomimage, $target);
-    $i+=1;
   }
-  foreach($_FILES["temoignagesphotos"]["tmp_name"] as $nomimage){
-    $info = pathinfo($nomimage);
-    $ext = $info['extension'];
-    $newname = "$i.".$ext; 
-    $target = "img/destinations/$nom".$newname;
-    move_uploaded_file( $nomimage, $target);
-    $i+=1;
+  $j=0;
+  if($_FILES["introphotos"]["name"][0]!=""){
+    for($i=0;$i<count($_FILES["introphotos"]["name"]);$i++){
+      $info = pathinfo($_FILES["introphotos"]["name"][$i]);
+      $ext = $info["extension"];
+      $newname = "$j.".$ext; 
+      $target = "img/destinations/$nom".$newname;
+      move_uploaded_file( $_FILES["introphotos"]["tmp_name"][$i], $target);
+      $j++;
+      DB::insert('insert into assoimage (nom,categorie,url) values (?,?,?)',[$nom,"intro",$target]);
+    }
+  }
+  if($_FILES["temoignagesphotos"]["name"][0]!=""){
+    for($i=0;$i<count($_FILES["temoignagesphotos"]["name"]);$i++){
+      $info = pathinfo($_FILES["temoignagesphotos"]["name"][$i]);
+      $ext = $info["extension"];
+      $newname = "$j.".$ext; 
+      $target = "img/destinations/$nom".$newname;
+      move_uploaded_file( $_FILES["temoignagesphotos"]["tmp_name"][$i], $target);
+      $j++;
+      DB::insert('insert into assoimage (nom,categorie,url) values (?,?,?)',[$nom,"temoignages",$target]);
+    }
   }
 
 
