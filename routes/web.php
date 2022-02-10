@@ -76,6 +76,9 @@ foreach($destinations as $destination){
     Route::get("/edit/$destination", function () {
         return view('editdestination');
     });
+    Route::post("/edit/$destination", function () {
+        return view('editdestination');
+    });
 }
 
 
