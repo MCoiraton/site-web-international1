@@ -17,12 +17,6 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/Destinations', function () {
-    return view('destinations');
-});
-Route::get('/Destination', function () {
-    return view('destination');
-});
 Route::get('/NouvelleDestination', function () {
     return view('newdestination');
 });
@@ -67,5 +61,13 @@ Route::get('/auth/logout', function(){
     phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
     phpCAS::logoutWithRedirectService("http://pive-site-web-international.univ-lorraine.fr");
 });
+$destinations=DB::select('select nom from destination');
+foreach($destinations as $destination){
+    $destination=$destination->nom;
+    Route::get("/$destination", function () {
+        return view('destination');
+    });
+}
 
 
+?>
