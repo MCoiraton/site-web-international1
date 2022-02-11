@@ -1,3 +1,13 @@
+<?php
+if(isset($_POST['delete'])){
+    $nom=$_POST['delete'];
+    DB::delete("delete from destination where nom = ?",[$nom]);
+    DB::delete("delete from assolien where nomdestination = ?",[$nom]);
+    DB::delete("delete from assoimage where nom = ?",[$nom]);
+    DB::delete("delete from assocours where nomdestination = ?",[$nom]);
+    DB::delete("delete from assoblog where nomdestination = ?",[$nom]);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
