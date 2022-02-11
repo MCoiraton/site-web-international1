@@ -32,6 +32,8 @@ if(isset($_POST['delete'])){
         echo("<form method=\"post\"><input type=\"hidden\" name=\"_token\" value=\"$token\"/><input type=\"hidden\" name=\"delete\" value=\"$nom\"/><button class=\"items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium\">Supprimer</button></form></div>");
     }
     ?>
+    <br />
+    <a href="/NouvelleDestination" class="hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ajouter une nouvelle destination</a>
         </article>
     </main>
 </body>
