@@ -8,80 +8,71 @@
     <link rel ="stylesheet" href ="{{ asset('css/app.css')}}">
     @include("nav")
     <script>
-      nbreCours=-1;
       function newCours(){
-        nbreCours+=1;
         var newdiv=document.createElement('div');
         newdiv.innerHTML="<div><div class=\"grid grid-cols-5 mt-5 mx-7\">"+
           "<div class=\"grid grid-cols-1\">"+
           "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Semestre :</label>"+
-            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"semestre["+nbreCours+"]\" type=\"text\"/>"+
+            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"semestre[]\" type=\"text\"/>"+
             "</div>"+
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Code :</label>"+
-              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"code["+nbreCours+"]\" type=\"text\"/>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"code[]\" type=\"text\"/>"+
             "</div>"+
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Titre</label>"+
-              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"titre["+nbreCours+"]\" type=\"text\"/>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"titre[]\" type=\"text\"/>"+
             "</div>"+
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">ECTS</label>"+
-              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"ects["+nbreCours+"]\" type=\"text\"/>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"ects[]\" type=\"text\"/>"+
             "</div>"+
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nombre d'échanges</label>"+
-              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nombre["+nbreCours+"]\" type=\"text\"/>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nombre[]\" type=\"text\"/>"+
             "</div></div>"+
             "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Contenu</label>"+
-              "<textarea style=\"white-space: pre-wrap\" class=\"h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"contenu["+nbreCours+"]\" type=\"text\"></textarea>"+
+              "<textarea style=\"white-space: pre-wrap\" class=\"h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"contenu[]\" type=\"text\"></textarea>"+
               "</div>"+
             "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppCours(this)\">Supprimer ce cours</button></div>";
           document.getElementById('cours').appendChild(newdiv);
       };
       function suppCours(btn){
-        nbreCours-=1;
         btn.parentNode.remove();
       };
-      nbreBlog=-1;
       function newBlog(){
-        nbreBlog+=1;
         var newdiv=document.createElement('div');
         newdiv.innerHTML="<div><div class=\"grid grid-cols-2 mt-5 mx-7\">"+
           "<div class=\"grid grid-cols-1\">"+
           "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom :</label>"+
-            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomblog["+nbreBlog+"]\" type=\"text\"/>"+
+            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomblog[]\" type=\"text\"/>"+
             "</div>"+
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lien :</label>"+
-              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienblog["+nbreBlog+"]\" type=\"text\"/>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienblog[]\" type=\"text\"/>"+
             "</div></div>"+
             "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppBlog(this)\">Supprimer ce blog</button></div>";
           document.getElementById('blog').appendChild(newdiv);
       };
       function suppBlog(btn){
-        nbreBlog-=1;
         btn.parentNode.remove();
       };
-      nbreLien=-1;
       function newLien(){
-        nbreLien+=1;
         var newdiv=document.createElement('div');
         newdiv.innerHTML="<div><div class=\"grid grid-cols-2 mt-5 mx-7\">"+
           "<div class=\"grid grid-cols-1\">"+
           "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom :</label>"+
-            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomlien["+nbreLien+"]\" type=\"text\"/>"+
+            "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nomlien[]\" type=\"text\"/>"+
             "</div>"+
             "<div class=\"grid grid-cols-1 ml-1\">"+
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lien :</label>"+
-              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienlien["+nbreLien+"]\" type=\"text\"/>"+
+              "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"lienlien[]\" type=\"text\"/>"+
             "</div></div>"+
             "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppLien(this)\">Supprimer ce lien</button></div>";
           document.getElementById('lien').appendChild(newdiv);
       };
       function suppLien(btn){
-        nbreLien-=1;
         btn.parentNode.remove();
       };
       </script>

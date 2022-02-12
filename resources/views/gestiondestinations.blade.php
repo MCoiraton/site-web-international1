@@ -3,6 +3,10 @@ if(isset($_POST['delete'])){
     $nom=$_POST['delete'];
     DB::delete("delete from destination where nom = ?",[$nom]);
     DB::delete("delete from assolien where nomdestination = ?",[$nom]);
+    $urls=DB::select('select url from assoimage where nom = ?',[$nom]);
+    foreach($urls as $url){
+        unlink($url->url);
+    }
     DB::delete("delete from assoimage where nom = ?",[$nom]);
     DB::delete("delete from assocours where nomdestination = ?",[$nom]);
     DB::delete("delete from assoblog where nomdestination = ?",[$nom]);
