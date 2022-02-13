@@ -22,6 +22,19 @@ Route::get('/Destinations', function () {
 Route::get('/CV', function () {
     return view('generateurcv');
 });
+
+Route::get('/admin', function () {
+    return view('admin');
+});
+
+Route::get('/admin/gestion', function () {
+    return view('admin-gestion');
+});
+
+Route::get('/ex', function () {
+    return view('example');
+});
+
 Route::get('/Profil', function () {
     return view('profil');
 });
