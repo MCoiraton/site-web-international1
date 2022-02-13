@@ -11,4 +11,9 @@ class CandidatureController extends Controller
     {
         return view('fiche_candidature');
     }
+
+    public function store(Request $request) 
+    {
+
+    }
 }

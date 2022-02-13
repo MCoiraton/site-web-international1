@@ -10,15 +10,9 @@
 </head>
 
 <body>
-    <script>console.log("salut2");
-        document.getElementsByName('tel_portable').addEventListener(onchange, function () {
-            if(document.getElementsByName('tel_portable').value!='') document.getElementsByName('tel_fixe').required=false;
-            else document.getElementsByName('tel_fixe').required=true;
-            console.log("salut");
-        });
-    </script>
     <h1> Fiche candidature à un échange international </h1>
-    <form action="#" method="post">
+    <form action="{{ route('fiche_candidature.store') }}" method="post">
+        @csrf
         <p><label for="prenom">Prénom</label>
         <input type="text" name="prenom" required class="border-black-600 border-2"> </p>
         <p><label for="nom">Nom</label>

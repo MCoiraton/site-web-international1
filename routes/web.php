@@ -53,4 +53,5 @@ Route::get('/auth/logout', function(){
     phpCAS::logoutWithRedirectService("http://polytech-international.univ-lorraine.fr:8000");
 });
 
-Route::get('/fiche_candidature', [CandidatureController::class, 'show']);
+Route::get('/fiche_candidature', [CandidatureController::class, 'show'])->name('fiche_candidature.show');
+Route::post('/fiche_candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store');
