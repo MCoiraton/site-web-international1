@@ -206,7 +206,7 @@ else{
     }
   }
 
-
+  echo("<head><meta http-equiv=\"refresh\" content=\"0; URL=/NouvelleDestination\" /></head>"); //permet d eviter d envoyer le formulaire plusieurs fois en rechargeant la page
 }
     
 ?>

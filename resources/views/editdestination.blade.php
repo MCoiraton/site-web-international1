@@ -23,12 +23,6 @@ if(isset($_POST['deletecours'])){
       DB::delete("delete from assocours where code = ?",[$cours]);
     }
 }
-if(isset($_POST['intro'])){
-  $intro=nl2br($_POST['intro']);
-  $temoignages=nl2br($_POST['temoignages']);
-  $astucesinfos=nl2br($_POST['astucesinfos']);
-  DB::update('update destination set intro = ?,temoignages = ?,astucesinfos = ? where nom = ?',[$intro,$temoignages,$astucesinfos,$nom]);
-}
 if(isset($_POST["nomblog"])){
     $nomsblog=$_POST["nomblog"];
     $liensblog=$_POST["lienblog"];
@@ -96,6 +90,13 @@ if(isset($_POST["semestre"])){
         DB::insert('insert into assoimage (nom,categorie,url) values (?,?,?)',[$nom,"temoignages",$target]);
       }
     }
+  }
+  if(isset($_POST['intro'])){
+  $intro=nl2br($_POST['intro']);
+  $temoignages=nl2br($_POST['temoignages']);
+  $astucesinfos=nl2br($_POST['astucesinfos']);
+  DB::update('update destination set intro = ?,temoignages = ?,astucesinfos = ? where nom = ?',[$intro,$temoignages,$astucesinfos,$nom]);
+  echo("<head><meta http-equiv=\"refresh\" content=\"0; URL=/edit/$nom\" /></head>"); //permet d eviter d envoyer le formulaire plusieurs fois en rechargeant la page
   }
 ?>
 <!DOCTYPE html>
