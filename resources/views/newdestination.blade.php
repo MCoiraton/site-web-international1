@@ -78,7 +78,7 @@
       </script>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" action="{{ action('DestinationController@NouvelleDestination') }}">
         @csrf
     <div class="flex items-center justify-center  mt-10 mb-10">
         <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12 lg:w-1/2">
@@ -148,66 +148,5 @@
 @include("footer")
 </footer>
 </html>
-<?php
-use Illuminate\Support\Facades\DB;
-if(!isset($_POST["nom"])){}
-else{
-  $nom=$_POST["nom"];
-  $intro=nl2br($_POST["intro"]);
-  $temoignages=nl2br($_POST["temoignages"]);
-  $astucesinfos=nl2br($_POST["astucesinfos"]);
-  DB::insert('insert into destination (nom,intro,temoignages,astucesinfos) values (?,?,?,?)',[$nom,$intro,$temoignages,$astucesinfos]);
-  if(isset($_POST["nomblog"])){
-    $nomsblog=$_POST["nomblog"];
-    $liensblog=$_POST["lienblog"];
-    for($i=0;$i<count($nomsblog);$i++){
-      DB::insert('insert into assoblog (nomdestination,nom,lien) values (?,?,?)',[$nom,$nomsblog[$i],$liensblog[$i]]);
-    }
-  }
-  if(isset($_POST["nomlien"])){
-    $nomslien=$_POST["nomlien"];
-    $lienslien=$_POST["lienlien"];
-    for($i=0;$i<count($nomslien);$i++){
-      DB::insert('insert into assolien (nomdestination,nom,lien) values (?,?,?)',[$nom,$nomslien[$i],$lienslien[$i]]);
-    }
-  }
-  if(isset($_POST["semestre"])){
-    $semestre=$_POST["semestre"];
-    $code=$_POST["code"];
-    $titre=$_POST["titre"];
-    $ects=$_POST["ects"];
-    $nombre=$_POST["nombre"];
-    $contenu=$_POST["contenu"];
-    for($i=0;$i<count($semestre);$i++){
-      DB::insert('insert into assocours (nomdestination,semestre,code,titre,ects,nombre,contenu) values (?,?,?,?,?,?,?)',[$nom,$semestre[$i],$code[$i],$titre[$i],$ects[$i],$nombre[$i],nl2br($contenu[$i])]);
-    }
-  }
-  $j=0;
-  if($_FILES["introphotos"]["name"][0]!=""){
-    for($i=0;$i<count($_FILES["introphotos"]["name"]);$i++){
-      $info = pathinfo($_FILES["introphotos"]["name"][$i]);
-      $ext = $info["extension"];
-      $newname = "$j.".$ext; 
-      $target = "img/destinations/$nom".$newname;
-      move_uploaded_file( $_FILES["introphotos"]["tmp_name"][$i], $target);
-      $j++;
-      DB::insert('insert into assoimage (nom,categorie,url) values (?,?,?)',[$nom,"intro",$target]);
-    }
-  }
-  if($_FILES["temoignagesphotos"]["name"][0]!=""){
-    for($i=0;$i<count($_FILES["temoignagesphotos"]["name"]);$i++){
-      $info = pathinfo($_FILES["temoignagesphotos"]["name"][$i]);
-      $ext = $info["extension"];
-      $newname = "$j.".$ext; 
-      $target = "img/destinations/$nom".$newname;
-      move_uploaded_file( $_FILES["temoignagesphotos"]["tmp_name"][$i], $target);
-      $j++;
-      DB::insert('insert into assoimage (nom,categorie,url) values (?,?,?)',[$nom,"temoignages",$target]);
-    }
-  }
 
-  echo("<head><meta http-equiv=\"refresh\" content=\"0; URL=/NouvelleDestination\" /></head>"); //permet d eviter d envoyer le formulaire plusieurs fois en rechargeant la page
-}
-    
-?>
 

@@ -20,9 +20,8 @@ Route::get('/', function () {
 Route::get('/NouvelleDestination', function () {
     return view('newdestination');
 });
-Route::post('/NouvelleDestination', function () {
-    return view('newdestination');
-});
+Route::post('/NouvelleDestination', 'DestinationController@NouvelleDestination');
+
 Route::get('/CV', function () {
     return view('generateurcv');
 });
