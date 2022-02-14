@@ -13,6 +13,7 @@ class CreateCandidaturesTable extends Migration
      */
     public function up()
     {
+//mettre les conditions et donc ne pas utiliser la forme de tableau
         Schema::create('candidatures', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('prenom');

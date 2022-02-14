@@ -16,6 +16,7 @@ class CandidatureController extends Controller
     public function store(Request $request) 
     {
         Candidature::create([
+            'email' => $request->mail,
             'prenom' => $request->prenom,
             'nom' => $request->nom,
             'date_naissance' => $request->date_naissance,

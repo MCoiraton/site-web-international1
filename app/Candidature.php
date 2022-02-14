@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Candidature extends Model
 {
+    protected $table='candidatures';
+    protected $primaryKey='email';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    public $timestamps = false;
+    protected $connection = 'mysql';
     protected $fillable = [
+        'email',
         'prenom', 
         'nom',
         'date_naissance',
