@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use App\Destination;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,18 +65,18 @@ Route::get('/auth/logout', function(){
     phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
     phpCAS::logoutWithRedirectService("http://pive-site-web-international.univ-lorraine.fr");
 });
-$destinations=DB::select('select nom from destination');
+
+Route::get("/edit/{nom}", "DestinationController@affichageEdition");
+Route::get("/{nom}", "DestinationController@affichageDestination");
+
+$destinations=Destination::all();
 foreach($destinations as $destination){
     $destination=$destination->nom;
     Route::get("/$destination", function () {
         return view('destination');
     });
-    Route::get("/edit/$destination", function () {
-        return view('editdestination');
-    });
-    Route::post("/edit/$destination", function () {
-        return view('editdestination');
-    });
+
+    Route::post("/edit/$destination", 'DestinationController@editDestination');
 }
 
 

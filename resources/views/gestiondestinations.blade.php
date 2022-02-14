@@ -14,7 +14,7 @@
             <h3 class="text-2xl font-semibold">Liste des destinations disponibles</h3>
             @foreach($destinations as $destination)
             <div class="flex space-x-4"><span class="px-3 py-2 text-sm font-medium">{{$destination->nom}}</span>
-                <a href="/edit/{{$destination->nom}}" class="hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Modifier</a>
+                <a href='/edit/{{$destination->nom}}' class="hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Modifier</a>
                 <form method="post" action="{{ action('DestinationController@suppDestination') }}">
                     @csrf
                     <input type="hidden" name="delete" value="{{$destination->nom}}"/>
