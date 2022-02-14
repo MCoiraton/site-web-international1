@@ -12,6 +12,10 @@ use App\Assocours;
 
 class DestinationController extends Controller
 {
+    public function liste(){
+        $destinations=Destination::all();
+        return view('gestiondestinations',['destinations' => $destinations]);
+    }
     public function nouvelleDestination(){
         $nom=$_POST["nom"];
         $destination=new Destination();
@@ -93,5 +97,21 @@ class DestinationController extends Controller
             }
         }
         return view("newdestination");
+    }
+    public function editDestination(){
+
+    }
+    public function suppDestination(){
+        $nom=$_POST['delete'];
+        Destination::where('nom',$nom)->delete();
+        Assolien::where('nomdestination',$nom)->delete();
+        $urls=Assoimage::where('nom',$nom)->get();
+        foreach($urls as $url){
+            unlink($url->url);
+        }
+        Assoimage::where('nom',$nom)->delete();
+        Assocours::where('nomdestination',$nom)->delete();
+        Assoblog::where('nomdestination',$nom)->delete();
+        return redirect('/GestionDestinations');
     }
 }

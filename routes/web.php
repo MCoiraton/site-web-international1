@@ -28,12 +28,10 @@ Route::get('/CV', function () {
 Route::get('/Profil', function () {
     return view('profil');
 });
-Route::get('/GestionDestinations', function () {
-    return view('gestiondestinations');
-});
-Route::post('/GestionDestinations', function () {
-    return view('gestiondestinations');
-});
+Route::get('/GestionDestinations', 'DestinationController@liste');
+
+Route::post('/GestionDestinations', 'DestinationController@suppDestination');
+
 Route::get('/auth/login', function(){
     phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
     phpCAS::setNoCasServerValidation();
