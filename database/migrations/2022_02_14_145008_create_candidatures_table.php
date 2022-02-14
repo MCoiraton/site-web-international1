@@ -14,7 +14,7 @@ class CreateCandidaturesTable extends Migration
     public function up()
     {
         Schema::create('candidatures', function (Blueprint $table) {
-            $table->id();
+            $table->string('email')->primary();
             $table->string('prenom');
             $table->string('nom');
             $table->date('date_naissance');
@@ -24,7 +24,6 @@ class CreateCandidaturesTable extends Migration
             $table->string('ville');
             $table->integer('tel_fixe');
             $table->integer('portable');
-            $table->string('email');
             $table->boolean('boursier');
             $table->string('region_origine');
             $table->string('annee_entree');
