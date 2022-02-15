@@ -4,12 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Polytech Nancy International</title>
     <link href="{{ asset('css/app.css')}}" rel="stylesheet">
 </head>
 <body class="bg-gray-200">
-    <!-- <div class="flex items-center justify-center bg-gray-200"> -->
-        <!-- <nav class="bg-white border-b border-gray-200 rounded-lg fixed z-30 w-full m-3 px-3 py-3 lg:px-5 lg:pl-3 flex items-center justify-start"> -->
-        <nav class="bg-white border-b border-gray-200 rounded-lg p-4 m-6 lg:px-5 lg:pl-3 flex items-center justify-start">
+    <nav class="bg-white border-b border-gray-200 rounded-lg p-4 m-6 lg:px-5 lg:pl-3 flex items-center justify-start">
             <a href="/" class="text-xl font-body flex items-center lg:ml-2.5">
                 <img src="{{ asset('img/logo.png')}}" class="h-10 mr-2" alt="Polytech Logo">
             </a>
@@ -27,7 +26,6 @@
         </nav>
         <div class="flex flex-row">
             <div class="bg-white p-4 m-6 rounded-lg ">
-                <!-- <aside id="sidebar" class="fixed z-20 h-full top-0 left-0 pt-16 flex lg:flex flex-shrink-0 flex-col w-64" aria-label="Sidebar"> -->
                 <aside id="sidebar" class="w-64" aria-label="Sidebar">
                     <div class="relative flex-1 flex flex-col rounded-lg bg-white pt-0">
                         <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
@@ -44,7 +42,7 @@
                                     </a>
                                     </li>
                                     <li>
-                                    <a href="admin/gestion/" id="gestion" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                    <a href="/admin/gestion/" id="gestion" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         {{ $gestion ?? '' }}
                                         <svg id="gestion" class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
@@ -85,8 +83,11 @@
                     </div>
                 </aside>
             </div>
-            <div class="bg-white grow rounded-lg m-6 p-4">
+            <div class="bg-white rounded-lg m-6 p-4 flex-grow">
                 {{ $panel ?? '' }}
             </div>
         </div>
 </body>
+<footer>
+    @include("footer") 
+</footer>

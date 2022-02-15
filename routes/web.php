@@ -34,6 +34,12 @@ Route::get('/admin/gestion', function () {
     return view('admin-gestion');
 });
 
+Route::get('/admin/creation', function () {
+    return view('admin-creation');
+});
+
+Route::get("/admin-modification/{nom}", ['as' => 'editDestination', 'uses' => 'DestinationController@editDestination']);
+
 Route::get('/ex', function () {
     return view('example');
 });

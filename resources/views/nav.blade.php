@@ -17,7 +17,7 @@ $destinations=Destination::all();
               <div id="dropdown" class="hidden z-10 w-auto rounded px-1 py-1 my-4">
                   <ul class="py-1" aria-labelledby="dropdownButton">
                     @foreach($destinations as $destination)
-                      <li><a href="/{{$destination->nom}}" class="bg-white border-2 border-blue-500 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">{{$destination->nom}}</a></li>
+                      <li><a href="/{{$destination->nom}}" class="bg-white border-2 border-blue-500 hover:text-blue-500 px-3 py-2 m-4 rounded-md text-sm font-medium">{{$destination->nom}}</a></li>
                     @endforeach
                   </ul>
               </div>

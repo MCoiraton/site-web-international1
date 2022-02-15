@@ -1,3 +1,7 @@
+<?php
+use App\Destination;
+$destinations=Destination::all();
+?>
 <x-layout-admin>
     <x-slot name='gestion'>
 		<style>
@@ -17,7 +21,8 @@
                 <span class="text-base font-normal text-gray-500">Vous pouvez içi créer, modifier, visualiser ou supprimer toutes les données des universités partenaires</span>
             </div>
         </div>
-            <div class="flex flex-col mt-8">
+        <a href="/admin/creation" class="hover:bg-blue-700 hover:text-white px-3 py-2 mt-4 rounded-md text-sm font-medium">Ajouter une nouvelle destination</a>
+            <div class="flex flex-col mt-4 border-2 border-gray-300 rounded-lg">
             <div class="overflow-x-auto rounded-lg">
                 <div class="align-middle inline-block min-w-full">
                     <div class="shadow overflow-hidden sm:rounded-lg">
@@ -39,9 +44,10 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white">
+                            @foreach($destinations as $destination)
                             <tr>
                                 <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                    Université <span class="font-semibold">UQAC</span>
+                                    {{$destination->nom}}
                                 </td>
                                 <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                     Apr 23 ,2021
@@ -49,7 +55,16 @@
                                 <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                     June 1, 2021
                                 </td>
+                                <td class="flex flex-row m-2">
+                                    <a href='/admin-modification/{{$destination->nom}}' class="hover:bg-blue-700 hover:text-white px-3 py-2 ml-2 rounded-md text-sm font-medium">Modifier</a>
+                                    <form method="post" action="{{ action('DestinationController@suppDestination') }}">
+                                        @csrf
+                                        <input type="hidden" name="delete" value="{{$destination->nom}}"/>
+                                        <button class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
+                                    </form>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                         </table>
                     </div>

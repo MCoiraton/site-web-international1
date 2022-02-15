@@ -96,7 +96,7 @@ class DestinationController extends Controller
                 $assoimage->save();
             }
         }
-        return view("newdestination");
+        return view("admin-gestion");
     }
     public function editDestination($nom){
         if(isset($_POST['deleteimg'])){
