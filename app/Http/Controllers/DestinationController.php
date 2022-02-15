@@ -227,7 +227,7 @@ class DestinationController extends Controller
             $destination->astucesinfos=$astucesinfos;
             $destination->save();
         }
-        return redirect("/edit/$nom");
+        return redirect("/admin/gestion");
 
     }
     public function suppDestination(){
@@ -241,7 +241,7 @@ class DestinationController extends Controller
         Assoimage::where('nom',$nom)->delete();
         Assocours::where('nomdestination',$nom)->delete();
         Assoblog::where('nomdestination',$nom)->delete();
-        return redirect('/GestionDestinations');
+        return redirect('/admin-gestion');
     }
     public function affichageEdition($nom){
         $destination=Destination::where('nom',$nom)->first();
