@@ -1,3 +1,7 @@
+<?php
+use App\Destination;
+$destinations=Destination::all();
+?>
 <nav class="bg-white p-2 m-6 rounded-lg text-gray-600 body-font">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
@@ -8,9 +12,29 @@
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4 md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 ">
               <a href="/" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
-              <a href="/Destinations" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Destinations</a>
+              <a href="/GestionDestinations" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Gérer les destinations</a>
+              <button id="dropdownButton" data-dropdown-toggle="dropdown"  class="inline-flex items-center hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" type="button">Destinations <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+              <div id="dropdown" class="hidden z-10 w-auto rounded px-1 py-1 my-4">
+                  <ul class="py-1" aria-labelledby="dropdownButton">
+                    @foreach($destinations as $destination)
+                      <li><a href="/{{$destination->nom}}" class="bg-white border-2 border-blue-500 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">{{$destination->nom}}</a></li>
+                    @endforeach
+                  </ul>
+              </div>
               <a href="/CV" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Générateur de CV</a>
               <a href="/admin" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Espace Admin</a>
+            <!-- <div class="flex space-x-4">
+              <a href="/" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
+              <a href="/GestionDestinations" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Gérer les destinations</a>
+              <button id="dropdownButton" data-dropdown-toggle="dropdown"  class="inline-flex items-center text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" type="button">Destinations <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+              <div id="dropdown" class="hidden z-10 w-auto bg-blue-600 rounded px-1 py-1 my-4">
+                  <ul class="py-1" aria-labelledby="dropdownButton">
+                    @foreach($destinations as $destination)
+                      <li><a href="/{{$destination->nom}}" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{$destination->nom}}</a></li>
+                    @endforeach
+                  </ul>
+              </div>
+              <a href="/CV" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Générateur de CV</a> -->
             </div>
           </div>
           
@@ -39,4 +63,6 @@
           @endif
         </div>
     </div>
+    <script src="https://unpkg.com/flowbite@1.3.3/dist/flowbite.js"></script>
   </nav>
+ 
