@@ -111,9 +111,8 @@
       };
 </script>
 <body>
-    <form method="post" enctype="multipart/form-data" action="{{ action('DestinationController@editDestination') }}">
+    <form method="post" enctype="multipart/form-data" action="{{ route('editDestination',$destination->nom) }}">
         @csrf
-        <input type="hidden" name="nom" value="{{$destination->nom}}"/>
         <div id="suppr"></div>
     <div class="flex items-center justify-center  mt-10 mb-10">
         <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12 lg:w-1/2">

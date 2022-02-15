@@ -98,8 +98,7 @@ class DestinationController extends Controller
         }
         return view("newdestination");
     }
-    public function editDestination(){
-        $nom=$_POST["nom"];
+    public function editDestination($nom){
         if(isset($_POST['deleteimg'])){
             foreach($_POST['deleteimg'] as $img){
                 Assoimage::where('url',$img)->delete();
@@ -245,12 +244,12 @@ class DestinationController extends Controller
         return redirect('/GestionDestinations');
     }
     public function affichageEdition($nom){
-        $destination=Destination::where('nom',$nom)->get();
+        $destination=Destination::where('nom',$nom)->first();
         $cours=Assocours::where('nomdestination',$nom)->get();
         $blogs=Assoblog::where('nomdestination',$nom)->get();
         $liens=Assolien::where('nomdestination',$nom)->get();
         $photos=Assoimage::where('nom',$nom)->get();
-        return view('editdestination',['destination' => $destination[0], 'cours' => $cours, 'blogs' => $blogs, 'liens' => $liens, 'photos' => $photos]);
+        return view('editdestination',['destination' => $destination, 'cours' => $cours, 'blogs' => $blogs, 'liens' => $liens, 'photos' => $photos]);
     }
     public function affichageDestination($nom){
         $destination=Destination::where('nom',$nom)->first();
