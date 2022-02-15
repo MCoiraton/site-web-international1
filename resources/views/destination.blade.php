@@ -56,7 +56,7 @@
             <p class="mt-4 mb-6">Tableau récapitulatif des cours par filières.</p>
             <table class="rounded-t-lg m-5 w-full mx-auto bg-gray-200 text-gray-800">
                 <tr class="text-left border-b-2 border-gray-300">
-                    <th class="px-4 py-3">Semstre</th>
+                    <th class="px-4 py-3">Semestre</th>
                     <th class="px-4 py-3">Code</th>
                     <th class="px-4 py-3">Titre Cours</th>
                     <th class="px-4 py-3">ECTS</th>
