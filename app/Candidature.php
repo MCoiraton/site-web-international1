@@ -10,11 +10,10 @@ class Candidature extends Model
     protected $primaryKey='email';
     public $incrementing = false;
     protected $keyType = 'string';
-    public $timestamps = false;
     protected $connection = 'mysql';
     protected $fillable = [
         'email',
-        'prenom', 
+        'prenom',
         'nom',
         'date_naissance',
         'nationalite',

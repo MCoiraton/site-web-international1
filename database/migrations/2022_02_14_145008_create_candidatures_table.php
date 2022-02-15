@@ -23,8 +23,8 @@ class CreateCandidaturesTable extends Migration
             $table->string('adresse_fixe');
             $table->integer('code_postal');
             $table->string('ville');
-            $table->integer('tel_fixe');
-            $table->integer('portable');
+            $table->integer('tel_fixe')->nullable()->default(null);
+            $table->integer('portable')->nullable()->default(null);
             $table->boolean('boursier');
             $table->string('region_origine');
             $table->string('annee_entree');
@@ -33,23 +33,24 @@ class CreateCandidaturesTable extends Migration
             $table->string('specialisation');
             $table->string('langue1');
             $table->integer('annee_langue1');
-            $table->string('langue2');
-            $table->integer('annee_langue2');
-            $table->string('langue3');
-            $table->integer('annee_langue3');
+            $table->string('langue2')->nullable()->default(null);
+            $table->integer('annee_langue2')->nullable()->default(null);
+            $table->string('langue3')->nullable();
+            $table->integer('annee_langue3')->nullable()->default(null);
             $table->integer('toeic');
             $table->integer('annee_toeic');
             $table->boolean('deja_parti_erasmus');
-            $table->string('destination_erasmus');
-            $table->date('date_erasmus');
+            $table->string('destination_erasmus')->nullable()->default(null);
+            $table->date('date_erasmus')->nullable()->default(null);
             $table->string('choix1');
             $table->string('semestre_choix1');
-            $table->string('choix2');
-            $table->string('semestre_choix2');
-            $table->string('choix3');
-            $table->string('semestre_choix3');
+            $table->string('choix2')->nullable()->default(null);
+            $table->string('semestre_choix2')->nullable()->default(null);
+            $table->string('choix3')->nullable()->default(null);
+            $table->string('semestre_choix3')->nullable()->default(null);
             $table->date('date_actuelle');
             $table->string('signature');
+            $table->timestamps();
         });
     }
 
