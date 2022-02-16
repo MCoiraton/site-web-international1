@@ -60,82 +60,16 @@
         document.getElementById("SIA").disabled=true;
     }
     function deja_parti_erasmus_oui() {
-        document.getElementByName("dest_deja_parti")[0].disabled=false;
-        document.getElementByName("date_deja_parti")[0].disabled=false;
-        document.getElementByName("dest_deja_parti")[0].required=true;
-        document.getElementByName("date_deja_parti")[0].required=true;
+        document.getElementsByName("dest_deja_parti")[0].disabled=false;
+        document.getElementsByName("date_deja_parti")[0].disabled=false;
+        document.getElementsByName("dest_deja_parti")[0].required=true;
+        document.getElementsByName("date_deja_parti")[0].required=true;
     }
     function deja_parti_erasmus_non() {
         document.getElementsByName("dest_deja_parti")[0].required=false;
         document.getElementsByName("date_deja_parti")[0].required=false;
         document.getElementsByName("dest_deja_parti")[0].disabled=true;
         document.getElementsByName("date_deja_parti")[0].disabled=true;
-    }
-    function annee_actuelle_2A() {
-        document.getElementById("choix1_S5").disabled=false;
-        document.getElementById("choix1_S7").disabled=true;
-        document.getElementById("choix1_S9").disabled=true;
-        document.getElementById("choix1_S5S6").disabled=false;
-        document.getElementById("choix1_S7S8").disabled=true;
-        document.getElementById("choix1_S9S10").disabled=true;
-
-        document.getElementById("choix2_S5").disabled=false;
-        document.getElementById("choix2_S7").disabled=true;
-        document.getElementById("choix2_S9").disabled=true;
-        document.getElementById("choix2_S5S6").disabled=false;
-        document.getElementById("choix2_S7S8").disabled=true;
-        document.getElementById("choix2_S9S10").disabled=true;
-
-        document.getElementById("choix3_S5").disabled=false;
-        document.getElementById("choix3_S7").disabled=true;
-        document.getElementById("choix3_S9").disabled=true;
-        document.getElementById("choix3_S5S6").disabled=false;
-        document.getElementById("choix3_S7S8").disabled=true;
-        document.getElementById("choix3_S9S10").disabled=true;
-    }
-    function annee_actuelle_3A() {
-        document.getElementById("choix1_S5").disabled=true;
-        document.getElementById("choix1_S7").disabled=false;
-        document.getElementById("choix1_S9").disabled=true;
-        document.getElementById("choix1_S5S6").disabled=true;
-        document.getElementById("choix1_S7S8").disabled=false;
-        document.getElementById("choix1_S9S10").disabled=true;
-
-        document.getElementById("choix2_S5").disabled=true;
-        document.getElementById("choix2_S7").disabled=false;
-        document.getElementById("choix2_S9").disabled=true;
-        document.getElementById("choix2_S5S6").disabled=true;
-        document.getElementById("choix2_S7S8").disabled=false;
-        document.getElementById("choix2_S9S10").disabled=true;
-
-        document.getElementById("choix3_S5").disabled=true;
-        document.getElementById("choix3_S7").disabled=false;
-        document.getElementById("choix3_S9").disabled=true;
-        document.getElementById("choix3_S5S6").disabled=true;
-        document.getElementById("choix3_S7S8").disabled=false;
-        document.getElementById("choix3_S9S10").disabled=true;
-    }
-    function annee_actuelle_4A() {
-        document.getElementById("choix1_S5").disabled=true;
-        document.getElementById("choix1_S7").disabled=true;
-        document.getElementById("choix1_S9").disabled=false;
-        document.getElementById("choix1_S5S6").disabled=true;
-        document.getElementById("choix1_S7S8").disabled=true;
-        document.getElementById("choix1_S9S10").disabled=false;
-
-        document.getElementById("choix2_S5").disabled=true;
-        document.getElementById("choix2_S7").disabled=true;
-        document.getElementById("choix2_S9").disabled=false;
-        document.getElementById("choix2_S5S6").disabled=true;
-        document.getElementById("choix2_S7S8").disabled=true;
-        document.getElementById("choix2_S9S10").disabled=false;
-
-        document.getElementById("choix3_S5").disabled=true;
-        document.getElementById("choix3_S7").disabled=true;
-        document.getElementById("choix3_S9").disabled=false;
-        document.getElementById("choix3_S5S6").disabled=true;
-        document.getElementById("choix3_S7S8").disabled=true;
-        document.getElementById("choix3_S9S10").disabled=false;
     }
 </script>
 <body>
@@ -182,11 +116,11 @@
             <input type="radio" name="annee_entree" onchange="annee_entree_4A()" value="4A" class="border-black-600 border-2"></p>
         <p><label for="annee_actuelle">Année scolaire actuelle :</label>
             <label for="2A">2A</label>
-            <input type="radio" name="annee_actuelle" id="annee_actuelle_2A" onchange="annee_actuelle_2A()" value="2A" class="border-black-600 border-2">
+            <input type="radio" name="annee_actuelle" id="annee_actuelle_2A" value="2A" class="border-black-600 border-2">
             <label for="3A">3A</label>
-            <input type="radio" name="annee_actuelle" id="annee_actuelle_3A" onchange="annee_actuelle_3A()" value="3A" class="border-black-600 border-2">
+            <input type="radio" name="annee_actuelle" id="annee_actuelle_3A" value="3A" class="border-black-600 border-2">
             <label for="4A">4A</label>
-            <input type="radio" name="annee_actuelle" id="annee_actuelle_4A" onchange="annee_actuelle_4A()" value="4A" class="border-black-600 border-2"></p>
+            <input type="radio" name="annee_actuelle" id="annee_actuelle_4A" value="4A" class="border-black-600 border-2"></p>
         <p><label for="diplome">Diplôme choisi :</label>
             <label for="EMME">EMME</label>
             <input type="radio" name="diplome" onchange="choixEMME()" value="EMME" class="border-black-600 border-2">
@@ -296,3 +230,71 @@
 @include("footer")
 </footer>
 </html>
+<script>
+    document.getElementById("annee_actuelle_2A").onchange=function(){
+        document.getElementById("choix1_S5").disabled=false;
+        document.getElementById("choix1_S7").disabled=true;
+        document.getElementById("choix1_S9").disabled=true;
+        document.getElementById("choix1_S5S6").disabled=false;
+        document.getElementById("choix1_S7S8").disabled=true;
+        document.getElementById("choix1_S9S10").disabled=true;
+
+        document.getElementById("choix2_S5").disabled=false;
+        document.getElementById("choix2_S7").disabled=true;
+        document.getElementById("choix2_S9").disabled=true;
+        document.getElementById("choix2_S5S6").disabled=false;
+        document.getElementById("choix2_S7S8").disabled=true;
+        document.getElementById("choix2_S9S10").disabled=true;
+
+        document.getElementById("choix3_S5").disabled=false;
+        document.getElementById("choix3_S7").disabled=true;
+        document.getElementById("choix3_S9").disabled=true;
+        document.getElementById("choix3_S5S6").disabled=false;
+        document.getElementById("choix3_S7S8").disabled=true;
+        document.getElementById("choix3_S9S10").disabled=true;
+    }
+    document.getElementById("annee_actuelle_3A").onchange=function(){
+        document.getElementById("choix1_S5").disabled=true;
+        document.getElementById("choix1_S7").disabled=false;
+        document.getElementById("choix1_S9").disabled=true;
+        document.getElementById("choix1_S5S6").disabled=true;
+        document.getElementById("choix1_S7S8").disabled=false;
+        document.getElementById("choix1_S9S10").disabled=true;
+
+        document.getElementById("choix2_S5").disabled=true;
+        document.getElementById("choix2_S7").disabled=false;
+        document.getElementById("choix2_S9").disabled=true;
+        document.getElementById("choix2_S5S6").disabled=true;
+        document.getElementById("choix2_S7S8").disabled=false;
+        document.getElementById("choix2_S9S10").disabled=true;
+
+        document.getElementById("choix3_S5").disabled=true;
+        document.getElementById("choix3_S7").disabled=false;
+        document.getElementById("choix3_S9").disabled=true;
+        document.getElementById("choix3_S5S6").disabled=true;
+        document.getElementById("choix3_S7S8").disabled=false;
+        document.getElementById("choix3_S9S10").disabled=true;
+    }
+    document.getElementById("annee_actuelle_4A").onchange=function(){
+        document.getElementById("choix1_S5").disabled=true;
+        document.getElementById("choix1_S7").disabled=true;
+        document.getElementById("choix1_S9").disabled=false;
+        document.getElementById("choix1_S5S6").disabled=true;
+        document.getElementById("choix1_S7S8").disabled=true;
+        document.getElementById("choix1_S9S10").disabled=false;
+
+        document.getElementById("choix2_S5").disabled=true;
+        document.getElementById("choix2_S7").disabled=true;
+        document.getElementById("choix2_S9").disabled=false;
+        document.getElementById("choix2_S5S6").disabled=true;
+        document.getElementById("choix2_S7S8").disabled=true;
+        document.getElementById("choix2_S9S10").disabled=false;
+
+        document.getElementById("choix3_S5").disabled=true;
+        document.getElementById("choix3_S7").disabled=true;
+        document.getElementById("choix3_S9").disabled=false;
+        document.getElementById("choix3_S5S6").disabled=true;
+        document.getElementById("choix3_S7S8").disabled=true;
+        document.getElementById("choix3_S9S10").disabled=false;
+    }
+</script>
