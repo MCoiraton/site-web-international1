@@ -8,7 +8,35 @@
     <link rel ="stylesheet" href ="{{ asset('css/app.css')}}">
     @include("nav")
 </head>
-
+<script>
+    function choixEMME(){
+        document.getElementById("SIR").disabled=true;
+        document.getElementById("SIA").disabled=true;
+        document.getElementById("MCL").disabled=true;
+        document.getElementById("MSS").disabled=true;
+        document.getElementById("MFE").disabled=false;
+        document.getElementById("MSM").disabled=false;
+        document.getElementById("IE").disabled=false;
+    }
+    function choixIA2R(){
+        document.getElementById("SIR").disabled=false;
+        document.getElementById("SIA").disabled=false;
+        document.getElementById("MFE").disabled=true;
+        document.getElementById("MSM").disabled=true;
+        document.getElementById("IE").disabled=true;
+        document.getElementById("MCL").disabled=true;
+        document.getElementById("MSS").disabled=true;
+    }
+    function choixM3(){
+        document.getElementById("MCL").disabled=false;
+        document.getElementById("MSS").disabled=false;
+        document.getElementById("MFE").disabled=true;
+        document.getElementById("MSM").disabled=true;
+        document.getElementById("IE").disabled=true;
+        document.getElementById("SIR").disabled=true;
+        document.getElementById("SIA").disabled=true;
+    }
+</script>
 <body>
     <h1> Fiche candidature à un échange international </h1>
     <form action="{{ route('fiche_candidature.store') }}" method="post">
@@ -60,26 +88,26 @@
             <input type="radio" name="annee_actuelle" value="4A" class="border-black-600 border-2"></p>
         <p><label for="diplome">Diplôme choisi :</label>
             <label for="EMME">EMME</label>
-            <input type="radio" name="diplome" value="EMME" class="border-black-600 border-2">
+            <input type="radio" name="diplome" onchange="choixEMME()" value="EMME" class="border-black-600 border-2">
                 <label for="MFE">MFE</label>
-                <input type="radio" name="parcours" value="MFE" class="border-black-600 border-2">
+                <input type="radio" name="parcours" id="MFE" value="MFE" class="border-black-600 border-2">
                 <label for="MSM">MSM</label>
-                <input type="radio" name="parcours" value="MSM" class="border-black-600 border-2">
+                <input type="radio" name="parcours" id="MSM" value="MSM" class="border-black-600 border-2">
                 <label for="IE">IE</label>
-                <input type="radio" name="parcours" value="IE" class="border-black-600 border-2">
+                <input type="radio" name="parcours" id="IE" value="IE" class="border-black-600 border-2">
             <p><label for="diplome">IA2R</label>
-            <input type="radio" name="diplome" value="IA2R" class="border-black-600 border-2">
+            <input type="radio" name="diplome" onchange="choixIA2R()" value="IA2R" class="border-black-600 border-2">
                 <label for="SIR">SIR</label>
-                <input type="radio" name="parcours" value="SIR" class="border-black-600 border-2">
+                <input type="radio" name="parcours" id="SIR" value="SIR" class="border-black-600 border-2">
                 <label for="SIA">SIA</label>
-                <input type="radio" name="parcours" value="SIA" class="border-black-600 border-2">
+                <input type="radio" name="parcours" id="SIA" value="SIA" class="border-black-600 border-2">
             </p>
             <p><label for="diplome">M3</label>
-            <input type="radio" name="diplome" value="M3" class="border-black-600 border-2">
+            <input type="radio" name="diplome" onchange="choixM3()" value="M3" class="border-black-600 border-2">
                 <label for="MSS">MSS</label>
-                <input type="radio" name="parcours" value="MSS" class="border-black-600 border-2">
+                <input type="radio" name="parcours" id="MSS" value="MSS" class="border-black-600 border-2">
                 <label for="MCL">MCL</label>
-                <input type="radio" name="parcours" value="MCL" class="border-black-600 border-2">
+                <input type="radio" name="parcours" id="MCL" value="MCL" class="border-black-600 border-2">
             </p>
         </p>
         <p><label for="langues">Langues étrangères :</label>
