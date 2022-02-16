@@ -51,7 +51,11 @@ class CandidatureController extends Controller
             $candidature->destination_erasmus = $request->dest_deja_parti;
             $candidature->date_erasmus = $request->date_deja_parti;
         }
-        else $candidature->deja_parti_erasmus = false;
+        else {
+            $candidature->deja_parti_erasmus = false;
+            $candidature->destination_erasmus = null;
+            $candidature->date_erasmus = null;
+        }
         $candidature->choix1 = $request->choix1;
         $candidature->semestre_choix1 = $request->semestre_choix1;
         if($request->choix2) {
