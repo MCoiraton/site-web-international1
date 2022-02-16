@@ -9,6 +9,29 @@
     @include("nav")
 </head>
 <script>
+    function choixtelportable(){
+        document.getElementsByName("tel_fixe")[0].required=false;
+    }
+    function annee_entree_1A() {
+        document.getElementById("annee_actuelle_2A").disabled=false;
+        document.getElementById("annee_actuelle_3A").disabled=false;
+        document.getElementById("annee_actuelle_4A").disabled=false;
+    }
+    function annee_entree_2A() {
+        document.getElementById("annee_actuelle_2A").disabled=false;
+        document.getElementById("annee_actuelle_3A").disabled=false;
+        document.getElementById("annee_actuelle_4A").disabled=false;
+    }
+    function annee_entree_3A() {
+        document.getElementById("annee_actuelle_2A").disabled=true;
+        document.getElementById("annee_actuelle_3A").disabled=false;
+        document.getElementById("annee_actuelle_4A").disabled=false;
+    }
+    function annee_entree_4A() {
+        document.getElementById("annee_actuelle_2A").disabled=true;
+        document.getElementById("annee_actuelle_3A").disabled=true;
+        document.getElementById("annee_actuelle_4A").disabled=false;
+    }
     function choixEMME(){
         document.getElementById("SIR").disabled=true;
         document.getElementById("SIA").disabled=true;
@@ -36,6 +59,84 @@
         document.getElementById("SIR").disabled=true;
         document.getElementById("SIA").disabled=true;
     }
+    function deja_parti_erasmus_oui() {
+        document.getElementByName("dest_deja_parti")[0].disabled=false;
+        document.getElementByName("date_deja_parti")[0].disabled=false;
+        document.getElementByName("dest_deja_parti")[0].required=true;
+        document.getElementByName("date_deja_parti")[0].required=true;
+    }
+    function deja_parti_erasmus_non() {
+        document.getElementsByName("dest_deja_parti")[0].required=false;
+        document.getElementsByName("date_deja_parti")[0].required=false;
+        document.getElementsByName("dest_deja_parti")[0].disabled=true;
+        document.getElementsByName("date_deja_parti")[0].disabled=true;
+    }
+    function annee_actuelle_2A() {
+        document.getElementById("choix1_S5").disabled=false;
+        document.getElementById("choix1_S7").disabled=true;
+        document.getElementById("choix1_S9").disabled=true;
+        document.getElementById("choix1_S5S6").disabled=false;
+        document.getElementById("choix1_S7S8").disabled=true;
+        document.getElementById("choix1_S9S10").disabled=true;
+
+        document.getElementById("choix2_S5").disabled=false;
+        document.getElementById("choix2_S7").disabled=true;
+        document.getElementById("choix2_S9").disabled=true;
+        document.getElementById("choix2_S5S6").disabled=false;
+        document.getElementById("choix2_S7S8").disabled=true;
+        document.getElementById("choix2_S9S10").disabled=true;
+
+        document.getElementById("choix3_S5").disabled=false;
+        document.getElementById("choix3_S7").disabled=true;
+        document.getElementById("choix3_S9").disabled=true;
+        document.getElementById("choix3_S5S6").disabled=false;
+        document.getElementById("choix3_S7S8").disabled=true;
+        document.getElementById("choix3_S9S10").disabled=true;
+    }
+    function annee_actuelle_3A() {
+        document.getElementById("choix1_S5").disabled=true;
+        document.getElementById("choix1_S7").disabled=false;
+        document.getElementById("choix1_S9").disabled=true;
+        document.getElementById("choix1_S5S6").disabled=true;
+        document.getElementById("choix1_S7S8").disabled=false;
+        document.getElementById("choix1_S9S10").disabled=true;
+
+        document.getElementById("choix2_S5").disabled=true;
+        document.getElementById("choix2_S7").disabled=false;
+        document.getElementById("choix2_S9").disabled=true;
+        document.getElementById("choix2_S5S6").disabled=true;
+        document.getElementById("choix2_S7S8").disabled=false;
+        document.getElementById("choix2_S9S10").disabled=true;
+
+        document.getElementById("choix3_S5").disabled=true;
+        document.getElementById("choix3_S7").disabled=false;
+        document.getElementById("choix3_S9").disabled=true;
+        document.getElementById("choix3_S5S6").disabled=true;
+        document.getElementById("choix3_S7S8").disabled=false;
+        document.getElementById("choix3_S9S10").disabled=true;
+    }
+    function annee_actuelle_4A() {
+        document.getElementById("choix1_S5").disabled=true;
+        document.getElementById("choix1_S7").disabled=true;
+        document.getElementById("choix1_S9").disabled=false;
+        document.getElementById("choix1_S5S6").disabled=true;
+        document.getElementById("choix1_S7S8").disabled=true;
+        document.getElementById("choix1_S9S10").disabled=false;
+
+        document.getElementById("choix2_S5").disabled=true;
+        document.getElementById("choix2_S7").disabled=true;
+        document.getElementById("choix2_S9").disabled=false;
+        document.getElementById("choix2_S5S6").disabled=true;
+        document.getElementById("choix2_S7S8").disabled=true;
+        document.getElementById("choix2_S9S10").disabled=false;
+
+        document.getElementById("choix3_S5").disabled=true;
+        document.getElementById("choix3_S7").disabled=true;
+        document.getElementById("choix3_S9").disabled=false;
+        document.getElementById("choix3_S5S6").disabled=true;
+        document.getElementById("choix3_S7S8").disabled=true;
+        document.getElementById("choix3_S9S10").disabled=false;
+    }
 </script>
 <body>
     <h1> Fiche candidature à un échange international </h1>
@@ -52,13 +153,13 @@
         <p><label for="rue_adresse">Adresse fixe</label>
         <input type="text" name="rue_adresse" required class="border-black-600 border-2"></p>
         <p><label for="code_postal">Code Postal</label>
-        <input type="number" name="code_postal" class="border-black-600 border-2"></p>
+        <input type="number" name="code_postal" required class="border-black-600 border-2"></p>
         <p><label for="ville">Ville</label>
         <input type="text" name="ville" required class="border-black-600 border-2"></p>
         <p><label for="tel_fixe">Tél fixe</label>
         <input type="tel" name="tel_fixe" required class="border-black-600 border-2"></p>
         <p><label for="tel_portable">Portable</label>
-        <input type="tel" name="tel_portable" class="border-black-600 border-2"></p>
+        <input type="tel" name="tel_portable" onchange="choixtelportable()" class="border-black-600 border-2"></p>
         <p><label for="mail">E-mail</label>
         <input type="mail" name="mail" required class="border-black-600 border-2"></p>
         <p><label for="boursier">Boursier national : </label>
@@ -67,25 +168,25 @@
             <label for="Non">Non</label>
             <input type="radio" name="boursier" value="Non" class="border-black-600 border-2"></p>
         <p><label for="region_origine">Région d'origine</label>
-        <input type="text" name="region_origine" class="border-black-600 border-2"></p>
+        <input type="text" name="region_origine" required class="border-black-600 border-2"></p>
         
         <h2>Informations scolarité</h2>
         <p><label for="annee_entree">Entrée à Polytech Nancy en :</label>
             <label for="1A">1A</label>
-            <input type="radio" name="annee_entree" value="1A" class="border-black-600 border-2">
+            <input type="radio" name="annee_entree" onchange="annee_entree_1A()" value="1A" class="border-black-600 border-2">
             <label for="2A">2A</label>
-            <input type="radio" name="annee_entree" value="2A" class="border-black-600 border-2">
+            <input type="radio" name="annee_entree" onchange="annee_entree_2A()" value="2A" class="border-black-600 border-2">
             <label for="3A">3A</label>
-            <input type="radio" name="annee_entree" value="3A" class="border-black-600 border-2">
+            <input type="radio" name="annee_entree" onchange="annee_entree_3A()" value="3A" class="border-black-600 border-2">
             <label for="4A">4A</label>
-            <input type="radio" name="annee_entree" value="4A" class="border-black-600 border-2"></p>
+            <input type="radio" name="annee_entree" onchange="annee_entree_4A()" value="4A" class="border-black-600 border-2"></p>
         <p><label for="annee_actuelle">Année scolaire actuelle :</label>
             <label for="2A">2A</label>
-            <input type="radio" name="annee_actuelle" value="2A" class="border-black-600 border-2">
+            <input type="radio" name="annee_actuelle" id="annee_actuelle_2A" onchange="annee_actuelle_2A()" value="2A" class="border-black-600 border-2">
             <label for="3A">3A</label>
-            <input type="radio" name="annee_actuelle" value="3A" class="border-black-600 border-2">
+            <input type="radio" name="annee_actuelle" id="annee_actuelle_3A" onchange="annee_actuelle_3A()" value="3A" class="border-black-600 border-2">
             <label for="4A">4A</label>
-            <input type="radio" name="annee_actuelle" value="4A" class="border-black-600 border-2"></p>
+            <input type="radio" name="annee_actuelle" id="annee_actuelle_4A" onchange="annee_actuelle_4A()" value="4A" class="border-black-600 border-2"></p>
         <p><label for="diplome">Diplôme choisi :</label>
             <label for="EMME">EMME</label>
             <input type="radio" name="diplome" onchange="choixEMME()" value="EMME" class="border-black-600 border-2">
@@ -124,13 +225,13 @@
         <p><label for="toeic">Score TOEIC :</label>
         <input type="number" name="toeic" required class="border-black-600 border-2">
         <label for="annee_toeic">Année :</label>
-        <input type="number" name="annee_toeic" class="border-black-600 border-2">
+        <input type="number" name="annee_toeic" required class="border-black-600 border-2">
         </p>
         <p><label for="deja_parti">Êtes-vous déjà parti en échange ERASMUS :</label>
             <label for="Oui">Oui</label>
-            <input type="radio" name="deja_parti" value="Oui" class="border-black-600 border-2">
+            <input type="radio" name="deja_parti" onchange="deja_parti_erasmus_oui()" value="Oui" class="border-black-600 border-2">
             <label for="Non">Non</label>
-            <input type="radio" name="deja_parti" value="Non" class="border-black-600 border-2"></p>
+            <input type="radio" name="deja_parti" onchange="deja_parti_erasmus_non()" value="Non" class="border-black-600 border-2"></p>
         <p><label for="dest_date_deja_parti">Si oui, destination et dates du séjour:</label>
         <input type="text" name="dest_deja_parti" class="border-black-600 border-2">
         <input type="date" name="date_deja_parti" class="border-black-600 border-2"></p>
@@ -141,47 +242,47 @@
         <p><label for="choix1">Choix 1 :</label>
             <input type="text" name="choix1" required class="border-black-600 border-2">
             <label for="S5">S5</label>
-            <input type="radio" name="semestre_choix1" value="S5" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix1" id="choix1_S5" value="S5" class="border-black-600 border-2">
             <label for="S7">S7</label>
-            <input type="radio" name="semestre_choix1" value="S7" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix1" id="choix1_S7" value="S7" class="border-black-600 border-2">
             <label for="S9">S9</label>
-            <input type="radio" name="semestre_choix1" value="S9" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix1" id="choix1_S9" value="S9" class="border-black-600 border-2">
             <label for="S5+6">S5+6</label>
-            <input type="radio" name="semestre_choix1" value="S5+6" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix1" id="choix1_S5S6" value="S5+6" class="border-black-600 border-2">
             <label for="S7+8">S7+8</label>
-            <input type="radio" name="semestre_choix1" value="S7+8" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix1" id="choix1_S7S8" value="S7+8" class="border-black-600 border-2">
             <label for="S9+10">S9+10</label>
-            <input type="radio" name="semestre_choix1" value="S9+10" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix1" id="choix1_S9S10" value="S9+10" class="border-black-600 border-2">
         </p>
         <p><label for="choix2">Choix 2 :</label>
             <input type="text" name="choix2" class="border-black-600 border-2">
             <label for="S5">S5</label>
-            <input type="radio" name="semestre_choix2" value="S5" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix2" id="choix2_S5" value="S5" class="border-black-600 border-2">
             <label for="S7">S7</label>
-            <input type="radio" name="semestre_choix2" value="S7" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix2" id="choix2_S7" value="S7" class="border-black-600 border-2">
             <label for="S9">S9</label>
-            <input type="radio" name="semestre_choix2" value="S9" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix2" id="choix2_S9" value="S9" class="border-black-600 border-2">
             <label for="S5+6">S5+6</label>
-            <input type="radio" name="semestre_choix2" value="S5+6" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix2" id="choix2_S5S6" value="S5+6" class="border-black-600 border-2">
             <label for="S7+8">S7+8</label>
-            <input type="radio" name="semestre_choix2" value="S7+8" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix2" id="choix2_S7S8" value="S7+8" class="border-black-600 border-2">
             <label for="S9+10">S9+10</label>
-            <input type="radio" name="semestre_choix2" value="S9+10" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix2" id="choix2_S9S10" value="S9+10" class="border-black-600 border-2">
         </p>
         <p><label for="choix3">Choix 3 :</label>
             <input type="text" name="choix3" class="border-black-600 border-2">
             <label for="S5">S5</label>
-            <input type="radio" name="semestre_choix3" value="S5" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix3" id="choix3_S5" value="S5" class="border-black-600 border-2">
             <label for="S7">S7</label>
-            <input type="radio" name="semestre_choix3" value="S7" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix3" id="choix3_S7" value="S7" class="border-black-600 border-2">
             <label for="S9">S9</label>
-            <input type="radio" name="semestre_choix3" value="S9" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix3" id="choix3_S9" value="S9" class="border-black-600 border-2">
             <label for="S5+6">S5+6</label>
-            <input type="radio" name="semestre_choix3" value="S5+6" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix3" id="choix3_S5S6" value="S5+6" class="border-black-600 border-2">
             <label for="S7+8">S7+8</label>
-            <input type="radio" name="semestre_choix3" value="S7+8" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix3" id="choix3_S7S8" value="S7+8" class="border-black-600 border-2">
             <label for="S9+10">S9+10</label>
-            <input type="radio" name="semestre_choix3" value="S9+10" class="border-black-600 border-2">
+            <input type="radio" name="semestre_choix3" id="choix3_S9S10" value="S9+10" class="border-black-600 border-2">
         </p>
         <p>Fiche à renvoyer par mail au Service International au plus tard le : </p>
         <p><label for="date_signature">Date :</label>
