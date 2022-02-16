@@ -65,5 +65,6 @@ class CandidatureController extends Controller
         $candidature->date_actuelle = $request->date_signature;
         $candidature->signature = $request->signature;
         $candidature->save();
+        return view('fiche_candidature');
     }
 }
