@@ -15,8 +15,9 @@ class CandidatureController extends Controller
 
     public function store(Request $request) 
     {
-        $candidature = new Candidature();
-        $candidature->email = $request->mail;
+        if(Candidature::find(session("mail"))) $candidature = Candidature::find(session("mail"));
+        else $candidature = new Candidature();
+        $candidature->email = session("mail");
         $candidature->prenom = $request->prenom;
         $candidature->nom = $request->nom;
         $candidature->date_naissance = $request->date_naissance;
@@ -47,7 +48,7 @@ class CandidatureController extends Controller
         $candidature->annee_toeic = $request->annee_toeic;
         if($request->deja_parti=='Oui') {
             $candidature->deja_parti_erasmus = true;
-            $candidature->destination_erasmus = $request->dest_date_deja_parti;
+            $candidature->destination_erasmus = $request->dest_deja_parti;
             $candidature->date_erasmus = $request->date_deja_parti;
         }
         else $candidature->deja_parti_erasmus = false;
