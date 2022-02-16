@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polytech Nancy International</title>
     <link rel ="stylesheet" href ="{{ asset('css/app.css')}}">
-    @include("nav")
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
 </head>
-<body>
-    <main class="relative container mx-auto bg-white px-4">
-
+<body class="bg-gray-200">
+    @include("nav")
+    <main class="relative container bg-white p-4 my-4 rounded-lg w-full m-6">
         <article class="max-w-4xl mx-auto py-8">
             <h1 class="text-3xl font-bold">{{$destination->nom}}</h1>
+            <p class="text-gray-500 font-thin">
+              {{$destination->pays}},{{$destination->continent}}
+            </p>
 
             <h3 class="text-2xl font-semibold">Introduction</h3>
             <p class="mt-4 mb-6"><?php echo($destination->intro) ?></p>
@@ -25,8 +27,8 @@
                   @foreach($photos->where("categorie","intro") as $photo)
                   <div class="swiper-slide">
                     <img
-                      class="object-contain w-full h-96"
-                      src="{{$photo->url}}"
+                      class="object-contain w-full h-72"
+                      src="/{{$photo->url}}"
                       alt="image"
                     />
                   </div>
@@ -43,7 +45,7 @@
                   <div class="swiper-slide">
                     <img
                       class="object-contain w-full h-96"
-                      src="{{$photo->url}}"
+                      src="/{{$photo->url}}"
                       alt="image"
                     />
                   </div>
@@ -76,11 +78,11 @@
             </table>
             <h3 class="text-2xl mt-6 font-semibold">Blogs/Presentations réalisés par nos étudiants</h3>
             @foreach($blogs as $blog)
-            <a href="{{$blog->lien}}"><p class="mt-4 mb-6 underline">{{$blog->nom}}</p></a>
+            <a href="//{{$blog->lien}}"><p class="mt-4 mb-6 underline">{{$blog->nom}}</p></a>
             @endforeach
             <h3 class="text-2xl mt-6 font-semibold">Documentation, liens utiles.</h3>
             @foreach($liens as $lien)
-            <a href="{{$lien->lien}}"><p class="mt-4 mb-6 underline">{{$lien->nom}}</p></a>
+            <a href="//{{$lien->lien}}"><p class="mt-4 mb-6 underline">{{$lien->nom}}</p></a>
             @endforeach
             <h3 class="text-2xl mt-6 font-semibold">Astuces et informations complémentaires</h3>
             <p class="mt-4 mb-6"><?php echo($destination->astucesinfos) ?></p>

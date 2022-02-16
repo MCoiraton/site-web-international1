@@ -15,6 +15,8 @@ class Destination extends Migration
     {
         Schema::create('destination', function (Blueprint $table) {
             $table->string('nom')->primary();
+            $table->string('pays');
+            $table->string('continent');
             $table->longText('intro');
             $table->longText('temoignages');
             $table->longText('astucesinfos');

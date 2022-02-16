@@ -78,7 +78,7 @@
                 btn.parentNode.remove();
             };
         </script>
-        <form method="post" enctype="multipart/form-data" action="{{ action('DestinationController@NouvelleDestination') }}">
+        <form method="post" enctype="multipart/form-data" action="{{ action('DestinationController@nouvelleDestination') }}">
             @csrf
             <div class="flex items-center justify-center mt-10 mb-10">
                 <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12">
@@ -89,6 +89,16 @@
                     <div class="grid grid-cols-1 mt-5 mx-7">
                         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Nom</label>
                         <input name="nom" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required/>
+                    </div>
+
+                    <div class="grid grid-cols-1 mt-5 mx-7">
+                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Pays</label>
+                        <input name="pays" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required/>
+                    </div>
+
+                    <div class="grid grid-cols-1 mt-5 mx-7">
+                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Continent</label>
+                        <input name="continent" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required/>
                     </div>
 
                     <div class="grid grid-cols-1 mt-5 mx-7">

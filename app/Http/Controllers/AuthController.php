@@ -35,10 +35,11 @@ class AuthController extends Controller
         session()->put('isAdmin',$isAdmin);
         return redirect('/');
     }
+
     public function logout(){
         session()->forget(['uid','nom','prenom','mail']);
         session()->save();
         phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
-        phpCAS::logoutWithRedirectService("http://pive-site-web-international.univ-lorraine.fr");
+        phpCAS::logoutWithRedirectService("http://polytech-international.univ-lorraine.fr:8000");
     }
 }

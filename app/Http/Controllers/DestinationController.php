@@ -12,14 +12,12 @@ use App\Assocours;
 
 class DestinationController extends Controller
 {
-    public function liste(){
-        $destinations=Destination::all();
-        return view('gestiondestinations',['destinations' => $destinations]);
-    }
     public function nouvelleDestination(){
         $nom=$_POST["nom"];
         $destination=new Destination();
         $destination->nom=$_POST["nom"];
+        $destination->pays=nl2br($_POST["pays"]);
+        $destination->continent=nl2br($_POST["continent"]);
         $destination->intro=nl2br($_POST["intro"]);
         $destination->temoignages=nl2br($_POST["temoignages"]);
         $destination->astucesinfos=nl2br($_POST["astucesinfos"]);
@@ -228,7 +226,6 @@ class DestinationController extends Controller
             $destination->save();
         }
         return redirect("/admin/gestion");
-
     }
     public function suppDestination(){
         $nom=$_POST['delete'];
@@ -241,7 +238,7 @@ class DestinationController extends Controller
         Assoimage::where('nom',$nom)->delete();
         Assocours::where('nomdestination',$nom)->delete();
         Assoblog::where('nomdestination',$nom)->delete();
-        return redirect('/admin-gestion');
+        return redirect('/admin/gestion');
     }
     public function affichageEdition($nom){
         $destination=Destination::where('nom',$nom)->first();
@@ -257,6 +254,13 @@ class DestinationController extends Controller
         $blogs=Assoblog::where('nomdestination',$nom)->get();
         $liens=Assolien::where('nomdestination',$nom)->get();
         $photos=Assoimage::where('nom',$nom)->get();
-        return view('destination',['destination' => $destination, 'cours' => $cours, 'blogs' => $blogs, 'liens' => $liens, 'photos' => $photos]);
+        return view('destination', ['destination' => $destination, 'cours' => $cours, 'blogs' => $blogs, 'liens' => $liens, 'photos' => $photos]);
+    }
+    public function affichageDestinations(){
+        $destinations = Destination::all();
+        $firstPhotos = [];
+        foreach($destinations as $destination)
+            $firstPhotos[$destination->nom] = Assoimage::where('nom',$destination->nom)->first();
+        return view('destinations', ['destinations' => $destinations, 'photos' => $firstPhotos]);
     }
 }
