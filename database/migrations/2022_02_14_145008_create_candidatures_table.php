@@ -23,8 +23,8 @@ class CreateCandidaturesTable extends Migration
             $table->string('adresse_fixe');
             $table->integer('code_postal');
             $table->string('ville');
-            $table->integer('tel_fixe')->nullable()->default(null);
-            $table->integer('portable')->nullable()->default(null);
+            $table->string('tel_fixe')->nullable()->default(null);
+            $table->string('portable')->nullable()->default(null);
             $table->boolean('boursier');
             $table->string('region_origine');
             $table->string('annee_entree');

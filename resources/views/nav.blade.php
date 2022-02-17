@@ -20,11 +20,6 @@ $destinations=Destination::all();
               @if(session()->has('uid')  && session('isAdmin'))
               <a href="/admin" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Espace Admin</a>
               @endif
-            <!-- <div class="flex space-x-4">
-              <a href="/" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
-              <a href="/Destinations" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Destinations</a>
-              <a href="/CV" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Générateur de CV</a>
-              <a href="{{ route('fiche_candidature.show') }}" class="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Fiche candidature</a> -->
             </div>
           </div>
           
