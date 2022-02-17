@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CandidatureController;
 
 
 /*
@@ -36,6 +35,14 @@ Route::get('/admin/gestion', function () {
     return view('admin-gestion');
 })->middleware('admin');
 
+Route::get('/admin/fiches', function () {
+    return view('admin-fiches');
+})->middleware('admin');
+Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');
+Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('admin');
+Route::get("/admin/fiche/{email}", "CandidatureController@showAdmin")->middleware('admin');
+Route::post('/admin/fiche', "CandidatureController@storeAdmin")->name('fiche_candidature.storeAdmin')->middleware('admin');
+
 Route::get("/admin-modification/{nom}", "DestinationController@affichageEdition")->middleware('admin');
 Route::post("/admin-modification/{nom}",['as' => 'editDestination', 'uses' => 'DestinationController@editDestination'])->middleware('admin');
 
@@ -55,5 +62,6 @@ Route::get("/destination/{nom}", "DestinationController@affichageDestination");
 
 Route::get('/fiche_candidature', [CandidatureController::class, 'show'])->name('fiche_candidature.show');
 Route::post('/fiche_candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store');
+
 
 ?>

@@ -50,6 +50,7 @@ class CreateCandidaturesTable extends Migration
             $table->string('semestre_choix3')->nullable()->default(null);
             $table->date('date_actuelle');
             $table->string('signature');
+            $table->boolean('blocked');
             $table->timestamps();
         });
     }
