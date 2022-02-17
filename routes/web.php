@@ -19,7 +19,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-
 Route::get('/admin/creation', function () {
 return view('admin-creation');
 })->middleware('admin');
@@ -32,7 +31,6 @@ Route::get('/admin', function () {
     return view('admin');
 })->middleware('admin');
 
-
 Route::get('/admin/gestion', function () {
     return view('admin-gestion');
 })->middleware('admin');
@@ -40,6 +38,7 @@ Route::get('/admin/gestion', function () {
 Route::get('/admin/fiches', function () {
     return view('admin-fiches');
 })->middleware('admin');
+
 Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');
 Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('admin');
 Route::get("/admin/fiche/{email}", "CandidatureController@showAdmin")->middleware('admin');
