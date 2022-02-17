@@ -54,9 +54,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'cas.auth'  => 'Subfission\Cas\Middleware\CASAuth',
-        'cas.guest' => 'Subfission\Cas\Middleware\RedirectCASAuthenticated',
         'admin' => AdminsOnly::class,
+        'polytech' => \App\Http\Middleware\PolytechOnly::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
