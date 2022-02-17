@@ -19,8 +19,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/fiche_candidature', [CandidatureController::class, 'show'])->name('fiche_candidature.show');
-Route::post('/fiche_candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store');
 
 Route::get('/admin/creation', function () {
 return view('admin-creation');
@@ -58,6 +56,8 @@ Route::get('/profil', function () {
 Route::get('/profil/candidature', function () {
     return view('profil-candidature');
 })->middleware('polytech');
+
+Route::post('/profil/candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store');
 
 Route::get('/profil/cv', function () {
     return view('profil-cv');
