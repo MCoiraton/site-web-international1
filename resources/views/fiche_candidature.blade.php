@@ -174,14 +174,12 @@ $candidature = Candidature::find(session("mail"));
                     </div>
                     <div class="mb-4 flex">
                         <label class="flex-row text-gray-700 text-md font-bold mb-2 mr-4" for="annee_actuelle">Année d'études actuelle: </label>
-                        <input <?php if($candidature && $candidature->annee_actuelle=="2A") echo("checked");?> class="my-1" type="radio" name="annee_actuelle" value="2A" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->annee_actuelle=="2A") echo("checked");?> id="annee_actuelle_2A" class="my-1" type="radio" name="annee_actuelle" value="2A" class="border-black-600 border-2">
                         <label class="ml-2 mr-4" for="2A">2A</label>
-                        <input <?php if($candidature && $candidature->annee_actuelle=="3A") echo("checked");?> class="my-1" type="radio" name="annee_actuelle" value="3A" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->annee_actuelle=="3A") echo("checked");?> id="annee_actuelle_3A" class="my-1" type="radio" name="annee_actuelle" value="3A" class="border-black-600 border-2">
                         <label class="ml-2 mr-4" for="3A">3A</label>
-                        <input <?php if($candidature && $candidature->annee_actuelle=="4A") echo("checked");?> class="my-1" type="radio" name="annee_actuelle" value="4A" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->annee_actuelle=="4A") echo("checked");?> id="annee_actuelle_4A" class="my-1" type="radio" name="annee_actuelle" value="4A" class="border-black-600 border-2">
                         <label class="ml-2 mr-4" for="4A">4A</label>
-                        <input <?php if($candidature && $candidature->annee_actuelle=="5A") echo("checked");?> class="my-1" type="radio" name="annee_actuelle" value="5A" class="border-black-600 border-2">
-                        <label class="ml-2 mr-4" for="5A">5A</label>
                     </div> 
 
                     <div class="mb-4 flex-col">
@@ -189,29 +187,29 @@ $candidature = Candidature::find(session("mail"));
                         <p class="ml-28">
                             <input class="my-1" type="radio" name="diplome" onchange="choixEMME()" value="EMME" <?php if($candidature && $candidature->diplome_choisi=="EMME") echo("checked");?> class="border-black-600 border-2">
                             <label class="ml-2 mr-4 text-gray-900 underline" for="EMME">EMME</label>
-                            <input <?php if($candidature && $candidature->specialisation=="MFE") echo("checked");?> class="my-1" type="radio" name="parcours" value="MFE" class="border-black-600 border-2">
+                            <input <?php if($candidature && $candidature->specialisation=="MFE") echo("checked");?> id="MFE" class="my-1" type="radio" name="parcours" value="MFE" class="border-black-600 border-2">
                             <label class="ml-2 mr-4" for="MFE">MFE</label>
-                            <input <?php if($candidature && $candidature->specialisation=="MSM") echo("checked");?> class="my-1" type="radio" name="parcours" value="MSM" class="border-black-600 border-2">
+                            <input <?php if($candidature && $candidature->specialisation=="MSM") echo("checked");?> id="MSM" class="my-1" type="radio" name="parcours" value="MSM" class="border-black-600 border-2">
                             <label class="ml-2 mr-4" for="MSM">MSM</label>
-                            <input <?php if($candidature && $candidature->specialisation=="IE") echo("checked");?> class="my-1" type="radio" name="parcours" value="MSM" class="border-black-600 border-2">
-                            <label class="ml-2 mr-4" for="MSM">IE</label>
+                            <input <?php if($candidature && $candidature->specialisation=="IE") echo("checked");?> id="IE" class="my-1" type="radio" name="parcours" value="IE" class="border-black-600 border-2">
+                            <label class="ml-2 mr-4" for="IE">IE</label>
                         </p>
 
                         <p class="ml-28">
                             <input class="my-1" type="radio" name="diplome" onchange="choixIA2R()" value="IA2R" <?php if($candidature && $candidature->diplome_choisi=="IA2R") echo("checked");?> class="border-black-600 border-2">
                             <label class="ml-2 mr-4 text-gray-900 underline" for="IA2R">IA2R</label>
-                            <input <?php if($candidature && $candidature->specialisation=="SIA") echo("checked");?> class="my-1" type="radio" name="parcours" value="SIA" class="border-black-600 border-2">
+                            <input <?php if($candidature && $candidature->specialisation=="SIA") echo("checked");?> id="SIA" class="my-1" type="radio" name="parcours" value="SIA" class="border-black-600 border-2">
                             <label class="ml-2 mr-4" for="SIA">SIA</label>
-                            <input <?php if($candidature && $candidature->specialisation=="SIR") echo("checked");?> class="my-1" type="radio" name="parcours" value="SIR" class="border-black-600 border-2">
+                            <input <?php if($candidature && $candidature->specialisation=="SIR") echo("checked");?> id="SIR" class="my-1" type="radio" name="parcours" value="SIR" class="border-black-600 border-2">
                             <label class="ml-2 mr-4" for="SIR">SIR</label>
                         </p>
 
                         <p class="ml-28">
                             <input class="my-1" type="radio" name="diplome" onchange="choixM3()" value="M3" <?php if($candidature && $candidature->diplome_choisi=="M3") echo("checked");?> class="border-black-600 border-2">
                             <label class="ml-2 mr-4 text-gray-900 underline" for="M3">M3</label>
-                            <input <?php if($candidature && $candidature->specialisation=="MSS") echo("checked");?> class="my-1" type="radio" name="parcours" value="MSS" class="border-black-600 border-2">
+                            <input <?php if($candidature && $candidature->specialisation=="MSS") echo("checked");?> id="MSS" class="my-1" type="radio" name="parcours" value="MSS" class="border-black-600 border-2">
                             <label class="ml-2 mr-4" for="MSS">MSS</label>
-                            <input <?php if($candidature && $candidature->specialisation=="MCL") echo("checked");?> class="my-1" type="radio" name="parcours" value="MCL" class="border-black-600 border-2">
+                            <input <?php if($candidature && $candidature->specialisation=="MCL") echo("checked");?> id="MCL" class="my-1" type="radio" name="parcours" value="MCL" class="border-black-600 border-2">
                             <label class="ml-2 mr-4" for="MCL">MCL</label>
                         </p>
                     </div>
@@ -266,49 +264,49 @@ $candidature = Candidature::find(session("mail"));
                         <label for="choix1">Choix 1 :</label>
                         <input value="<?php if($candidature) echo($candidature->choix1); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix1" class="border-black-600 border-2">
                         <label for="S5">S5</label>
-                        <input <?php if($candidature && $candidature->semestre_choix1=="S5") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S5" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix1=="S5") echo("checked");?> id="choix1_S5" class="my-1" type="radio" name="semestre_choix1" value="S5" class="border-black-600 border-2">
                         <label for="S7">S7</label>
-                        <input <?php if($candidature && $candidature->semestre_choix1=="S7") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S7" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix1=="S7") echo("checked");?> id="choix1_S7" class="my-1" type="radio" name="semestre_choix1" value="S7" class="border-black-600 border-2">
                         <label for="S9">S9</label>
-                        <input <?php if($candidature && $candidature->semestre_choix1=="S9") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S9" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix1=="S9") echo("checked");?> id="choix1_S9" class="my-1" type="radio" name="semestre_choix1" value="S9" class="border-black-600 border-2">
                         <label for="S5+6">S5+6</label>
-                        <input <?php if($candidature && $candidature->semestre_choix1=="S5+6") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S5+6" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix1=="S5+6") echo("checked");?> id="choix1_S5S6" class="my-1" type="radio" name="semestre_choix1" value="S5+6" class="border-black-600 border-2">
                         <label for="S7+8">S7+8</label>
-                        <input <?php if($candidature && $candidature->semestre_choix1=="S7+8") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S7+8" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix1=="S7+8") echo("checked");?> id="choix1_S7S8" class="my-1" type="radio" name="semestre_choix1" value="S7+8" class="border-black-600 border-2">
                         <label for="S9+10">S9+10</label>
-                        <input <?php if($candidature && $candidature->semestre_choix1=="S9+10") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S9+10" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix1=="S9+10") echo("checked");?> id="choix1_S9S10" class="my-1" type="radio" name="semestre_choix1" value="S9+10" class="border-black-600 border-2">
                     </div>
                     <div class="mt-4">
                         <label for="choix2">Choix 2 :</label>
                         <input value="<?php if($candidature && $candidature->choix2) echo($candidature->choix2); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix2" class="border-black-600 border-2">
                         <label for="S5">S5</label>
-                        <input <?php if($candidature && $candidature->semestre_choix2=="S5") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S5" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix2=="S5") echo("checked");?> id="choix2_S5" class="my-1" type="radio" name="semestre_choix2" value="S5" class="border-black-600 border-2">
                         <label for="S7">S7</label>
-                        <input <?php if($candidature && $candidature->semestre_choix2=="S7") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S7" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix2=="S7") echo("checked");?> id="choix2_S7" class="my-1" type="radio" name="semestre_choix2" value="S7" class="border-black-600 border-2">
                         <label for="S9">S9</label>
-                        <input <?php if($candidature && $candidature->semestre_choix2=="S9") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S9" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix2=="S9") echo("checked");?> id="choix2_S9" class="my-1" type="radio" name="semestre_choix2" value="S9" class="border-black-600 border-2">
                         <label for="S5+6">S5+6</label>
-                        <input <?php if($candidature && $candidature->semestre_choix2=="S5+6") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S5+6" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix2=="S5+6") echo("checked");?> id="choix2_S5S6" class="my-1" type="radio" name="semestre_choix2" value="S5+6" class="border-black-600 border-2">
                         <label for="S7+8">S7+8</label>
-                        <input <?php if($candidature && $candidature->semestre_choix2=="S7+8") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S7+8" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix2=="S7+8") echo("checked");?> id="choix2_S7S8" class="my-1" type="radio" name="semestre_choix2" value="S7+8" class="border-black-600 border-2">
                         <label for="S9+10">S9+10</label>
-                        <input <?php if($candidature && $candidature->semestre_choix2=="S9+10") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S9+10" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix2=="S9+10") echo("checked");?> id="choix2_S9S10" class="my-1" type="radio" name="semestre_choix2" value="S9+10" class="border-black-600 border-2">
                     </div>
                     <div class="mt-4">
                         <label for="choix3">Choix 3 :</label>
                         <input value="<?php if($candidature && $candidature->choix3) echo($candidature->choix3); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix3" class="border-black-600 border-2">
                         <label for="S5">S5</label>
-                        <input <?php if($candidature && $candidature->semestre_choix3=="S5") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S5" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix3=="S5") echo("checked");?> id="choix3_S5" class="my-1" type="radio" name="semestre_choix3" value="S5" class="border-black-600 border-2">
                         <label for="S7">S7</label>
-                        <input <?php if($candidature && $candidature->semestre_choix3=="S7") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S7" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix3=="S7") echo("checked");?> id="choix3_S7" class="my-1" type="radio" name="semestre_choix3" value="S7" class="border-black-600 border-2">
                         <label for="S9">S9</label>
-                        <input <?php if($candidature && $candidature->semestre_choix3=="S9") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S9" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix3=="S9") echo("checked");?> id="choix3_S9" class="my-1" type="radio" name="semestre_choix3" value="S9" class="border-black-600 border-2">
                         <label for="S5+6">S5+6</label>
-                        <input <?php if($candidature && $candidature->semestre_choix3=="S5+6") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S5+6" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix3=="S5+6") echo("checked");?> id="choix3_S5S6" class="my-1" type="radio" name="semestre_choix3" value="S5+6" class="border-black-600 border-2">
                         <label for="S7+8">S7+8</label>
-                        <input <?php if($candidature && $candidature->semestre_choix3=="S7+8") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S7+8" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix3=="S7+8") echo("checked");?> id="choix3_S7S8" class="my-1" type="radio" name="semestre_choix3" value="S7+8" class="border-black-600 border-2">
                         <label for="S9+10">S9+10</label>
-                        <input <?php if($candidature && $candidature->semestre_choix3=="S9+10") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S9+10" class="border-black-600 border-2">
+                        <input <?php if($candidature && $candidature->semestre_choix3=="S9+10") echo("checked");?> id="choix3_S9S10" class="my-1" type="radio" name="semestre_choix3" value="S9+10" class="border-black-600 border-2">
                     </div>
                     <div class="mt-4">
                             <p>Fiche à renvoyer par mail au Service International au plus tard le : </p>
@@ -330,3 +328,65 @@ $candidature = Candidature::find(session("mail"));
 <footer>
     @include('footer');
 </footer>
+<script>
+    document.getElementById("annee_actuelle_2A").onchange=function(){
+        document.getElementById("choix1_S5").disabled=false;
+        document.getElementById("choix1_S7").disabled=true;
+        document.getElementById("choix1_S9").disabled=true;
+        document.getElementById("choix1_S5S6").disabled=false;
+        document.getElementById("choix1_S7S8").disabled=true;
+        document.getElementById("choix1_S9S10").disabled=true;
+        document.getElementById("choix2_S5").disabled=false;
+        document.getElementById("choix2_S7").disabled=true;
+        document.getElementById("choix2_S9").disabled=true;
+        document.getElementById("choix2_S5S6").disabled=false;
+        document.getElementById("choix2_S7S8").disabled=true;
+        document.getElementById("choix2_S9S10").disabled=true;
+        document.getElementById("choix3_S5").disabled=false;
+        document.getElementById("choix3_S7").disabled=true;
+        document.getElementById("choix3_S9").disabled=true;
+        document.getElementById("choix3_S5S6").disabled=false;
+        document.getElementById("choix3_S7S8").disabled=true;
+        document.getElementById("choix3_S9S10").disabled=true;
+    }
+    document.getElementById("annee_actuelle_3A").onchange=function(){
+        document.getElementById("choix1_S5").disabled=true;
+        document.getElementById("choix1_S7").disabled=false;
+        document.getElementById("choix1_S9").disabled=true;
+        document.getElementById("choix1_S5S6").disabled=true;
+        document.getElementById("choix1_S7S8").disabled=false;
+        document.getElementById("choix1_S9S10").disabled=true;
+        document.getElementById("choix2_S5").disabled=true;
+        document.getElementById("choix2_S7").disabled=false;
+        document.getElementById("choix2_S9").disabled=true;
+        document.getElementById("choix2_S5S6").disabled=true;
+        document.getElementById("choix2_S7S8").disabled=false;
+        document.getElementById("choix2_S9S10").disabled=true;
+        document.getElementById("choix3_S5").disabled=true;
+        document.getElementById("choix3_S7").disabled=false;
+        document.getElementById("choix3_S9").disabled=true;
+        document.getElementById("choix3_S5S6").disabled=true;
+        document.getElementById("choix3_S7S8").disabled=false;
+        document.getElementById("choix3_S9S10").disabled=true;
+    }
+    document.getElementById("annee_actuelle_4A").onchange=function(){
+        document.getElementById("choix1_S5").disabled=true;
+        document.getElementById("choix1_S7").disabled=true;
+        document.getElementById("choix1_S9").disabled=false;
+        document.getElementById("choix1_S5S6").disabled=true;
+        document.getElementById("choix1_S7S8").disabled=true;
+        document.getElementById("choix1_S9S10").disabled=false;
+        document.getElementById("choix2_S5").disabled=true;
+        document.getElementById("choix2_S7").disabled=true;
+        document.getElementById("choix2_S9").disabled=false;
+        document.getElementById("choix2_S5S6").disabled=true;
+        document.getElementById("choix2_S7S8").disabled=true;
+        document.getElementById("choix2_S9S10").disabled=false;
+        document.getElementById("choix3_S5").disabled=true;
+        document.getElementById("choix3_S7").disabled=true;
+        document.getElementById("choix3_S9").disabled=false;
+        document.getElementById("choix3_S5S6").disabled=true;
+        document.getElementById("choix3_S7S8").disabled=true;
+        document.getElementById("choix3_S9S10").disabled=false;
+    }
+</script>
