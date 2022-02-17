@@ -34,6 +34,7 @@ Route::get('/admin', function () {
     return view('admin');
 })->middleware('admin');
 
+
 Route::get('/admin/gestion', function () {
     return view('admin-gestion');
 })->middleware('admin');
@@ -49,13 +50,18 @@ Route::post('/admin/fiche', "CandidatureController@storeAdmin")->name('fiche_can
 Route::get("/admin-modification/{nom}", "DestinationController@affichageEdition")->middleware('admin');
 Route::post("/admin-modification/{nom}",['as' => 'editDestination', 'uses' => 'DestinationController@editDestination'])->middleware('admin');
 
-Route::get('/CV', function () {
-    return view('generateurcv');
-}); 
 
 Route::get('/profil', function () {
     return view('profil');
 });
+
+Route::get('/profil/candidature', function () {
+    return view('profil-candidature');
+})->middleware('polytech');
+
+Route::get('/profil/cv', function () {
+    return view('profil-cv');
+}); 
 
 Route::get('/auth/login', "AuthController@login");
 Route::get('/auth/logout', "AuthController@logout");
