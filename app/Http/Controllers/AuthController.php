@@ -18,7 +18,7 @@ class AuthController extends Controller
         $isPolytech=false;
         $myfile = fopen("userlist.txt", "r") or die("Unable to open file!");
         while(!feof($myfile)) {
-            $currentUser=fgets($myfile);
+            $currentUser=trim(fgets($myfile));
             if($currentUser==phpCAS::getAttribute("uid")) $isPolytech=true;
         }
         fclose($myfile);
