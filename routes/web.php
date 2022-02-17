@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CandidatureController;
 
 
 /*
@@ -51,5 +52,8 @@ Route::get('/auth/logout', "AuthController@logout");
 
 Route::get('/destinations', 'DestinationController@affichageDestinations');
 Route::get("/destination/{nom}", "DestinationController@affichageDestination");
+
+Route::get('/fiche_candidature', [CandidatureController::class, 'show'])->name('fiche_candidature.show');
+Route::post('/fiche_candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store');
 
 ?>
