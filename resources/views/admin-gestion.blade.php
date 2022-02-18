@@ -52,10 +52,10 @@ $destinations=Destination::all();
                                         {{$destination->nom}}
                                     </td>
                                     <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                        Apr 23 ,2021
+                                        {{$destination->created_at}}
                                     </td>
                                     <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                        June 1, 2021
+                                        {{$destination->updated_at}}
                                     </td>
                                     <td class="flex flex-row m-2">
                                         <a href='/admin-modification/{{$destination->nom}}' class="hover:bg-blue-700 hover:text-white px-3 py-2 ml-2 rounded-md text-sm font-medium">Modifier</a>
