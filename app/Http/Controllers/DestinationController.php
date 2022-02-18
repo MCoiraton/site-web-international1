@@ -30,13 +30,22 @@ class DestinationController extends Controller
                 if(Assocours::find(($code))) $valide=false;
             }
         }
+        $j=0;
         if($_FILES["introphotos"]["name"][0]!=""){
-            $j=0;
             foreach($_FILES["introphotos"]["name"] as $image){
                 $info = pathinfo($image);
                 $ext = $info["extension"];
                 $newname = "$j.".$ext; 
-                $target = "img/destinations/".$_POST["nom"].$newname;
+                $target = "/img/destinations/".$_POST["nom"].$newname;
+                if(Assoimage::find(($target))) $valide=false;
+            }
+        }
+        if($_FILES["temoignagesphotos"]["name"][0]!=""){
+            foreach($_FILES["introphotos"]["name"] as $image){
+                $info = pathinfo($image);
+                $ext = $info["extension"];
+                $newname = "$j.".$ext; 
+                $target = "/img/destinations/".$_POST["nom"].$newname;
                 if(Assoimage::find(($target))) $valide=false;
             }
         }
@@ -98,7 +107,7 @@ class DestinationController extends Controller
                     $info = pathinfo($_FILES["introphotos"]["name"][$i]);
                     $ext = $info["extension"];
                     $newname = "$j.".$ext; 
-                    $target = "img/destinations/$nom".$newname;
+                    $target = "/img/destinations/$nom".$newname;
                     move_uploaded_file( $_FILES["introphotos"]["tmp_name"][$i], $target);
                     $j++;
                     $assoimage=new Assoimage();
@@ -113,7 +122,7 @@ class DestinationController extends Controller
                     $info = pathinfo($_FILES["temoignagesphotos"]["name"][$i]);
                     $ext = $info["extension"];
                     $newname = "$j.".$ext; 
-                    $target = "img/destinations/$nom".$newname;
+                    $target = "/img/destinations/$nom".$newname;
                     move_uploaded_file( $_FILES["temoignagesphotos"]["tmp_name"][$i], $target);
                     $j++;
                     $assoimage=new Assoimage();
@@ -276,7 +285,7 @@ class DestinationController extends Controller
         $blogs=Assoblog::where('nomdestination',$nom)->get();
         $liens=Assolien::where('nomdestination',$nom)->get();
         $photos=Assoimage::where('nom',$nom)->get();
-        return view('editdestination',['destination' => $destination, 'cours' => $cours, 'blogs' => $blogs, 'liens' => $liens, 'photos' => $photos]);
+        return view('admin-modification',['destination' => $destination, 'cours' => $cours, 'blogs' => $blogs, 'liens' => $liens, 'photos' => $photos]);
     }
     public function affichageDestination($nom){
         $destination=Destination::where('nom',$nom)->first();

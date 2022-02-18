@@ -28,7 +28,7 @@
                   <div class="swiper-slide">
                     <img
                       class="object-contain w-full h-72"
-                      src="/{{$photo->url}}"
+                      src="{{$photo->url}}"
                       alt="image"
                     />
                   </div>
@@ -45,7 +45,7 @@
                   <div class="swiper-slide">
                     <img
                       class="object-contain w-full h-96"
-                      src="/{{$photo->url}}"
+                      src="{{$photo->url}}"
                       alt="image"
                     />
                   </div>
