@@ -20,6 +20,7 @@ class Destination extends Migration
             $table->longText('intro');
             $table->longText('temoignages');
             $table->longText('astucesinfos');
+            $table->timestamps();
         });
     }
 

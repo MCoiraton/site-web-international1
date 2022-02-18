@@ -11,7 +11,6 @@ class Destination extends Model
     protected $primaryKey='nom';
     public $incrementing = false;
     protected $keyType = 'string';
-    public $timestamps = false;
     protected $connection = 'mysql';
     protected $fillable=["nom","intro","temoignages","astucesinfos"];
 }
