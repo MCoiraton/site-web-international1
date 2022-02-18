@@ -23,7 +23,10 @@ class DatabaseSeeder extends Seeder
         $fred->save();
         $ayoub=new Admin();
         $ayoub->uid="echchama1u";
-        $ayoub->save();        
+        $ayoub->save();
+        $lucas=new Admin();
+        $lucas->uid="schwing3u";
+        $lucas->save();        
         for($j=0;$j<4;$j++){
             $faker = Faker\Factory::create();
             $destination=new Destination();
