@@ -272,7 +272,8 @@ class DestinationController extends Controller
         Assolien::where('nomdestination',$nom)->delete();
         $urls=Assoimage::where('nom',$nom)->get();
         foreach($urls as $url){
-            unlink($url->url);
+            if(substr($url->url,0,5)=="https");
+            else unlink($url->url);
         }
         Assoimage::where('nom',$nom)->delete();
         Assocours::where('nomdestination',$nom)->delete();
