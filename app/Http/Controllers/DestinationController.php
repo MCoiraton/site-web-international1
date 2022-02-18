@@ -41,7 +41,7 @@ class DestinationController extends Controller
             }
         }
         if($_FILES["temoignagesphotos"]["name"][0]!=""){
-            foreach($_FILES["introphotos"]["name"] as $image){
+            foreach($_FILES["temoignagesphotos"]["name"] as $image){
                 $info = pathinfo($image);
                 $ext = $info["extension"];
                 $newname = "$j.".$ext; 
@@ -107,8 +107,9 @@ class DestinationController extends Controller
                     $info = pathinfo($_FILES["introphotos"]["name"][$i]);
                     $ext = $info["extension"];
                     $newname = "$j.".$ext; 
+                    $target0= "img/destinations/$nom".$newname;
                     $target = "/img/destinations/$nom".$newname;
-                    move_uploaded_file( $_FILES["introphotos"]["tmp_name"][$i], $target);
+                    move_uploaded_file( $_FILES["introphotos"]["tmp_name"][$i], $target0);
                     $j++;
                     $assoimage=new Assoimage();
                     $assoimage->nom=$nom;
@@ -121,9 +122,10 @@ class DestinationController extends Controller
                 for($i=0;$i<count($_FILES["temoignagesphotos"]["name"]);$i++){
                     $info = pathinfo($_FILES["temoignagesphotos"]["name"][$i]);
                     $ext = $info["extension"];
-                    $newname = "$j.".$ext; 
+                    $newname = "$j.".$ext;
+                    $target0= "img/destinations/$nom".$newname;
                     $target = "/img/destinations/$nom".$newname;
-                    move_uploaded_file( $_FILES["temoignagesphotos"]["tmp_name"][$i], $target);
+                    move_uploaded_file( $_FILES["temoignagesphotos"]["tmp_name"][$i], $target0);
                     $j++;
                     $assoimage=new Assoimage();
                     $assoimage->nom=$nom;
@@ -139,7 +141,7 @@ class DestinationController extends Controller
         if(isset($_POST['deleteimg'])){
             foreach($_POST['deleteimg'] as $img){
                 Assoimage::where('url',$img)->delete();
-                unlink($img); //unlink supprime le fichier du stockage
+                unlink(substr($img,1)); //unlink supprime le fichier du stockage
             }
         }
         if(isset($_POST['deleteblog'])){
@@ -264,7 +266,7 @@ class DestinationController extends Controller
             $destination->astucesinfos=$astucesinfos;
             $destination->save();
         }
-        return redirect("/admin/gestion");
+       return redirect("/admin/gestion");
     }
     public function suppDestination(){
         $nom=$_POST['delete'];
@@ -273,7 +275,7 @@ class DestinationController extends Controller
         $urls=Assoimage::where('nom',$nom)->get();
         foreach($urls as $url){
             if(substr($url->url,0,5)=="https");
-            else unlink($url->url);
+            else unlink(substr($url->url,1));
         }
         Assoimage::where('nom',$nom)->delete();
         Assocours::where('nomdestination',$nom)->delete();
