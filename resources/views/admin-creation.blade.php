@@ -15,7 +15,7 @@
                 newdiv.innerHTML="<div><div class=\"grid grid-cols-5 mt-5 mx-7\">"+
                 "<div class=\"grid grid-cols-1\">"+
                 "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Semestre :</label>"+
-                    "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"semestre[]\" type=\"text\"/>"+
+                    "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"semestre[]\" type=\"number\"/>"+
                     "</div>"+
                     "<div class=\"grid grid-cols-1 ml-1\">"+
                     "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Code :</label>"+
@@ -27,11 +27,11 @@
                     "</div>"+
                     "<div class=\"grid grid-cols-1 ml-1\">"+
                     "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">ECTS</label>"+
-                    "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"ects[]\" type=\"text\"/>"+
+                    "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"ects[]\" type=\"number\"/>"+
                     "</div>"+
                     "<div class=\"grid grid-cols-1 ml-1\">"+
                     "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nombre d'échanges</label>"+
-                    "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nombre[]\" type=\"text\"/>"+
+                    "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nombre[]\" type=\"number\"/>"+
                     "</div></div>"+
                     "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
                     "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Contenu</label>"+
@@ -82,6 +82,9 @@
             @csrf
             <div class="flex items-center justify-center mt-10 mb-10">
                 <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12">
+                    <div class="flex justify-center text-red-600 font-bold md:text-2xl text-xl">
+                        <?php if(isset($_GET["erreur"])) echo($_GET["erreur"].", veuillez réessayer");?>
+                    </div>
                     <div class="flex justify-center">
                         <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Ajout d'une nouvelle destination</h1>
                     </div>
