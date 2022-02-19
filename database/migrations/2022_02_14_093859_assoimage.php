@@ -17,6 +17,7 @@ class Assoimage extends Migration
             $table->string('url')->primary();
             $table->string('categorie');
             $table->string('nom');
+            $table->foreign('nom')->references('nom')->on('destination');
         });
     }
 

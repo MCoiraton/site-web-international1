@@ -16,6 +16,7 @@ class Assolien extends Migration
         Schema::create('assolien', function (Blueprint $table) {
             $table->string('nom')->primary();
             $table->string('nomdestination');
+            $table->foreign('nomdestination')->references('nom')->on('destination');
             $table->string('lien');
         });
     }

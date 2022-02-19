@@ -16,6 +16,7 @@ class Assocours extends Migration
         Schema::create('assocours', function (Blueprint $table) {
             $table->string('code')->primary();
             $table->string('nomdestination');
+            $table->foreign('nomdestination')->references('nom')->on('destination');
             $table->string('titre');
             $table->integer('semestre');
             $table->integer('ects');
