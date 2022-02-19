@@ -98,13 +98,13 @@ $candidature = Candidature::find(session("mail"));
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="prénom">
                                     Prénom:
                                 </label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="<?php if($candidature) echo($candidature->prenom); ?>" required name="prenom" type="text">
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{session('prenom')}}" required name="prenom" type="text">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="nom">
                                     Nom:
                                 </label>
-                                <input value="<?php if($candidature) echo($candidature->nom); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nom" type="text">
+                                <input value="{{session('nom')}}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nom" type="text">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="date_naissance">
@@ -152,7 +152,7 @@ $candidature = Candidature::find(session("mail"));
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="email">
                                     E-mail:
                                 </label>
-                                <input value="<?php echo(session("mail")); ?>" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="mail">
+                                <input value="{{session('mail')}}" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="mail">
                             </div>
                             
                             <div class="mb-4 flex">
