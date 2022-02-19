@@ -62,9 +62,9 @@ $candidatures=Candidature::all();
                                             <input type="hidden" name="email" value="{{$candidature->email}}"/>
                                             <button form="block" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">
                                             @if($candidature->blocked)
-                                                Débloquer modification
+                                                Débloquer
                                             @else
-                                                Bloquer modification
+                                                Bloquer
                                             @endif
                                             </button>
                                         </form>
@@ -72,6 +72,11 @@ $candidatures=Candidature::all();
                                             @csrf
                                             <input type="hidden" name="email" value="{{$candidature->email}}"/>
                                             <button form="mail" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Contacter</button>
+                                        </form>
+                                        <form id="excel" method="post" action="">
+                                            @csrf
+                                            <input type="hidden" name="email" value="{{$candidature->email}}"/>
+                                            <button form="excel" class="items-center hover:bg-green-700 hover:text-white bg-white text-green-700 px-3 py-2 rounded-md text-sm font-medium">To Excel</button>
                                         </form>
                                     </td>
                                 </tr>
