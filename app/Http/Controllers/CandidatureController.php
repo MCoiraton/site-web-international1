@@ -156,6 +156,7 @@ class CandidatureController extends Controller
         else
             abort(404);
         $candidature->blocked = !$candidature->blocked;
+        $candidature->demande_unblocked = !$candidature->demande_unblocked;
         $candidature->save();
         return redirect('/admin/fiches');
     }

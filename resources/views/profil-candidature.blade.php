@@ -93,17 +93,17 @@ $candidature = Candidature::find(session("mail"));
                         <h1 class="text-4xl text-gray-900 flex items-center justify-center">Fiche candidature à un échange international </h1>
                             <?php if(!$candidature) echo("<p> Attention une fois la fiche de candidature envoyé elle ne pourra plus être modifié. </p>"); ?>
                             <div class="<?php if(!$candidature || !$candidature->blocked) echo("hidden"); ?>">
-                            <p>
-                                Vous ne pouvez plus modifier votre fiche de candidature. 
-                                <p> Vous avez fait une erreur ? Faire une demande de modification : </p>
+                                <p class="mt-4 font-bold">Vous ne pouvez plus modifier votre fiche de candidature.</p>
+                                <p class="mt-4">Vous avez fait une erreur ? </p>
+                                <p class="my-4">Les administrateurs du site peuvent corriger les informations pour vous ou vous débloquer le formulaire.</p>
+                                <p class="mb-2">Faites une demande ci-dessous: </p>
                                 <form action="{{ route('fiche_candidature.store') }}" method="POST">
                                     @csrf
-                                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="message_unblocked" type="text">
-                                    <button class="mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit"> Envoyer </button>
+                                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="message_unblocked" type="text" placeholder="Votre message...">
+                                    <button class="my-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Envoyer</button>
                                 </form>
-                                <p> <?php if($candidature && $candidature->demande_unblocked) echo("Demande bien envoyé!")?> </p>
+                                <p><?php if($candidature && $candidature->demande_unblocked) echo("<script type='text/javascript'>alert('Demande bien envoyé!');</script>");?></p>
                             </div>
-                            </p>
                         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('fiche_candidature.store') }}" method="POST">
                             @csrf
                             <h2 class="text-xl mb-4 text-gray-700">Informations Personelles:</h2>
@@ -340,7 +340,7 @@ $candidature = Candidature::find(session("mail"));
                                 <label for="signature">Signature (mettre ses initiales) :</label>
                                 <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->signature); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="signature" class="border-black-600 border-2">
                             </div>
-                            <button <?php if($candidature && $candidature->blocked) echo("disabled"); ?> class="mt-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit"> Envoyer </button>
+                            <button <?php if($candidature && $candidature->blocked) echo("disabled class=\"bg-gray-500 hover:bg-gray-600 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center\""); else echo("class=\"bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center\"") ?> type="submit">Envoyer</button>
                         </form>
                     </div>
                 </div>
