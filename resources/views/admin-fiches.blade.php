@@ -20,6 +20,11 @@ $candidatures=Candidature::all();
                     <span class="text-base font-normal text-gray-500">Vous pouvez içi visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
                 </div>
             </div>
+            <form id="exportExcel" method="POST" action="{{ action('FastExcelController@exportCandidature') }}">
+                @csrf
+                <input type="hidden" name="candidatures" value="{{$candidatures}}"/>
+                <button form="exportExcel" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Exporter sous format Excel </button>
+            </form>
             <a href="#" class="hover:bg-blue-700 hover:text-white px-3 py-2 mt-4 rounded-md text-sm font-medium">Bouton Utile</a>
                 <div class="flex flex-col mt-4 border-2 border-gray-300 rounded-lg">
                 <div class="overflow-x-auto rounded-lg">

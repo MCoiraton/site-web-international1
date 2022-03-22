@@ -39,6 +39,7 @@ Route::get('/admin/fiches', function () {
     return view('admin-fiches');
 })->middleware('admin');
 
+Route::post('/admin/fiches/exportExcel', 'FastExcelController@exportCandidature')->middleware('admin');
 Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');
 Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('admin');
 Route::get("/admin/fiche/{email}", "CandidatureController@showAdmin")->middleware('admin');
