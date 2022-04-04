@@ -1,3 +1,14 @@
 À faire:
   - style radio fiche candidature
   - style demande changement fiche candidature
+  - Contenu fiche candidature modifiable
+  - CV headers en anglais
+  - durée 1 an fiches
+  - page d'acceuil sous forme d'un formulaire modifiable
+  - remplissage des données: destinations (les trouver sur vieux blog), informations utiles (intranet)
+  - admin peut controller la date limit de dépot de candidature
+  - widgets insta/FB
+  - progressbar espace etudiant / checklist
+  - espace admin: dossier de bourse?
+  - ajout des universités favories
+  - guide prise en main du site (readme, architecture site pour prochains PIVEs)
