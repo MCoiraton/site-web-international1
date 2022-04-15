@@ -18,8 +18,39 @@
             <title>Polytech Nancy International</title>
             <link rel ="stylesheet" href ="{{ asset('css/app.css')}}">
         </head>
+        <script>
+            function afficher_pdf(pdf){
+                img=document.getElementById(pdf);
+                if(img.style.display=="none") {
+                    img.style.display ="block";
+                    document.getElementById("bouton_"+pdf).innerHTML = "Cacher";
+                }
+                else {
+                    img.style.display ="none";
+                    document.getElementById("bouton_"+pdf).innerHTML = "Voir";
+                }
+                }
+        </script>
         <body>
             <section class="text-gray-600 body-font pt-6">
+                <h1>Fichiers en ligne :</h1>
+                @foreach($fichiers as $fichier)
+                <div>
+                    <h2>{{$fichier->nom}}</h2>
+                    <embed
+                        src="../{{$fichier->url}}"
+                        type="application/pdf"
+                        frameBorder="0"
+                        scrolling="auto"
+                        height="600px"
+                        width="1000px"
+                        id={{$fichier->nom}}
+                        style="display:none"
+                    />
+                    <button type="button" id="bouton_{{$fichier->nom}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
+                    <button type="button" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
+                </div>
+                @endforeach
                 <form enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('fichier.store') }}" method="POST">
                     @csrf
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="nom"> Nom du fichier (pas besoin de mettre votre nom) </label>

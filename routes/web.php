@@ -64,9 +64,7 @@ Route::post('/profil/fichiers', [FichiersController::class, 'store'])->name('fic
 Route::get('/profil/cv', function () {
     return view('profil-cv');
 })->middleware('polytech');
-Route::get('/profil/fichiers', function () {
-    return view('profil-fichiers');
-})->middleware('polytech'); 
+Route::get('/profil/fichiers', [FichiersController::class, 'show'])->middleware('polytech');
 
 Route::get('/auth/login', "AuthController@login");
 Route::get('/auth/logout', "AuthController@logout");
