@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatureController;
+use App\Http\Controllers\FichiersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,8 @@ Route::get('/profil/candidature', function () {
     return view('profil-candidature');
 })->middleware('polytech');
 
-Route::post('/profil/candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store');
+Route::post('/profil/candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store')->middleware('polytech');
+Route::post('/profil/fichiers', [FichiersController::class, 'store'])->name('fichier.store')->middleware('polytech');
 
 Route::get('/profil/cv', function () {
     return view('profil-cv');

@@ -14,7 +14,8 @@ class Assoimage extends Migration
     public function up()
     {
         Schema::create('assoimage', function (Blueprint $table) {
-            $table->string('url')->primary();
+            $table->increments("id");
+            $table->string('url');
             $table->string('categorie');
             $table->string('nom');
             $table->foreign('nom')->references('nom')->on('destination');
