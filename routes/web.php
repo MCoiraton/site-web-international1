@@ -61,7 +61,10 @@ Route::post('/profil/candidature', [CandidatureController::class, 'store'])->nam
 
 Route::get('/profil/cv', function () {
     return view('profil-cv');
-}); 
+})->middleware('polytech');
+Route::get('/profil/fichiers', function () {
+    return view('profil-fichiers');
+})->middleware('polytech'); 
 
 Route::get('/auth/login', "AuthController@login");
 Route::get('/auth/logout', "AuthController@logout");
