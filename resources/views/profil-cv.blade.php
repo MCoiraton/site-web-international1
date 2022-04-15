@@ -27,14 +27,14 @@
             nbreEducations+=1;
             var newdiv=document.createElement('div');
             newdiv.innerHTML="<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
-              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Cursus précédent :</label>"+
+              "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Previous curriculum / Cursus précédent :</label>"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
-                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom de l'établissement</label>"+
+                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">School name / Nom de l'établissement</label>"+
                   "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"nomeduc"+nbreEducations+"\" type=\"text\" placeholder=\"Napoleon High School\" />"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
-                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lieu</label>"+
+                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Place / Lieu</label>"+
                   "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"lieueduc"+nbreEducations+"\" type=\"text\" placeholder=\"Paris, France\" />"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
@@ -45,7 +45,7 @@
                   "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Description</label>"+
                   "<textarea style=\"white-space: pre-wrap\" class=\"h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"desceduc"+nbreEducations+"\" type=\"text\" placeholder=\"French Scientific “Baccalauréat”, equivalent to A-levels. &#10;European English section, graduated with honours (= mention Bien) / First class honours (= mention Très bien) (this is an example)\"></textarea>"+
                   "</div>"+
-                "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppeduc(this)\">Supprmier ce cursus</button>";
+                "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppeduc(this)\">Delete this curriculum / Supprmier ce cursus</button>";
               document.getElementById('education').appendChild(newdiv);
               document.getElementById("nbreEduc").innerHTML=nbreEducations;
           };
@@ -56,11 +56,11 @@
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Projet "+(nbreProjets+1)+" :</label>"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
-                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom du projet</label>"+
+                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Name of the project / Nom du projet</label>"+
                   "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"titreprojet"+nbreProjets+"\" type=\"text\" placeholder=\"Gymnasium Renovation\" />"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
-                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lieu</label>"+
+                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Place / Lieu</label>"+
                   "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"lieuprojet"+nbreProjets+"\" type=\"text\" placeholder=\"Polytech Nancy\" />"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
@@ -71,7 +71,7 @@
                   "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Description</label>"+
                   "<textarea style=\"white-space: pre-wrap\" class=\"h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"descprojet"+nbreProjets+"\" type=\"text\" placeholder=\"Worked in a team of …… &#10;Designed ……… &#10;Prepared and Presented ………\"></textarea>"+
                   "</div>"+
-                "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppprojet(this)\">Supprmier ce projet</button>";
+                "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppprojet(this)\">Delete this project / Supprmier ce projet</button>";
               document.getElementById('projets').appendChild(newdiv);
               document.getElementById("nbreProj").innerHTML=nbreProjets;
           };
@@ -82,11 +82,11 @@
               "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Expérience "+(nbreExperiences+1)+" :</label>"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
-                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nom de l'entreprise</label>"+
+                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Name of the Company / Nom de l'entreprise</label>"+
                   "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"nomexp"+nbreExperiences+"\" type=\"text\" placeholder=\"Law Office of Red, White and Blue\" />"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
-                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Lieu</label>"+
+                  "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Place / Lieu</label>"+
                   "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"lieuexp"+nbreExperiences+"\" type=\"text\" placeholder=\"Nancy, France\" />"+
                 "</div>"+
                 "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
@@ -97,7 +97,7 @@
                   "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Description</label>"+
                   "<textarea style=\"white-space: pre-wrap\" class=\"h-28 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" id=\"descexp"+nbreProjets+"\" type=\"text\" placeholder=\"Office Assistant: &#10; - Provide office support including filing, copying and out of office errands &#10; - Direct phone calls to staff in a friendly and efficient manner &#10; - Utilize Excel to maintain and update client database\"></textarea>"+
                   "</div>"+
-                "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppexp(this)\">Supprmier cette expérience</button>";
+                "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppexp(this)\">Delete this experience / Supprmier cette expérience</button>";
               document.getElementById('experiences').appendChild(newdiv);
               document.getElementById("nbreExp").innerHTML=nbreExperiences;
           };
@@ -132,51 +132,51 @@
           
               <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
                 <div class="grid grid-cols-1">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Prénom</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">First name / Prénom</label>
                   <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="prenom" type="text" placeholder="Prénom" />
                 </div>
                 <div class="grid grid-cols-1">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nom</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Last name / Nom</label>
                   <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="nom" type="text" placeholder="Nom" />
                 </div>
               </div>
               <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Adresse</label>
+                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Address / Adresse</label>
                 <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="adresse" type="text" placeholder="Adresse" />
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
                 <div class="grid grid-cols-1">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Ville</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">City / Ville</label>
                   <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="ville" type="text" placeholder="Ville" />
                 </div>
                 <div class="grid grid-cols-1">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Code postal</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Zip code / Code postal</label>
                   <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="codepostal" type="text" placeholder="Code postal" />
                 </div>
               </div>
               
               <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Adresse mail</label>
+                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Mail address / Adresse mail</label>
                 <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="mail" type="text" placeholder="exemple@etu.univ-lorraine.fr" />
               </div>
 
               <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Numéro de téléphone</label>
+                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Phone number / Numéro de téléphone</label>
                 <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="numtel" type="text" placeholder="06XXXXXXXX" />
               </div>
 
               <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Téléverser votre photo (format 4:3)</label>
+                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Upload your photo / Téléverser votre photo (format 4:3)</label>
                 <input name="photo" id="photo" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file">
               </div>
               
               <div id="education">
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Scolarité</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Education / Scolarité</label>
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Cursus actuel :</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Current curriculum / Cursus actuel :</label>
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
                   <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Date d'entrée à Polytech</label>
@@ -191,21 +191,21 @@
               <input type="hidden" id="nomeduc0" value="Polytech Nancy - Graduate School of Engineering"/>
               <input type="hidden" id="lieueduc0" value="Nancy, France"/>        
               <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="newEduc()">Ajouter un cursus</button>
+                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="newEduc()">Add a curriculum / Ajouter un cursus</button>
               </div>
               <div id="projets">
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Parlez de vos projets</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Talk about your engineering projects / Parlez de vos projets</label>
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
                   <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Projet 1 :</label>
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nom du projet</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Name of the project / Nom du projet</label>
                   <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="titreprojet0" type="text" placeholder="Gymnasium Renovation" />
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Lieu</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Place / Lieu</label>
                   <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="lieuprojet0" type="text" placeholder="Polytech Nancy" />
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
@@ -219,21 +219,21 @@
                 </div>
               </div>          
               <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="newProjet()">Ajouter un projet</button>
+                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="newProjet()">Add a project / Ajouter un projet</button>
               </div>
               <div id="experiences">
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Expériences professionnelles</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Professional experience / Expériences professionnelles</label>
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
                   <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Expérience 1 :</label>
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nom de l'entreprise</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Name of the company / Nom de l'entreprise</label>
                   <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="nomexp0" type="text" placeholder="Law Office of Red, White and Blue" />
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Lieu</label>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Place / Lieu</label>
                   <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="lieuexp0" type="text" placeholder="Nancy, France" />
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
@@ -247,28 +247,28 @@
                 </div>
               </div>          
               <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="newExp()">Ajouter une expérience</button>
+                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="newExp()">Add an experience / Ajouter une expérience</button>
               </div>
 
               <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Informatique</label>
+                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Computer skills / Compétences informatique</label>
                 <textarea class="h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="informatique" type="text" 
                 placeholder="Software: AutoCAD, Microsoft Word, Excel, PowerPoint (these are just examples) &#10;Programming Languages: Java, C++ &#10;Operating Systems: Windows, Mac OS X, Linux, UNIX"></textarea>
               </div>
 
 
               <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Langues</label>
+                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Languages / Langues</label>
                 <textarea style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="langues" type="text" placeholder="French: Native &#10;English: (Beginner, Intermediate, Advanced) Toeic Score: 785"></textarea>
               </div>
 
               <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Activités et centres d'intérets (doivent montrer vos qualités)</label>
+                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Activities and centers of interest (should show your qualities) / Activités et centres d'intérets (doivent montrer vos qualités)</label>
                 <textarea class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" id="activites" type="text" placeholder="Décrivez vos activités et centres d'intérets"></textarea>
               </div>
 
               <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="generate()">Générer mon CV !</button>
+                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="generate()">Generate my CV / Générer mon CV</button>
               </div>
 
             </div>
