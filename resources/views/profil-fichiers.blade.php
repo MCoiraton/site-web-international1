@@ -29,7 +29,7 @@
                     img.style.display ="none";
                     document.getElementById("bouton_"+pdf).innerHTML = "Voir";
                 }
-                }
+            }
         </script>
         <body>
             <section class="text-gray-600 body-font pt-6">

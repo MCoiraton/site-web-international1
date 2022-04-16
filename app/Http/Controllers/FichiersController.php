@@ -12,6 +12,10 @@ class FichiersController extends Controller
         $fichiers = Fichier::all()->where('uid', '=', session('uid'));
         return view('profil-fichiers', ['fichiers' => $fichiers]);
     }
+    public function showadmin(){
+        $fichiers = Fichier::all()->groupBy('uid');
+        return view('admin-fichiers', ['fichiers' => $fichiers]);
+    }
     public function store(Request $request){
         $uid=session()->get('uid');
         $file = $request->file('fichier')->store("public/{$uid}");
