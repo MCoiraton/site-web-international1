@@ -17,7 +17,7 @@ class FichiersController extends Controller
         return view('admin-fichiers', ['fichiers' => $fichiers]);
     }
     public function store(Request $request){
-        if($request->hasFile('fichier') && $request->has('nom')){
+        if($request->hasFile('fichier') && $request->nom!=""){
             $uid=session()->get('uid');
             $file = $request->file('fichier')->store("public/{$uid}");
             $file = str_replace("public", 'storage', $file);
