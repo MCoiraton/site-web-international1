@@ -17,15 +17,18 @@ class FichiersController extends Controller
         return view('admin-fichiers', ['fichiers' => $fichiers]);
     }
     public function store(Request $request){
-        $uid=session()->get('uid');
-        $file = $request->file('fichier')->store("public/{$uid}");
-        $file = str_replace("public", 'storage', $file);
-        Fichier::create([
-            'nom' => $request->nom,
-            'uid' => $uid,
-            'url' => $file
-        ]);
-        return redirect("/profil/fichiers");
+        if($request->hasFile('fichier') && $request->has('nom')){
+            $uid=session()->get('uid');
+            $file = $request->file('fichier')->store("public/{$uid}");
+            $file = str_replace("public", 'storage', $file);
+            Fichier::create([
+                'nom' => $request->nom,
+                'uid' => $uid,
+                'url' => $file
+            ]);
+            return redirect("/profil/fichiers");
+        }
+        return redirect("/profil/fichiers?e=1");
     }
     public function delete(Request $request){
         $fichier = Fichier::find($request->id);
