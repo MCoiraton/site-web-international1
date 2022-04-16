@@ -23,4 +23,11 @@ class FichiersController extends Controller
         ]);
         return redirect("/profil/fichiers");
     }
+    public function delete(Request $request){
+        $fichier = Fichier::find($request->id);
+        $file=$fichier->url;
+        unlink($file);
+        $fichier->delete();
+        return redirect("/profil/fichiers");
+    }
 }

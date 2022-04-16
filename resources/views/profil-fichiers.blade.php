@@ -39,7 +39,11 @@
                     <div>
                         <h2 class="text-gray-600 text-sm font-semibold mb-2">{{$fichier->nom}}</h2>
                         <button type="button" id="bouton_{{$fichier->nom}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
-                        <button type="button" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
+                        <form action="{{route('fichier.delete')}}" class="inline" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$fichier->id}}">
+                            <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
+                        </form>
                         <embed
                             src="../{{$fichier->url}}"
                             type="application/pdf"

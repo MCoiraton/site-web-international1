@@ -59,7 +59,8 @@ Route::get('/profil/candidature', function () {
 })->middleware('polytech');
 
 Route::post('/profil/candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store')->middleware('polytech');
-Route::post('/profil/fichiers', [FichiersController::class, 'store'])->name('fichier.store')->middleware('polytech');
+Route::post('/profil/fichiers/store', [FichiersController::class, 'store'])->name('fichier.store')->middleware('polytech');
+Route::post('/profil/fichiers/delete', [FichiersController::class, 'delete'])->name('fichier.delete')->middleware('polytech');
 
 Route::get('/profil/cv', function () {
     return view('profil-cv');
