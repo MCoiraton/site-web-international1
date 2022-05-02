@@ -35,9 +35,16 @@ Route::get('/admin/gestion', function () {
     return view('admin-gestion');
 })->middleware('admin');
 
-Route::get('/admin/fiches', function () {
-    return view('admin-fiches');
+// Route::get('/admin/fiches', function () {
+//     return view('admin-fiches');
+// })->middleware('admin');
+
+Route::get('/admin/fiches/{annee?}', function (int $annee = null) {
+    return view('admin-fiches',[
+        'annee' => $annee
+    ]);
 })->middleware('admin');
+
 
 Route::post('/admin/fiches/exportExcel', 'FastExcelController@exportCandidature')->middleware('admin');
 Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');

@@ -1,6 +1,16 @@
 <?php
 use App\Candidature;
-$candidatures=Candidature::all();
+$candidatures=Candidature::latest()->get();
+$annees = [];
+foreach($candidatures as $candidature){
+    $year = $candidature->created_at->year;
+    if(!in_array($year,$annees)){
+        array_push($annees,$year);
+    }
+}
+if($annee){
+    $candidatures=Candidature::latest()->whereYear('created_at', '=', $annee)->get();
+}
 ?>
 <x-layout-admin>
     <x-slot name='fiches'>
@@ -14,23 +24,43 @@ $candidatures=Candidature::all();
 	</x-slot>
     <x-slot name='panel'>
     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-            <div class="mb-4 flex items-center justify-between">
-                <div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Fiches de Candidature</h3>
-                    <span class="text-base font-normal text-gray-500">Vous pouvez içi visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
-                </div>
+        <div class="mb-4 flex items-center justify-between">
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Fiches de Candidature</h3>
+                <span class="text-base font-normal text-gray-500">Vous pouvez içi visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
             </div>
-            <form id="exportExcel" method="POST" action="{{ action('FastExcelController@exportCandidature') }}">
-                @csrf
-                <input type="hidden" name="candidatures" value="{{$candidatures}}"/>
-                <button form="exportExcel" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Exporter sous format Excel </button>
-            </form>
-            <a href="#" class="hover:bg-blue-700 hover:text-white px-3 py-2 mt-4 rounded-md text-sm font-medium">Bouton Utile</a>
-                <div class="flex flex-col mt-4 border-2 border-gray-300 rounded-lg">
-                <div class="overflow-x-auto rounded-lg">
-                    <div class="align-middle inline-block min-w-full">
-                        <div class="shadow overflow-hidden sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
+        </div>
+        <form id="exportExcel" method="POST" action="{{ action('FastExcelController@exportCandidature') }}">
+            @csrf
+            <input type="hidden" name="candidatures" value="{{$candidatures}}"/>
+            <button form="exportExcel" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Exporter sous format Excel </button>
+        </form>
+        <div class="px-3 py-2 rounded-md text-sm font-medium">
+            <select id='fiches_annee' onchange="change(this.value)">
+                @if($annee)
+                    <option value="">Toutes les fiches</option>
+                @else
+                    <option value="" selected>Toutes les fiches</option>
+                @endif
+                @foreach($annees as $year1)
+                    @if($year1 === $annee)
+                        <option value="{{$year1}}" selected>Fiches {{$year1}}</option>
+                    @else
+                        <option value="{{$year1}}">Fiches {{$year1}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        <script>
+            function change(value){
+                window.location.href = '/admin/fiches/' + value;
+            }
+        </script>
+        <div class="flex flex-col mt-4 border-2 border-gray-300 rounded-lg">
+            <div class="overflow-x-auto rounded-lg">
+                <div class="align-middle inline-block min-w-full">
+                    <div class="shadow overflow-hidden sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -87,11 +117,11 @@ $candidatures=Candidature::all();
                                 </tr>
                                 @endforeach
                             </tbody>
-                            </table>
-                        </div>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </x-slot>
 </x-layout-admin>
