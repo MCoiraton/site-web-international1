@@ -1,15 +1,21 @@
 <?php
 use App\Candidature;
-$candidatures=Candidature::latest()->get();
 $annees = [];
+$candidatures = [];
 foreach($candidatures as $candidature){
     $year = $candidature->created_at->year;
     if(!in_array($year,$annees)){
         array_push($annees,$year);
     }
 }
-if($annee){
-    $candidatures=Candidature::latest()->whereYear('created_at', '=', $annee)->get();
+if(isset($fiches)){
+    $candidatures = $fiches;
+}
+else if(isset($annee)){
+    $candidatures = Candidature::latest()->whereYear('created_at', '=', $annee)->get();
+}
+else{
+    $candidatures = Candidature::latest()->get();
 }
 ?>
 <x-layout-admin>
@@ -30,34 +36,44 @@ if($annee){
                 <span class="text-base font-normal text-gray-500">Vous pouvez içi visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
             </div>
         </div>
-        <form id="exportExcel" method="POST" action="{{ action('FastExcelController@exportCandidature') }}">
-            @csrf
-            <input type="hidden" name="candidatures" value="{{$candidatures}}"/>
-            <button form="exportExcel" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Exporter sous format Excel </button>
-        </form>
-        <div class="px-3 py-2 rounded-md text-sm font-medium">
-            <select id='fiches_annee' onchange="change(this.value)">
-                @if($annee)
-                    <option value="">Toutes les fiches</option>
-                @else
-                    <option value="" selected>Toutes les fiches</option>
-                @endif
-                @foreach($annees as $year1)
-                    @if($year1 === $annee)
-                        <option value="{{$year1}}" selected>Fiches {{$year1}}</option>
+        <div class="flex flex-row">
+            <div class="px-3 py-2 rounded-md text-sm font-medium">
+                <select id='fiches_annee' onchange="change(this.value)">
+                    @if(isset($annee))
+                        <option value="">Toutes les fiches</option>
                     @else
-                        <option value="{{$year1}}">Fiches {{$year1}}</option>
+                        <option value="" selected>Toutes les fiches</option>
                     @endif
-                @endforeach
-            </select>
+                    @foreach($annees as $year1)
+                        @if(isset($annee))
+                            @if($year1 === $annee)
+                                <option value="{{$year1}}" selected>Fiches {{$year1}}</option>
+                            @else
+                                <option value="{{$year1}}">Fiches {{$year1}}</option>
+                            @endif
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <script>
+                function change(value){
+                    window.location.href = '/admin/fiches/annee/' + value;
+                }
+            </script>
+            <form id="exportExcel" method="POST" action="{{ action('FastExcelController@exportCandidature') }}">
+                @csrf
+                <input type="hidden" name="candidatures" value="{{$candidatures}}"/>
+                <button form="exportExcel" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Exporter sous format Excel </button>
+            </form>
         </div>
-        <script>
-            function change(value){
-                window.location.href = '/admin/fiches/' + value;
-            }
-        </script>
-        <div class="flex flex-col mt-4 border-2 border-gray-300 rounded-lg">
-            <div class="overflow-x-auto rounded-lg">
+        <div class="flex flex-col m-4">
+            <form id="searchFiches" method="GET" action="{{ action('CandidatureController@search') }}" class="p-2 w-1/3 mx-0 flex justify-between text-gray-600 border-2 border-gray-300 bg-white  rounded-lg text-sm">
+                <input class="focus:outline-none w-full" type="text" name="query" placeholder="Chercher...">
+                <button form="searchFiches" type="submit" class="relative">
+                    <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px"> <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" /></svg>
+                </button>
+            </form>
+            <div class="overflow-x-auto border-2 border-gray-300 rounded-lg mt-2">
                 <div class="align-middle inline-block min-w-full">
                     <div class="shadow overflow-hidden sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">

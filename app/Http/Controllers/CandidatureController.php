@@ -18,6 +18,17 @@ class CandidatureController extends Controller
         return view('admin-fiche');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+
+        $fiches = Candidature::where('email', 'LIKE', "%$query%")
+                    ->orWhere('prenom', 'LIKE', "%$query%")
+                    ->orWhere('nom', 'LIKE', "%$query%")
+                    ->get();
+        return view('admin-fiches', compact('fiches'));
+    }   
+
     public function store(Request $request) 
     {
         if(Candidature::find(session("mail"))) 
