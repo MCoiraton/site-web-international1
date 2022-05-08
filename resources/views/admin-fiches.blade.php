@@ -17,7 +17,7 @@ $candidatures=Candidature::all();
             <div class="mb-4 flex items-center justify-between">
                 <div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Fiches de Candidature</h3>
-                    <span class="text-base font-normal text-gray-500">Vous pouvez içi visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
+                    <span class="text-base font-normal text-gray-500">Vous pouvez ici visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
                 </div>
             </div>
             <form id="exportExcel" method="POST" action="{{ action('FastExcelController@exportCandidature') }}">
@@ -92,6 +92,10 @@ $candidatures=Candidature::all();
                     </div>
                 </div>
             </div>
+            <form id="deleteAll" method="POST" action="{{ action('CandidatureController@deleteAll') }}">
+                @csrf
+                <button form="deleteAll" onclick="return confirm('Êtes-vous sûr de vouloir supprimer toutes les fiches de candidatures ? Vous ne pourrez pas revenir en arrière.')" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Supprimer les fiches de candidatures </button>
+            </form>
         </div>
     </x-slot>
 </x-layout-admin>

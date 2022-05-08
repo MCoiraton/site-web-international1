@@ -42,6 +42,7 @@ Route::get('/admin/fiches', function () {
 Route::post('/admin/fiches/exportExcel', 'FastExcelController@exportCandidature')->middleware('admin');
 Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');
 Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('admin');
+Route::post('/admin/fiches/deleteAll', 'CandidatureController@deleteAll')->middleware('admin');
 Route::get("/admin/fiche/{email}", "CandidatureController@showAdmin")->middleware('admin');
 Route::post('/admin/fiche', "CandidatureController@storeAdmin")->name('fiche_candidature.storeAdmin')->middleware('admin');
 
@@ -51,17 +52,17 @@ Route::post("/admin-modification/{nom}",['as' => 'editDestination', 'uses' => 'D
 
 Route::get('/profil', function () {
     return view('profil');
-});
+})->middleware('polytech');
 
 Route::get('/profil/candidature', function () {
     return view('profil-candidature');
 })->middleware('polytech');
 
-Route::post('/profil/candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store');
+Route::post('/profil/candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store')->middleware('polytech');
 
 Route::get('/profil/cv', function () {
     return view('profil-cv');
-}); 
+})->middleware('polytech'); 
 
 Route::get('/auth/login', "AuthController@login");
 Route::get('/auth/logout', "AuthController@logout");

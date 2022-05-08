@@ -167,4 +167,9 @@ class CandidatureController extends Controller
         return redirect('https://mail.etu.univ-lorraine.fr/?view=compose&to=mailto%3A'.$email.'#1');
     }
     
+    public function deleteAll(Request $request) 
+    {
+        Candidature::truncate();
+        return view('admin-fiches');
+    }
 }
