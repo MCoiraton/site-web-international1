@@ -37,7 +37,7 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        session()->forget(['uid','nom','prenom','mail']);
+        session()->forget(['uid','nom','prenom','mail','isPolytech','isAdmin']);
         session()->save();
         phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
         phpCAS::logoutWithRedirectService("http://polytech-international.univ-lorraine.fr:8000");
