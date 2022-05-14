@@ -35,6 +35,6 @@ class FichiersController extends Controller
         $file=$fichier->url;
         unlink($file);
         $fichier->delete();
-        return redirect("/profil/fichiers");
+        return redirect($request->redirect);
     }
 }

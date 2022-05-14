@@ -65,6 +65,7 @@
                 <form action="{{route('fichier.delete')}}" class="inline" method="POST">
                     @csrf
                     <input type="hidden" name="id" value="{{$fichier->id}}">
+                    <input type="hidden" name="redirect" value="/admin/fichiers">
                     <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
                 </form>
                 <embed
