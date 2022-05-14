@@ -32,6 +32,24 @@
                     document.getElementById("bouton_"+pdf).innerHTML = "v";
                 }
             }
+            //fonction pour telecharger en blob le pdf avec un nom donné
+            function telecharger_pdf(pdf, nom){
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', "../"+pdf, true);
+                xhr.responseType = 'blob';
+                xhr.onload = function(e) {
+                    if (this.status == 200) {
+                        var myBlob = this.response;
+                        var blob = new Blob([myBlob], {type: 'application/pdf'});
+                        var link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = nom;
+                        link.click();
+                    }
+                };
+                xhr.send();
+            }
+            
         </script>
     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
         @foreach($fichiers as $byuid)
@@ -43,6 +61,7 @@
             <div>
                 <h2 class="text-gray-600 text-sm font-semibold mb-2">{{$fichier->nom}}</h2>
                 <button type="button" id="bouton_{{$fichier->nom}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
+                <button type="button" id="bouton_{{$fichier->nom}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='telecharger_pdf("{{$fichier->url}}","{{$fichier->nom}}")'>Télécharger</button>
                 <form action="{{route('fichier.delete')}}" class="inline" method="POST">
                     @csrf
                     <input type="hidden" name="id" value="{{$fichier->id}}">
