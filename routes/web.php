@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatureController;
 use App\Http\Controllers\FichiersController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,10 @@ Route::get('/admin/gestion', function () {
 Route::get('/admin/fiches', function () {
     return view('admin-fiches');
 })->middleware('admin');
+
+Route::get('/admin/utilisateurs', [UserController::class,'liste'])->middleware('admin');
+Route::post('/admin/utilisateurs/delete', [UserController::class,'delete'])->middleware('admin')->name('deleteadmin');
+Route::post('/admin/utilisateurs/add', [UserController::class,'add'])->middleware('admin')->name('addadmin');
 
 Route::get('/admin/fichiers', [FichiersController::class, 'showadmin'])->middleware('admin');
 
