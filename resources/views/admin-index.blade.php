@@ -1,7 +1,7 @@
 <x-layout-admin>
-    <x-slot name='tableau'>
+    <x-slot name='accueil'>
         <style>
-            #tableau {
+            #accueil {
                 background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
                 --tw-text-opacity: 1;
                 color: rgba(17, 24, 39, var(--tw-text-opacity));
@@ -27,44 +27,14 @@
                 document.getElementById('suppr').appendChild(newdiv);
                 document.getElementById(element).parentNode.remove();
             }
-            // function newCours(){
-            //     var newdiv=document.createElement('div');
-            //     newdiv.innerHTML="<div><div class=\"grid grid-cols-5 mt-5 mx-7\">"+
-            //     "<div class=\"grid grid-cols-1\">"+
-            //     "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Semestre :</label>"+
-            //         "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"semestre[]\" type=\"text\"/>"+
-            //         "</div>"+
-            //         "<div class=\"grid grid-cols-1 ml-1\">"+
-            //         "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Code :</label>"+
-            //         "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"code[]\" type=\"text\"/>"+
-            //         "</div>"+
-            //         "<div class=\"grid grid-cols-1 ml-1\">"+
-            //         "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Titre</label>"+
-            //         "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"titre[]\" type=\"text\"/>"+
-            //         "</div>"+
-            //         "<div class=\"grid grid-cols-1 ml-1\">"+
-            //         "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">ECTS</label>"+
-            //         "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"ects[]\" type=\"text\"/>"+
-            //         "</div>"+
-            //         "<div class=\"grid grid-cols-1 ml-1\">"+
-            //         "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Nombre d'échanges</label>"+
-            //         "<input class=\"py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"nombre[]\" type=\"text\"/>"+
-            //         "</div></div>"+
-            //         "<div class=\"grid grid-cols-1 mt-5 mx-7\">"+
-            //         "<label class=\"uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Contenu</label>"+
-            //         "<textarea style=\"white-space: pre-wrap\" class=\"h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent\" name=\"contenu[]\" type=\"text\"></textarea>"+
-            //         "</div>"+
-            //         "<button class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick=\"suppCours(this)\">Supprimer ce cours</button></div>";
-            //     document.getElementById('cours').appendChild(newdiv);
-            // };
         </script>
 
         <body>
-            <form method="post" enctype="multipart/form-data" action="{{ route('editDestination', $destination->nom) }}">
+            <form method="post" enctype="multipart/form-data" action="{{action('IndexController@saveIndex')}}">
                 @csrf
                 <div id="suppr"></div>
                 <div class="flex items-center justify-center  mt-10 mb-10">
-                    <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12 lg:w-1/2">
+                    <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12">
                         <div class="flex justify-center">
                             <div class="flex">
                                 <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Modification de la page d'acceuil</h1>
@@ -72,129 +42,78 @@
                         </div>
 
                         <div class="grid grid-cols-1 mt-5 mx-7">
-                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Introduction</label>
-                            <textarea name="intro" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$destination->intro)}}</textarea>
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Titre</label>
+                            <textarea name="titre" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->titre)}}</textarea>
                         </div>
                         <div class="grid grid-cols-1 mt-5 mx-7">
                             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Images</label>
-                            @foreach($photos->where("categorie","intro") as $photo)
+                            @foreach($photos as $photo)
                             <?php
-                            $url = $photo->url;
-                            $photo = explode("/", $photo->url)[3];
+                            $url = $photo->nom;
+                            $img = explode("/", $photo->nom)[0];
                             ?>
-                            <div class="flex space-x-4"><span class="px-3 py-2 text-sm font-medium">{{$photo}}</span>
-                                <button onclick="afficherMasquer('{{$url}}')" type="button" class="hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Afficher/Masquer</button>
-                                <button onclick="supprimage('{{$url}}')" type="button" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
-                                <img id='{{$url}}' style="display: none" class="object-contain w-full h-96" src="{{$url}}" />
+                            <div class="flex space-x-4">
+                                <span class="px-3 py-2 text-sm font-medium">{{$img}}</span>
+                                <button onclick="afficherMasquer('{{ $url }}')" type="button" class="hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Afficher/Masquer</button>
+                                <button onclick="supprimage('{{ $url }}')" type="button" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
+                                <img id='{{$url}}' style="display: none" class="object-contain w-1/2 h-1/2" src="{{asset('img/hero/imageIndex'.$photo->nom)}}" />
                             </div>
                             @endforeach
                             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Ajouter de nouvelles images</label>
-                            <input name="introphotos[]" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file" multiple>
+                            <input name="indexphotos[]" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file" multiple>
                         </div>
                         <div class="grid grid-cols-1 mt-5 mx-7">
-                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Témoignages</label>
-                            <textarea name="temoignages" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$destination->intro)}}
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Description</label>
+                            <textarea name="description" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->description)}}
+                            </textarea>
+                        </div>
+                        <div class="flex mt-4 ml-4">
+                            <h1 class="text-gray-600 font-bold md:text-xl text-xl">Modification contenu rubriques</h1>
+                        </div>
+                        <div class="grid grid-cols-1 mt-5 mx-7">
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Titre Rubrique n°1</label>
+                            <textarea name="titreR1" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->titreRubrique1)}}
                             </textarea>
                         </div>
                         <div class="grid grid-cols-1 mt-5 mx-7">
-                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Images</label>
-                            @foreach($photos->where("categorie","temoignages") as $photo)
-                            <?php
-                            $url = $photo->url;
-                            $photo = explode("/", $photo->url)[3];
-                            ?>
-                            <div class="flex space-x-4"><span class="px-3 py-2 text-sm font-medium">{{$photo}}</span>
-                                <button onclick="afficherMasquer('{{$url}}')" type="button" class="hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Afficher/Masquer</button>
-                                <button onclick="supprimage('{{$url}}')" type="button" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
-                                <img id='{{$url}}' style="display: none" class="object-contain w-full h-96" src="{{$url}}" />
-                            </div>
-                            @endforeach
-                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Ajouter de nouvelles images</label>
-                            <input name="temoignagesphotos[]" accept="image/*" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="file" multiple>
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Paragraphe Rubrique n°1</label>
+                            <textarea name="paragrapheR1" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->paragrapheRubrique1)}}
+                            </textarea>
                         </div>
-
-                        <div id="cours" div class="grid grid-cols-1 mt-5 mx-7">
-                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Liste des cours choisis par les étudiants</label>
-                            @foreach($cours as $cour)
-                            <div>
-                                <div class="grid grid-cols-5 mt-5 mx-7">
-                                    <div class="grid grid-cols-1">
-                                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Semestre :</label>
-                                        <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value='{{$cour->semestre}}' name="updatesemestre[]" type="text" />
-                                    </div>
-                                    <div class="grid grid-cols-1 ml-1">
-                                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Code :</label>
-                                        <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value='{{$cour->code}}' name="updatecode[]" type="text" readonly>
-                                    </div>
-                                    <div class="grid grid-cols-1 ml-1\">
-                                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Titre</label>
-                                        <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value='{{$cour->titre}}' name="updatetitre[]" type="text" />
-                                    </div>
-                                    <div class="grid grid-cols-1 ml-1">
-                                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">ECTS</label>
-                                        <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value='{{$cour->ects}}' name="updateects[]" type="text" />
-                                    </div>
-                                    <div class="grid grid-cols-1 ml-1">
-                                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nombre d'échanges</label>
-                                        <input class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value='{{$cour->nombre}}' name="updatenombre[]" type="text" />
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-1 mt-5 mx-7\">
-                                    <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold\">Contenu</label>
-                                    <textarea style="white-space: pre-wrap" class="h-24 py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" name="updatecontenu[]" type="text">{{$cour->contenu}}</textarea>
-                                </div>
-                                <button type='button' id='{{$cour->code}}' class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="suppAncienCours('{{$cour->code}}')">Supprimer ce cours</button>
-                            </div>
-                            @endforeach
-                        </div>
-                        <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                            <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' type="button" onclick="newCours()">Ajouter un cours</button>
-                        </div>
-                        <div id="blog" div class="grid grid-cols-1 mt-5 mx-7">
-                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Blogs réalisés par les étudiants</label>
-                            @foreach($blogs as $blog)
-                            <div>
-                                <div class="grid grid-cols-2 mt-5 mx-7">
-                                    <div class="grid grid-cols-1">
-                                        <label class="md:text-sm text-xs text-gray-500 text-light font-semibold">NOM : {{$blog->nom}}</label>
-                                    </div>
-                                    <div class="grid grid-cols-1 ml-1\">
-                                        <label class="md:text-sm text-xs text-gray-500 text-light font-semibold">LIEN : {{$blog->lien}}</label>
-                                    </div>
-                                </div>
-                                <button type="button" id="{{$blog->nom}}" class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="suppAncienBlog('{{$blog->nom}}')">Supprimer ce blog</button>
-                            </div>
-                            @endforeach
-                        </div>
-                        <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                            <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' type="button" onclick="newBlog()">Ajouter un blog</button>
-                        </div>
-                        <div id="lien" div class="grid grid-cols-1 mt-5 mx-7">
-                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Liens utiles</label>
-                            @foreach($liens as $lien)
-                            <div>
-                                <div class="grid grid-cols-2 mt-5 mx-7">
-                                    <div class="grid grid-cols-1">
-                                        <label class="md:text-sm text-xs text-gray-500 text-light font-semibold">NOM : {{$lien->nom}}</label>
-                                    </div>
-                                    <div class="grid grid-cols-1 ml-1\">
-                                        <label class="md:text-sm text-xs text-gray-500 text-light font-semibold">LIEN : {{$lien->lien}}</label>
-                                    </div>
-                                </div>
-                                <button type="button" id="{{$lien->nom}}" class='grid grid-cols-1 mt-5 mx-7 w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' onclick="suppAncienLien('{{$lien->nom}}')">Supprimer ce lien</button>
-                            </div>
-                            @endforeach
-                        </div>
-                        <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                            <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' type="button" onclick="newLien()">Ajouter un lien</button>
-                        </div>
-
                         <div class="grid grid-cols-1 mt-5 mx-7">
-                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Astuces et informations complémentaires</label>
-                            <textarea name="astucesinfos" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$destination->astucesinfos)}}</textarea>
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Lien Rubrique n°1</label>
+                            <textarea name="lienR1" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->lienRubrique1)}}
+                            </textarea>
                         </div>
-
-
+                        <div class="grid grid-cols-1 mt-5 mx-7">
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Titre Rubrique n°2</label>
+                            <textarea name="titreR2" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->titreRubrique2)}}
+                            </textarea>
+                        </div>
+                        <div class="grid grid-cols-1 mt-5 mx-7">
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Paragraphe Rubrique n°2</label>
+                            <textarea name="paragrapheR2" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->paragrapheRubrique2)}}
+                            </textarea>
+                        </div>
+                        <div class="grid grid-cols-1 mt-5 mx-7">
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Lien Rubrique n°2</label>
+                            <textarea name="lienR2" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->lienRubrique2)}}
+                            </textarea>
+                        </div>
+                        <div class="grid grid-cols-1 mt-5 mx-7">
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Titre Rubrique n°3</label>
+                            <textarea name="titreR3" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->titreRubrique3)}}
+                            </textarea>
+                        </div>
+                        <div class="grid grid-cols-1 mt-5 mx-7">
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Paragraphe Rubrique n°3</label>
+                            <textarea name="paragrapheR3" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->paragrapheRubrique3)}}
+                            </textarea>
+                        </div>
+                        <div class="grid grid-cols-1 mt-5 mx-7">
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Lien Rubrique n°3</label>
+                            <textarea name="lienR3" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{str_replace("<br />","",$index->lienRubrique3)}}</textarea>
+                        </div>
                         <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
                             <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' type="submit">Sauvegarder les modifications</button>
                         </div>

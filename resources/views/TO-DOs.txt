@@ -10,6 +10,8 @@
   - progressbar espace etudiant / checklist
   - ajout des universités favories
 
+sudo mysql.server start &&  php artisan serve --host=polytech-international.univ-lorraine.fr
+
 
   - style radio fiche candidature (done)
   - style demande changement fiche candidature (done)
