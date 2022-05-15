@@ -55,10 +55,10 @@
                 var fichiers = document.getElementsByClassName("fichier");
                 for(var i=0; i<fichiers.length; i++){
                     if(fichiers[i].innerHTML.toLowerCase().indexOf(search.toLowerCase())==-1){
-                        fichiers[i].style.display = "none";
+                        fichiers[i].parentNode.style.display = "none";
                     }
                     else{
-                        fichiers[i].style.display = "block";
+                        fichiers[i].parentNode.style.display = "block";
                     }
                 }
 
@@ -67,13 +67,15 @@
     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
         <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" placeholder="Rechercher" id="search" onkeyup="search()">
         @foreach($fichiers as $byuid)
-        <div class="fichier" class="mt-4">
+        <div class="mt-4">
+            <div class="fichier">
             {{$byuid[0]->nomprenom}} ({{$byuid[0]->uid}})
             <button type="button" id="bouton_{{$byuid[0]->uid}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_detail("{{$byuid[0]->uid}}")'>v</button>
+            </div>
             <div id="{{$byuid[0]->uid}}" style="display:none">
             @foreach($byuid as $fichier)
                 <div>
-                    <h2 class="text-gray-600 text-sm font-semibold mb-2">{{$fichier->nom}}</h2>
+                    <h2 class="text-gray-600 text-sm font-semibold mb-2">{{$fichier->nom}} {{$fichier->updated_at}}</h2>
                     <button type="button" id="bouton_{{$fichier->nom}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
                     <button type="button" id="bouton_{{$fichier->nom}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='telecharger_pdf("{{$fichier->url}}","{{$fichier->nom}}")'>Télécharger</button>
                     <form action="{{route('fichier.delete')}}" class="inline" method="POST">
