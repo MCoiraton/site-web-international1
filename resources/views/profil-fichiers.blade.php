@@ -46,7 +46,7 @@
                             <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
                         </form>
                         <embed
-                            src="../{{$fichier->url}}"
+                            src="/storage/{{$fichier->url}}"
                             type="application/pdf"
                             frameBorder="0"
                             scrolling="auto"

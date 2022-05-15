@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Fichier;
 
 class FichiersController extends Controller
@@ -19,12 +20,13 @@ class FichiersController extends Controller
     public function store(Request $request){
         if($request->hasFile('fichier') && $request->nom!=""){
             $uid=session()->get('uid');
-            $file = $request->file('fichier')->store("public/{$uid}");
-            $file = str_replace("public", 'storage', $file);
+            $file = $request->file('fichier')->store("{$uid}");
+            $np=session()->get('prenom')." ".session()->get('nom');
             Fichier::create([
                 'nom' => $request->nom,
                 'uid' => $uid,
-                'url' => $file
+                'url' => $file,
+                'nomprenom' => $np
             ]);
             return redirect("/profil/fichiers");
         }
@@ -32,8 +34,7 @@ class FichiersController extends Controller
     }
     public function delete(Request $request){
         $fichier = Fichier::find($request->id);
-        $file=$fichier->url;
-        unlink($file);
+        Storage::delete($fichier->url);
         $fichier->delete();
         return redirect($request->redirect);
     }

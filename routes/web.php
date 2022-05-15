@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatureController;
 use App\Http\Controllers\FichiersController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,11 @@ Route::post('/admin/utilisateurs/delete', [UserController::class,'delete'])->mid
 Route::post('/admin/utilisateurs/add', [UserController::class,'add'])->middleware('admin')->name('addadmin');
 
 Route::get('/admin/fichiers', [FichiersController::class, 'showadmin'])->middleware('admin');
+
+Route::get('/storage/{uid}/{filename}', function ($uid,$filename) {
+    $file = Storage::disk('local')->get($uid.'/'.$filename);
+    return response($file, 200)->header('Content-Type', 'application/pdf');
+})->middleware('filesecu:{uid}');
 
 Route::post('/admin/fiches/exportExcel', 'FastExcelController@exportCandidature')->middleware('admin');
 Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');

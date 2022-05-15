@@ -18,6 +18,7 @@ class FichiersEleves extends Migration
             $table->string('nom');
             $table->string('uid');
             $table->string('url');
+            $table->string('nomprenom');
             $table->timestamps();
         });
     }

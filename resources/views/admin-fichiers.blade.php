@@ -35,7 +35,7 @@
             //fonction pour telecharger en blob le pdf avec un nom donné
             function telecharger_pdf(pdf, nom){
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', "../"+pdf, true);
+                xhr.open('GET', "/storage/"+pdf, true);
                 xhr.responseType = 'blob';
                 xhr.onload = function(e) {
                     if (this.status == 200) {
@@ -54,7 +54,7 @@
     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
         @foreach($fichiers as $byuid)
         <div>
-            {{$byuid[0]->uid}}
+            {{$byuid[0]->nomprenom}} ({{$byuid[0]->uid}})
             <button type="button" id="bouton_{{$byuid[0]->uid}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_detail("{{$byuid[0]->uid}}")'>v</button>
             <div id="{{$byuid[0]->uid}}" style="display:none">
             @foreach($byuid as $fichier)
@@ -69,7 +69,7 @@
                     <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
                 </form>
                 <embed
-                    src="../{{$fichier->url}}"
+                    src="/storage/{{$fichier->url}}"
                     type="application/pdf"
                     frameBorder="0"
                     scrolling="auto"
