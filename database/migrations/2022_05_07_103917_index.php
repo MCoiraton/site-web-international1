@@ -14,7 +14,7 @@ class Index extends Migration
     public function up()
     {
         Schema::create('index', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->string('titre');
             $table->string('description');
             $table->string('titreRubrique1');

@@ -80,7 +80,6 @@ class DatabaseSeeder extends Seeder
                 $assocours->save();
             }
             $index = new Index();
-            $index->id = 1;
             $index->titre = 'Site Intranet des Relations Internationales de POLYTECH Nancy';
             $index->description = 'Polytech Nancy offre une vaste liste de destinations internationales pour ses étudiants qui souhaitent effectuer un séjour à l\'étranger, et les accompagne dans toutes les démarches pour garantir leur réussite.';
             $index->titreRubrique1 = 'Description générale';

@@ -14,7 +14,8 @@ class ImagesIndex extends Migration
     public function up()
     {
         Schema::create('images_index', function (Blueprint $table) {
-            $table->string('nom')->primary();
+            $table->increments('id');
+            $table->string('nom');
             $table->integer('indx');
             $table->timestamps();
         });
