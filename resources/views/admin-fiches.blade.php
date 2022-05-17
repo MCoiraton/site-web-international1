@@ -1,5 +1,9 @@
 <?php
 use App\Candidature;
+use App\VariableGlobal;
+
+$datelimite = VariableGlobal::find("1");
+
 $annees = [];
 $candidatures = [];
 foreach($candidatures as $candidature){
@@ -55,6 +59,13 @@ else{
                 <span class="text-base font-normal text-gray-500">Vous pouvez ici visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
             </div>
         </div>
+        <form id="datelimite" method="POST" action="{{ action('CandidatureController@changerdatelimite') }}">
+            @csrf
+            <label for="datelimite"> Date limite de dépôt de candidature
+            </label>
+            <input value="<?php if($datelimite!=null) echo($datelimite->datelimite_candidature); ?>" type="date" name="datelimite">
+            <button type="submit"> Changer </button>
+        </form>
         <div class="flex flex-row">
             <div class="px-3 py-2 rounded-md text-sm font-medium">
                 <select id='fiches_annee' onchange="change(this.value)">

@@ -47,6 +47,7 @@ Route::get('/admin/accueil/', 'IndexController@affichageIndMod')->middleware('ad
 Route::post('/admin/accueil/', 'IndexController@saveIndex')->middleware('admin');
 
 
+Route::post('/admin/fiches/changerdatelimite', 'CandidatureController@changerdatelimite')->middleware('admin');
 Route::post('/admin/fiches/exportExcel', 'FastExcelController@exportCandidature')->middleware('admin');
 Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');
 Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('admin');

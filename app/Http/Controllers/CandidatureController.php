@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Candidature;
+use App\VariableGlobal;
 
 class CandidatureController extends Controller
 {
@@ -167,4 +168,12 @@ class CandidatureController extends Controller
         return redirect('https://mail.etu.univ-lorraine.fr/?view=compose&to=mailto%3A'.$email.'#1');
     }
     
+    public function changerdatelimite(Request $request)
+    {
+        $datelimite=VariableGlobal::find("1");
+        if($datelimite==null) $datelimite = new VariableGlobal();
+        $datelimite->datelimite_candidature = $request->datelimite;
+        $datelimite->save();
+        return redirect('/admin/fiches');
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 use App\Candidature;
+use App\VariableGlobal;
 $candidature = Candidature::find(session("mail"));
+$datelimite = VariableGlobal::find("1");
 ?>
 <x-layout-profil>
     <x-slot name='tableau'>
@@ -91,6 +93,8 @@ $candidature = Candidature::find(session("mail"));
                 <div class="container w-3/4 max-h-full mx-auto flex items-center justify-center">
                     <div class="w-full max-w-full">
                         <h1 class="text-4xl text-gray-900 flex items-center justify-center">Fiche candidature à un échange international </h1>
+                        <p>Fiche à compléter au plus tard le : <?php if($datelimite!=null) echo($datelimite->datelimite_candidature); else echo("Date en attente d'être à jour");?></p>
+                        <p> Si la date limite est passée veuillez contacter le service international par mail. </p>
                             <?php if(!$candidature) echo("<p> Attention une fois la fiche de candidature envoyé elle ne pourra plus être modifié. </p>"); ?>
                             <div class="<?php if(!$candidature || !$candidature->blocked) echo("hidden"); ?>">
                                 <p class="mt-4 font-bold">Vous ne pouvez plus modifier votre fiche de candidature.</p>
@@ -332,7 +336,6 @@ $candidature = Candidature::find(session("mail"));
                                 <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> <?php if($candidature && $candidature->semestre_choix3=="S9+10") echo("checked");?> id="choix3_S9S10" class="my-1" type="radio" name="semestre_choix3" value="S9+10" class="border-black-600 border-2">
                             </div>
                             <div class="mt-4">
-                                    <p>Fiche à renvoyer par mail au Service International au plus tard le : </p>
                                     <label for="date_signature">Date :</label>
                                     <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->date_actuelle); ?>" class="mt-2 border-2 border-gray-500 rounded p-1" type="date" name="date_signature" class="border-black-600 border-2">
                             </div>
