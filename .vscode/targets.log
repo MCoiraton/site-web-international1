@@ -6,11 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Sat May 14 02:16:19 2022
+# Make data base, printed on Tue May 17 21:32:13 2022
 
 # Variables
 
@@ -41,13 +38,11 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/bv/2_v_gh1j74l8s4hzzhbghj580000gn/T/vscode-ipc-5ecceaa2-79a4-428c-a94f-51416f11f99b.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/bv/2_v_gh1j74l8s4hzzhbghj580000gn/T/vscode-ipc-0dbb0d26-3538-4bd9-92ce-d1a62dee9f90.sock
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /opt/miniconda3/bin:/opt/miniconda3/condabin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands
-# environment
-LaunchInstanceID = 6CEA3778-7C01-4BD0-8ABF-E7164EB9667E
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/opt/miniconda3/bin:/opt/miniconda3/condabin
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -94,6 +89,8 @@ MAKE = $(MAKE_COMMAND)
 MAKECMDGOALS := all
 # environment
 SHLVL = 1
+# environment
+LOCAL_GIT_DIRECTORY = /Applications/GitHub Desktop.app/Contents/Resources/app/git
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -138,8 +135,6 @@ MAKEFILES :=
 LC_ALL = C
 # environment
 CONDA_PYTHON_EXE = /opt/miniconda3/bin/python
-# environment
-SECURITYSESSIONID = 186a3
 # automatic
 ^F = $(notdir $^)
 # default
@@ -153,13 +148,13 @@ MAKELEVEL := 0
 # environment
 CONDA_PREFIX = /opt/miniconda3
 # environment
-VSCODE_PID = 417
+VSCODE_PID = 74872
 # environment
 _CE_CONDA = 
 # environment
 LANG = C
 # variable set hash-table stats:
-# Load=72/1024=7%, Rehash=0, Collisions=2/93=2%
+# Load=71/1024=7%, Rehash=0, Collisions=2/92=2%
 
 # Pattern-specific Variable Values
 
@@ -241,6 +236,8 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sat May 14 02:16:19 2022
+# Finished Make data base on Tue May 17 21:32:13 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+
