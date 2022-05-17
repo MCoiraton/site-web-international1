@@ -54,24 +54,6 @@ $candidatures = Candidature::latest()->get();
             <button type="submit"> Changer </button>
         </form>
         <div class="flex flex-row">
-            <div class="px-3 py-2 rounded-md text-sm font-medium">
-                <select id='fiches_annee' onchange="change(this.value)">
-                    @if(isset($annee))
-                        <option value="">Toutes les fiches</option>
-                    @else
-                        <option value="" selected>Toutes les fiches</option>
-                    @endif
-                    @foreach($annees as $year1)
-                        @if(isset($annee))
-                            @if($year1 === $annee)
-                                <option value="{{$year1}}" selected>Fiches {{$year1}}</option>
-                            @else
-                                <option value="{{$year1}}">Fiches {{$year1}}</option>
-                            @endif
-                        @endif
-                    @endforeach
-                </select>
-            </div>
             <div class="flex flex-col m-4">
                 <div class="p-2 w-1/3 mx-0 flex justify-between text-gray-600 border-2 border-gray-300 bg-white  rounded-lg text-sm">
                     <input class="focus:outline-none w-full" type="text" name="query" id="recherche" placeholder="Chercher..." onkeyup="chercher()">
