@@ -47,13 +47,6 @@ Route::get('/admin/accueil/', 'IndexController@affichageIndMod')->middleware('ad
 Route::post('/admin/accueil/', 'IndexController@saveIndex')->middleware('admin');
 
 
-// Route::get('/admin/fiches/search/{query?}', function (string $query = null) {
-//     return view('admin-fiches',[
-//         'query' => $query
-//     ]);
-// })->middleware('admin');
-Route::get('/admin/fiches/search/{query?}', 'CandidatureController@search')->middleware('admin');
-
 Route::post('/admin/fiches/exportExcel', 'FastExcelController@exportCandidature')->middleware('admin');
 Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');
 Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('admin');

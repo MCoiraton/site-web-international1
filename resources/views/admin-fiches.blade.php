@@ -29,11 +29,30 @@ else{
         </style>
 	</x-slot>
     <x-slot name='panel'>
+        <script>
+            //fonction chercher pour afficher uniquement les éléments de class fiche qui correspondent à la recherche qui ne sont pas dans un tableau
+            function chercher(){
+                var recherche = document.getElementById("recherche").value;
+                var fiches = document.getElementsByClassName("fiche");
+                for(var i = 0; i < fiches.length; i++){
+                    var fiche = fiches[i];
+                    var nom = fiche.innerHTML;
+                    if(nom.toLowerCase().indexOf(recherche.toLowerCase()) == -1){
+                        parent=fiche.parentNode.style.display = "none";
+                    }
+                    else{
+                        fiche.parentNode.removeAttribute("style");
+                    }
+                }
+            }
+
+            
+        </script>
     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
         <div class="mb-4 flex items-center justify-between">
             <div>
                 <h3 class="text-xl font-bold text-gray-900 mb-2">Fiches de Candidature</h3>
-                <span class="text-base font-normal text-gray-500">Vous pouvez içi visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
+                <span class="text-base font-normal text-gray-500">Vous pouvez ici visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
             </div>
         </div>
         <div class="flex flex-row">
@@ -67,12 +86,10 @@ else{
             </form>
         </div>
         <div class="flex flex-col m-4">
-            <form id="searchFiches" method="GET" action="{{ action('CandidatureController@search') }}" class="p-2 w-1/3 mx-0 flex justify-between text-gray-600 border-2 border-gray-300 bg-white  rounded-lg text-sm">
-                <input class="focus:outline-none w-full" type="text" name="query" placeholder="Chercher...">
-                <button form="searchFiches" type="submit" class="relative">
-                    <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px"> <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" /></svg>
-                </button>
-            </form>
+            <div class="p-2 w-1/3 mx-0 flex justify-between text-gray-600 border-2 border-gray-300 bg-white  rounded-lg text-sm">
+                <input class="focus:outline-none w-full" type="text" name="query" id="recherche" placeholder="Chercher..." onkeyup="chercher()">
+                <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px"> <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" /></svg>
+            </div>
             <div class="overflow-x-auto border-2 border-gray-300 rounded-lg mt-2">
                 <div class="align-middle inline-block min-w-full">
                     <div class="shadow overflow-hidden sm:rounded-lg">
@@ -96,7 +113,7 @@ else{
                             <tbody class="bg-white">
                                 @foreach($candidatures as $candidature)
                                 <tr>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                                    <td class="fiche p-4 whitespace-nowrap text-sm font-normal text-gray-900">
                                         <a href="/admin/fiche/{{$candidature->email}}" class="underline text-blue-700">
                                             {{$candidature->nom}} {{$candidature->prenom}}
                                         </a>
