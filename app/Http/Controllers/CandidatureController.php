@@ -175,7 +175,7 @@ class CandidatureController extends Controller
         $datelimite->datelimite_candidature = $request->datelimite;
         $datelimite->save();
         return redirect('/admin/fiches');
-
+    }
     public function deleteAll(Request $request) 
     {
         Candidature::truncate();

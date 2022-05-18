@@ -25,7 +25,7 @@
         <form action="{{route('addadmin')}}" method="POST">
             @csrf
             <label for="uid">Ajouter un admin par identifiant UL : </label><br>
-            <input type="text" name="uid" placeholder="uid">
+            <input type="text" name="uid" placeholder="Identifiant">
             <button type="submit" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Ajouter</button>
         </form>
     </div>
