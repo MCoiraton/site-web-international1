@@ -95,7 +95,8 @@ $datelimite = VariableGlobal::find("1");
                         <h1 class="text-4xl text-gray-900 flex items-center justify-center">Fiche candidature à un échange international </h1>
                         <p>Fiche à compléter au plus tard le : <?php if($datelimite!=null) echo($datelimite->datelimite_candidature); else echo("Date en attente d'être à jour");?></p>
                         <p> Si la date limite est passée veuillez contacter le service international par mail. </p>
-                            <?php if(!$candidature) echo("<p> Attention une fois la fiche de candidature envoyé elle ne pourra plus être modifié. </p>"); ?>
+                        @if ((date('Y-m-d')< $datelimite->datelimite_candidature) || $candidature)    
+                        <?php if(!$candidature) echo("<p> Attention une fois la fiche de candidature envoyé elle ne pourra plus être modifié. </p>"); ?>
                             <div class="<?php if(!$candidature || !$candidature->blocked) echo("hidden"); ?>">
                                 <p class="mt-4 font-bold">Vous ne pouvez plus modifier votre fiche de candidature.</p>
                                 <p class="mt-4">Vous avez fait une erreur ? </p>
@@ -108,7 +109,6 @@ $datelimite = VariableGlobal::find("1");
                                 </form>
                                 <p><?php if($candidature && $candidature->demande_unblocked) echo("<script type='text/javascript'>alert('Demande bien envoyé!');</script>");?></p>
                             </div>
-                        @if (date('Y-m-d')< $datelimite->datelimite_candidature)
                         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('fiche_candidature.store') }}" method="POST">
                             @csrf
                             <h2 class="text-xl mb-4 text-gray-700">Informations Personelles:</h2>
