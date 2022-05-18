@@ -95,6 +95,7 @@ class DatabaseSeeder extends Seeder
             $index->save();
             $variables=new VariableGlobal();
             $variables->datelimite_candidature=date('Y-m-d',strtotime('2099-12-31'));
+            $variables->save();
         }
     }
 }
