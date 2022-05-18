@@ -108,6 +108,7 @@ $datelimite = VariableGlobal::find("1");
                                 </form>
                                 <p><?php if($candidature && $candidature->demande_unblocked) echo("<script type='text/javascript'>alert('Demande bien envoyé!');</script>");?></p>
                             </div>
+                        @if (date('Y-m-d')< $datelimite->datelimite_candidature)
                         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('fiche_candidature.store') }}" method="POST">
                             @csrf
                             <h2 class="text-xl mb-4 text-gray-700">Informations Personelles:</h2>
@@ -343,8 +344,11 @@ $datelimite = VariableGlobal::find("1");
                                 <label for="signature">Signature (mettre ses initiales) :</label>
                                 <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->signature); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="signature" class="border-black-600 border-2">
                             </div>
-                            <button <?php if($candidature && $candidature->blocked) echo("disabled class=\"bg-gray-500 hover:bg-gray-600 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center\""); else echo("class=\"bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center\"") ?> type="submit">Envoyer</button>
+                            @if (!($candidature && $candidature->blocked))
+                            <button class="bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Envoyer</button>
+                            @endif
                         </form>
+                        @endif
                     </div>
                 </div>
             </section>
