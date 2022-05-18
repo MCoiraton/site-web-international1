@@ -51,7 +51,7 @@ class CreateCandidaturesTable extends Migration
             $table->date('date_actuelle');
             $table->string('signature');
             $table->boolean('blocked');
-            $table->boolean('demande_unblocked');
+            $table->boolean('demande_unblocked')->default(false);
             $table->string('message_unblocked')->nullable()->default(null);
             $table->timestamps();
         });

@@ -15,12 +15,10 @@ use App\Http\Controllers\CandidatureController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'IndexController@affichageIndex');
 
 Route::get('/admin/creation', function () {
-return view('admin-creation');
+    return view('admin-creation');
 })->middleware('admin');
 
 Route::post('admin-creation', 'DestinationController@nouvelleDestination')->middleware('admin');
@@ -39,6 +37,17 @@ Route::get('/admin/fiches', function () {
     return view('admin-fiches');
 })->middleware('admin');
 
+Route::get('/admin/fiches/annee/{annee?}', function (int $annee = null) {
+    return view('admin-fiches', [
+        'annee' => $annee
+    ]);
+})->middleware('admin');
+
+Route::get('/admin/accueil/', 'IndexController@affichageIndMod')->middleware('admin');
+Route::post('/admin/accueil/', 'IndexController@saveIndex')->middleware('admin');
+
+
+Route::post('/admin/fiches/changerdatelimite', 'CandidatureController@changerdatelimite')->middleware('admin');
 Route::post('/admin/fiches/exportExcel', 'FastExcelController@exportCandidature')->middleware('admin');
 Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');
 Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('admin');
@@ -47,7 +56,7 @@ Route::get("/admin/fiche/{email}", "CandidatureController@showAdmin")->middlewar
 Route::post('/admin/fiche', "CandidatureController@storeAdmin")->name('fiche_candidature.storeAdmin')->middleware('admin');
 
 Route::get("/admin-modification/{nom}", "DestinationController@affichageEdition")->middleware('admin');
-Route::post("/admin-modification/{nom}",['as' => 'editDestination', 'uses' => 'DestinationController@editDestination'])->middleware('admin');
+Route::post("/admin-modification/{nom}", ['as' => 'editDestination', 'uses' => 'DestinationController@editDestination'])->middleware('admin');
 
 
 Route::get('/profil', function () {
@@ -69,7 +78,3 @@ Route::get('/auth/logout', "AuthController@logout");
 
 Route::get('/destinations', 'DestinationController@affichageDestinations');
 Route::get("/destination/{nom}", "DestinationController@affichageDestination");
-
-
-
-?>

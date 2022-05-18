@@ -1,6 +1,4 @@
 À faire:
-  - style radio fiche candidature (done)
-  - style demande changement fiche candidature (done)
   - Contenu fiche candidature modifiable 
   - CV headers en anglais
   - durée 1 an fiches
@@ -10,6 +8,10 @@
   - caching (optimiser chargement pages par moins de requetes SQL)
   - widgets insta/FB
   - progressbar espace etudiant / checklist
-  - espace admin: dossier de bourse?
   - ajout des universités favories
-  - guide prise en main du site (readme, architecture site pour prochains PIVEs)
+
+sudo mysql.server start &&  php artisan serve --host=polytech-international.univ-lorraine.fr
+
+
+  - style radio fiche candidature (done)
+  - style demande changement fiche candidature (done)

@@ -1,6 +1,8 @@
 <?php
 use App\Candidature;
+use App\VariableGlobal;
 $candidature = Candidature::find(session("mail"));
+$datelimite = VariableGlobal::find("1");
 ?>
 <x-layout-profil>
     <x-slot name='tableau'>
@@ -91,7 +93,10 @@ $candidature = Candidature::find(session("mail"));
                 <div class="container w-3/4 max-h-full mx-auto flex items-center justify-center">
                     <div class="w-full max-w-full">
                         <h1 class="text-4xl text-gray-900 flex items-center justify-center">Fiche candidature à un échange international </h1>
-                            <?php if(!$candidature) echo("<p> Attention une fois la fiche de candidature envoyé elle ne pourra plus être modifié. </p>"); ?>
+                        <p>Fiche à compléter au plus tard le : <?php if($datelimite!=null) echo($datelimite->datelimite_candidature); else echo("Date en attente d'être à jour");?></p>
+                        <p> Si la date limite est passée veuillez contacter le service international par mail. </p>
+                        @if ($datelimite && ((date('Y-m-d')< $datelimite->datelimite_candidature) || $candidature))    
+                        <?php if(!$candidature) echo("<p> Attention une fois la fiche de candidature envoyé elle ne pourra plus être modifié. </p>"); ?>
                             <div class="<?php if(!$candidature || !$candidature->blocked) echo("hidden"); ?>">
                                 <p class="mt-4 font-bold">Vous ne pouvez plus modifier votre fiche de candidature.</p>
                                 <p class="mt-4">Vous avez fait une erreur ? </p>
@@ -102,7 +107,7 @@ $candidature = Candidature::find(session("mail"));
                                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="message_unblocked" type="text" placeholder="Votre message...">
                                     <button class="my-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Envoyer</button>
                                 </form>
-                                <p><?php if($candidature && $candidature->demande_unblocked) echo("<script type='text/javascript'>alert('Demande bien envoyé!');</script>");?></p>
+                                <p><?php if($candidature && $candidature->demande_unblocked) echo("Demande bien envoyé!");?></p>
                             </div>
                         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('fiche_candidature.store') }}" method="POST">
                             @csrf
@@ -141,7 +146,7 @@ $candidature = Candidature::find(session("mail"));
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="code_postal">
                                     Code Postal:
                                 </label>
-                                <input value="<?php if($candidature) echo($candidature->code_postal); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="code_postal" type="number">
+                                <input value="<?php if($candidature) echo($candidature->code_postal); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="code_postal" type="number" max="100000" min="0">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="ville">
@@ -153,13 +158,13 @@ $candidature = Candidature::find(session("mail"));
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="tel_fixe">
                                     Tél Fixe:
                                 </label>
-                                <input value="<?php if($candidature && $candidature->tel_fixe) echo($candidature->tel_fixe); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> <?php if(!$candidature) echo("required")?> class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tel_fixe" type="number">
+                                <input value="<?php if($candidature && $candidature->tel_fixe) echo($candidature->tel_fixe); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> <?php if(!$candidature) echo("required")?> class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tel_fixe" type="phone" pattern="[0-9]{10}">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="tel_portable">
                                     Tél Portable:
                                 </label>
-                                <input value="<?php if($candidature && $candidature->portable) echo($candidature->portable); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> onchange="choixtelportable()" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tel_portable" type="number">
+                                <input value="<?php if($candidature && $candidature->portable) echo($candidature->portable); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> onchange="choixtelportable()" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tel_portable" type="phone" pattern="[0-9]{10}">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="email">
@@ -259,7 +264,7 @@ $candidature = Candidature::find(session("mail"));
                             </div>
                             <div class="mt-4">
                                 <label class="text-gray-700 text-md font-bold" for="toeic">Score TOEIC :</label>
-                                <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->toeic); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="toeic" class="border-black-600 border-2">
+                                <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->toeic); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="toeic" class="border-black-600 border-2" min="0" max="990">
                                 <label for="annee_toeic">Année :</label>
                                 <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->annee_toeic); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="annee_toeic" class="border-black-600 border-2">
                             </div>
@@ -332,16 +337,18 @@ $candidature = Candidature::find(session("mail"));
                                 <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> <?php if($candidature && $candidature->semestre_choix3=="S9+10") echo("checked");?> id="choix3_S9S10" class="my-1" type="radio" name="semestre_choix3" value="S9+10" class="border-black-600 border-2">
                             </div>
                             <div class="mt-4">
-                                    <p>Fiche à renvoyer par mail au Service International au plus tard le : </p>
                                     <label for="date_signature">Date :</label>
-                                    <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->date_actuelle); ?>" class="mt-2 border-2 border-gray-500 rounded p-1" type="date" name="date_signature" class="border-black-600 border-2">
+                                    <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->date_actuelle); ?>" class="mt-2 border-2 border-gray-500 rounded p-1" type="date" name="date_signature" class="border-black-600 border-2" required>
                             </div>
                             <div class="mt-4">
                                 <label for="signature">Signature (mettre ses initiales) :</label>
-                                <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->signature); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="signature" class="border-black-600 border-2">
+                                <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->signature); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="signature" class="border-black-600 border-2" required>
                             </div>
-                            <button <?php if($candidature && $candidature->blocked) echo("disabled class=\"bg-gray-500 hover:bg-gray-600 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center\""); else echo("class=\"bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center\"") ?> type="submit">Envoyer</button>
+                            @if (!($candidature && $candidature->blocked))
+                            <button class="bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Envoyer</button>
+                            @endif
                         </form>
+                        @endif
                     </div>
                 </div>
             </section>
