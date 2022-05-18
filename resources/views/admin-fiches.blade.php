@@ -126,6 +126,10 @@ $candidatures = Candidature::latest()->get();
                     </div>
                 </div>
             </div>
+            <form id="deleteAll" method="POST" action="{{ action('CandidatureController@deleteAll') }}">
+                @csrf
+                <button form="deleteAll" onclick="return confirm('Êtes-vous sûr de vouloir supprimer toutes les fiches de candidatures ? Vous ne pourrez pas revenir en arrière.')" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Supprimer les fiches de candidatures </button>
+            </form>
         </div>
     </x-slot>
 </x-layout-admin>
