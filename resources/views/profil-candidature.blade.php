@@ -146,7 +146,7 @@ $datelimite = VariableGlobal::find("1");
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="code_postal">
                                     Code Postal:
                                 </label>
-                                <input value="<?php if($candidature) echo($candidature->code_postal); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="code_postal" type="number">
+                                <input value="<?php if($candidature) echo($candidature->code_postal); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="code_postal" type="number" max="100000" min="0">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="ville">
@@ -158,13 +158,13 @@ $datelimite = VariableGlobal::find("1");
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="tel_fixe">
                                     Tél Fixe:
                                 </label>
-                                <input value="<?php if($candidature && $candidature->tel_fixe) echo($candidature->tel_fixe); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> <?php if(!$candidature) echo("required")?> class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tel_fixe" type="number">
+                                <input value="<?php if($candidature && $candidature->tel_fixe) echo($candidature->tel_fixe); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> <?php if(!$candidature) echo("required")?> class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tel_fixe" type="phone" pattern="[0-9]{10}">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="tel_portable">
                                     Tél Portable:
                                 </label>
-                                <input value="<?php if($candidature && $candidature->portable) echo($candidature->portable); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> onchange="choixtelportable()" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tel_portable" type="number">
+                                <input value="<?php if($candidature && $candidature->portable) echo($candidature->portable); ?>" <?php if($candidature && $candidature->blocked) echo("disabled"); ?> onchange="choixtelportable()" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tel_portable" type="phone" pattern="[0-9]{10}">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="email">
@@ -264,7 +264,7 @@ $datelimite = VariableGlobal::find("1");
                             </div>
                             <div class="mt-4">
                                 <label class="text-gray-700 text-md font-bold" for="toeic">Score TOEIC :</label>
-                                <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->toeic); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="toeic" class="border-black-600 border-2">
+                                <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->toeic); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="toeic" class="border-black-600 border-2" min="0" max="990">
                                 <label for="annee_toeic">Année :</label>
                                 <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->annee_toeic); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="annee_toeic" class="border-black-600 border-2">
                             </div>
@@ -338,11 +338,11 @@ $datelimite = VariableGlobal::find("1");
                             </div>
                             <div class="mt-4">
                                     <label for="date_signature">Date :</label>
-                                    <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->date_actuelle); ?>" class="mt-2 border-2 border-gray-500 rounded p-1" type="date" name="date_signature" class="border-black-600 border-2">
+                                    <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->date_actuelle); ?>" class="mt-2 border-2 border-gray-500 rounded p-1" type="date" name="date_signature" class="border-black-600 border-2" required>
                             </div>
                             <div class="mt-4">
                                 <label for="signature">Signature (mettre ses initiales) :</label>
-                                <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->signature); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="signature" class="border-black-600 border-2">
+                                <input <?php if($candidature && $candidature->blocked) echo("disabled"); ?> value="<?php if($candidature) echo($candidature->signature); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="signature" class="border-black-600 border-2" required>
                             </div>
                             @if (!($candidature && $candidature->blocked))
                             <button class="bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 mt-6 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Envoyer</button>

@@ -85,7 +85,7 @@ class CandidatureController extends Controller
             $candidature->message_unblocked = $request->message_unblocked;
         }
         $candidature->save();
-        return view('profil-candidature');
+        return redirect('/profil/candidature');
     }
 
     public function storeAdmin(Request $request) 
