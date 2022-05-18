@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Destination extends Migration
+class FichiersEleves extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class Destination extends Migration
      */
     public function up()
     {
-        Schema::create('destination', function (Blueprint $table) {
+        Schema::create('fichiers_eleves', function (Blueprint $table) {
             $table->increments("id");
-            $table->string('nom')->unique();
-            $table->string('pays');
-            $table->string('continent');
-            $table->longText('intro');
-            $table->longText('temoignages');
-            $table->longText('astucesinfos');
+            $table->string('nom');
+            $table->string('uid');
+            $table->string('url');
+            $table->string('nomprenom');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class Destination extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('destination');
+        //
     }
 }

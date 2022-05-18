@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Assoblog extends Model
 {
     protected $table='assoblog';
-    protected $primaryKey='nom';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $primaryKey='id';
     public $timestamps = false;
     protected $connection = 'mysql';
     protected $fillable=["nomdestination","nom","lien"];

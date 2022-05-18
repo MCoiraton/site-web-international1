@@ -3,6 +3,9 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatureController;
+use App\Http\Controllers\FichiersController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +40,18 @@ Route::get('/admin/fiches', function () {
     return view('admin-fiches');
 })->middleware('admin');
 
+
+Route::get('/admin/utilisateurs', [UserController::class,'liste'])->middleware('admin');
+Route::post('/admin/utilisateurs/delete', [UserController::class,'delete'])->middleware('admin')->name('deleteadmin');
+Route::post('/admin/utilisateurs/add', [UserController::class,'add'])->middleware('admin')->name('addadmin');
+
+Route::get('/admin/fichiers', [FichiersController::class, 'showadmin'])->middleware('admin');
+
+Route::get('/storage/{uid}/{filename}', function ($uid,$filename) {
+    $file = Storage::disk('local')->get($uid.'/'.$filename);
+    return response($file, 200)->header('Content-Type', 'application/pdf');
+})->middleware('filesecu:{uid}');
+
 Route::get('/admin/fiches/annee/{annee?}', function (int $annee = null) {
     return view('admin-fiches', [
         'annee' => $annee
@@ -68,10 +83,15 @@ Route::get('/profil/candidature', function () {
 })->middleware('polytech');
 
 Route::post('/profil/candidature', [CandidatureController::class, 'store'])->name('fiche_candidature.store')->middleware('polytech');
+Route::post('/profil/fichiers/store', [FichiersController::class, 'store'])->name('fichier.store')->middleware('polytech');
+Route::post('/profil/fichiers/delete', [FichiersController::class, 'delete'])->name('fichier.delete')->middleware('polytech');
 
 Route::get('/profil/cv', function () {
     return view('profil-cv');
-})->middleware('polytech'); 
+})->middleware('polytech');
+Route::get('/profil/fichiers', [FichiersController::class, 'show'])->middleware('polytech');
+
+
 
 Route::get('/auth/login', "AuthController@login");
 Route::get('/auth/logout', "AuthController@logout");

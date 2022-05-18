@@ -14,7 +14,8 @@ class Assoblog extends Migration
     public function up()
     {
         Schema::create('assoblog', function (Blueprint $table) {
-            $table->string('nom')->primary();
+            $table->increments("id");
+            $table->string('nom');
             $table->string('nomdestination');
             $table->foreign('nomdestination')->references('nom')->on('destination');
             $table->string('lien');
