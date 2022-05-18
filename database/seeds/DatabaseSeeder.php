@@ -9,6 +9,7 @@ use App\Assocours;
 use App\Admin;
 use App\Index;
 use App\Images_index;
+use App\VariableGlobal;
 
 
 class DatabaseSeeder extends Seeder
@@ -92,6 +93,9 @@ class DatabaseSeeder extends Seeder
             $index->paragrapheRubrique3 = 'GÖTEBORG, SUEDE Groupe Facebook Français à Göteborg Erasmus 2014/2015 (vous pouvez voir des annonces de logements qui se libèrent) Erasmus 2015/2016 Annonces de logements Voyages Scandinavian ...';
             $index->lienRubrique3 = 'www.lien3.com';
             $index->save();
+            $variables=new VariableGlobal();
+            $variables->datelimite_candidature=date('Y-m-d',strtotime('2099-12-31'));
+            $variables->save();
         }
     }
 }
