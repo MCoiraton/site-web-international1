@@ -95,7 +95,7 @@ $datelimite = VariableGlobal::find("1");
                         <h1 class="text-4xl text-gray-900 flex items-center justify-center">Fiche candidature à un échange international </h1>
                         <p>Fiche à compléter au plus tard le : <?php if($datelimite!=null) echo($datelimite->datelimite_candidature); else echo("Date en attente d'être à jour");?></p>
                         <p> Si la date limite est passée veuillez contacter le service international par mail. </p>
-                        @if ((date('Y-m-d')< $datelimite->datelimite_candidature) || $candidature)    
+                        @if ($datelimite && ((date('Y-m-d')< $datelimite->datelimite_candidature) || $candidature))    
                         <?php if(!$candidature) echo("<p> Attention une fois la fiche de candidature envoyé elle ne pourra plus être modifié. </p>"); ?>
                             <div class="<?php if(!$candidature || !$candidature->blocked) echo("hidden"); ?>">
                                 <p class="mt-4 font-bold">Vous ne pouvez plus modifier votre fiche de candidature.</p>
