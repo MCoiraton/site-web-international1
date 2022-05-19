@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-gray-100" lang="en">
+<html class="bg-gray-200" lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,7 @@
   @include(" nav")
 </head>
 
-<body>
+<body class="">
   <section class="text-gray-600 body-font bg-white m-6 rounded-lg p-6">
     <div class="swiper hero">
       <div class="swiper-wrapper">
