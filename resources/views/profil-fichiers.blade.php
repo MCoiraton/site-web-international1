@@ -112,14 +112,14 @@
                    C19.033,16.725,19.033,17.138,18.78,17.394z"/>
            </g>
            </svg></button>
-                    <embed class="w-1/4 h-1/4" src="/storage/{{$fichier->url}}" type="application/pdf" frameBorder="0" scrolling="auto" height="600px" width="1000px" id={{$fichier->nom}} 
+                    <iframe class="w-1/4 h-1/4" src="/storage/{{$fichier->url}}" type="application/pdf" frameBorder="0" scrolling="auto" height="600px" width="1000px" id="{{$fichier->nom}}" 
                     style="position : absolute;
                         top      : 0;
                         left     : 15%;
                         width    : 70%;
                         height   : 100%;
                         z-index  : 10;
-                        display  : none;" />
+                        display  : none;" ></iframe>
             @endforeach
         </body>
     </x-slot>
