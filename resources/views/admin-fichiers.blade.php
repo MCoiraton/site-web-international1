@@ -85,16 +85,18 @@
                 </div>
                 <div id="{{$byuid[0]->uid}}" style="display:none">
                     @foreach($byuid as $fichier)
-                    <div>
+                    <div class="flex flex-col">
                         <h2 class="text-gray-600 text-sm font-semibold mb-2">{{$fichier->nom}} {{$fichier->updated_at}}</h2>
-                        <button type="button" id="bouton_{{$fichier->nom}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
-                        <button type="button" id="bouton_{{$fichier->nom}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='telecharger_pdf("{{$fichier->url}}","{{$fichier->nom}}")'>Télécharger</button>
-                        <form action="{{route('fichier.delete')}}" class="inline" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$fichier->id}}">
-                            <input type="hidden" name="redirect" value="/admin/fichiers">
-                            <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
-                        </form>
+                        <div class="flex flex-row">
+                            <button type="button" id="bouton_{{$fichier->nom}}" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
+                            <button type="button" id="bouton_{{$fichier->nom}}" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='telecharger_pdf("{{$fichier->url}}","{{$fichier->nom}}")'>Télécharger</button>
+                            <form class="mb-4" action="{{route('fichier.delete')}}" class="inline" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$fichier->id}}">
+                                <input type="hidden" name="redirect" value="/admin/fichiers">
+                                <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
+                            </form>
+                        </div>
                         <embed src="/storage/{{$fichier->url}}" type="application/pdf" frameBorder="0" scrolling="auto" height="600px" width="1000px" id={{$fichier->nom}} style="display:none" />
                     </div>
                     @endforeach
