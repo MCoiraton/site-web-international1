@@ -111,11 +111,9 @@ $candidatures = Candidature::latest()->get();
                                                     @endif
                                                 </button>
                                             </form>
-                                            <form id="mail" method="post" action="{{ action('CandidatureController@mail') }}">
-                                                @csrf
-                                                <input type="hidden" name="email" value="{{$candidature->email}}" />
-                                                <button form="mail" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Contacter</button>
-                                            </form>
+                                            <a href="mailto:{{$candidature->email}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">
+                                                Contacter
+                                            </a>
                                             <form id="excel" method="post" action="fiches/exportExcel">
                                                 @csrf
                                                 <input type="hidden" name="email" value="{{$candidature->email}}" />
