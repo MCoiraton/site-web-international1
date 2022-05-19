@@ -30,6 +30,14 @@
         </script>
 
         <body>
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+                <div class="mb-4 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Gestion Page d'accueil</h3>
+                        <span class="text-base font-normal text-gray-500">Vous pouvez ici modifier le contenu de la page d'accueil, comme le texte, les photos et les liens</span>
+                    </div>
+                </div>
+            </div>
             <form method="post" enctype="multipart/form-data" action="{{action('IndexController@saveIndex')}}">
                 @csrf
                 <div id="suppr"></div>

@@ -1,14 +1,9 @@
 À faire:
-  - Contenu fiche candidature modifiable 
-  - CV headers en anglais
-  - durée 1 an fiches
-  - page d'acceuil sous forme d'un formulaire modifiable
   - remplissage des données: destinations (les trouver sur vieux blog), informations utiles (intranet)
-  - admin peut controller la date limit de dépot de candidature
-  - caching (optimiser chargement pages par moins de requetes SQL)
   - widgets insta/FB
   - progressbar espace etudiant / checklist
   - ajout des universités favories
+
 
 sudo mysql.server start &&  php artisan serve --host=polytech-international.univ-lorraine.fr
 
