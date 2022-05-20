@@ -11,16 +11,15 @@
         </style>
     </x-slot>
     <x-slot name='panel'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             function afficher_pdf(pdf) {
-                img = document.getElementById(pdf);
-                if (img.style.display == "none") {
-                    img.style.display = "block";
-                    document.getElementById("bouton_" + pdf).innerHTML = "Cacher";
-                } else {
-                    img.style.display = "none";
-                    document.getElementById("bouton_" + pdf).innerHTML = "Voir";
-                }
+                $('#'+pdf+', #overlay-back').fadeIn(500);
+                $('#'+pdf+"btn"+', #'+pdf).fadeIn(500);
+            }
+            function cacher_pdf(pdf) {
+                $('#'+pdf+', #overlay-back').fadeOut(500);
+                $('#'+pdf+"btn"+', #'+pdf).fadeOut(500);
             }
 
             function afficher_detail(pdf) {
@@ -84,25 +83,72 @@
                     <button type="button" id="bouton_{{$byuid[0]->uid}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_detail("{{$byuid[0]->uid}}")'>v</button>
                 </div>
                 <div id="{{$byuid[0]->uid}}" style="display:none">
-                    @foreach($byuid as $fichier)
-                    <div class="flex flex-col">
-                        <h2 class="text-gray-600 text-sm font-semibold mb-2">{{$fichier->nom}} {{$fichier->updated_at}}</h2>
-                        <div class="flex flex-row">
-                            <button type="button" id="bouton_{{$fichier->nom}}" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
-                            <button type="button" id="bouton_{{$fichier->nom}}" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='telecharger_pdf("{{$fichier->url}}","{{$fichier->nom}}")'>Télécharger</button>
-                            <form class="mb-4" action="{{route('fichier.delete')}}" class="inline" method="POST">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$fichier->id}}">
-                                <input type="hidden" name="redirect" value="/admin/fichiers">
-                                <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
-                            </form>
-                        </div>
-                        <embed src="/storage/{{$fichier->url}}" type="application/pdf" frameBorder="0" scrolling="auto" height="600px" width="1000px" id={{$fichier->nom}} style="display:none" />
-                    </div>
-                    @endforeach
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Nom du Fichier
+                                </th>
+                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Date Création Fichier
+                                </th>
+                                <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            @foreach($byuid as $fichier)
+                            <tr>
+                                <td class="text-gray-600 text-sm font-semibold mb-2 p-2">{{$fichier->nom}}</td>
+                                <td class="text-gray-600 text-sm font-semibold mb-2 p-2">{{$fichier->created_at}}</td>
+                                <td class="flex flex-col">
+                                    <div class="flex flex-row">
+                                    <button type="button" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom."_".$fichier->uid}}")'>Voir</button>
+                                    <button type="button" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='telecharger_pdf("{{$fichier->url}}","{{$fichier->nom."_".$fichier->uid}}")'>Télécharger</button>
+                                    <form class="mb-4" action="{{route('fichier.delete')}}" class="inline" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$fichier->id}}">
+                                        <input type="hidden" name="redirect" value="/admin/fichiers">
+                                        <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
+                                    </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            <button type="button" onclick='cacher_pdf("{{$fichier->nom."_".$fichier->uid}}")' style="position:absolute;top:3%;left:93%;width:3%;height:3%;z-index:10;display:none;" id="{{$fichier->nom."_".$fichier->uid}}btn"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 26 26" xml:space="preserve">
+                            <g>
+                            <path style="fill:#030104;" d="M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25
+                                C23.818,26,26,23.818,26,21.125V4.875C26,2.182,23.818,0,21.125,0z M18.78,17.394l-1.388,1.387c-0.254,0.255-0.67,0.255-0.924,0
+                                L13,15.313L9.533,18.78c-0.255,0.255-0.67,0.255-0.925-0.002L7.22,17.394c-0.253-0.256-0.253-0.669,0-0.926l3.468-3.467
+                                L7.221,9.534c-0.254-0.256-0.254-0.672,0-0.925l1.388-1.388c0.255-0.257,0.671-0.257,0.925,0L13,10.689l3.468-3.468
+                                c0.255-0.257,0.671-0.257,0.924,0l1.388,1.386c0.254,0.255,0.254,0.671,0.001,0.927l-3.468,3.467l3.468,3.467
+                                C19.033,16.725,19.033,17.138,18.78,17.394z"/>
+                            </g></svg></button>
+                            <iframe class="w-1/4 h-1/4" src="/storage/{{$fichier->url}}" type="application/pdf" frameBorder="0" scrolling="auto" height="600px" width="1000px" id="{{$fichier->nom."_".$fichier->uid}}" 
+                                    style="position : absolute;
+                                        top      : 0;
+                                        left     : 15%;
+                                        width    : 70%;
+                                        height   : 100%;
+                                        z-index  : 10;
+                                        display  : none;" ></iframe>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
             @endforeach
         </div>
+        <div id="overlay-back" style="position   : absolute;
+                top        : 0;
+                left       : 0;
+                width      : 100%;
+                height     : 100%;
+                background : #000;
+                opacity    : 0.6;
+                filter     : alpha(opacity=60);
+                z-index    : 5;
+                display    : none;"></div>
     </x-slot>
 </x-layout-admin>
