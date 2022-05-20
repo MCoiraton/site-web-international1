@@ -34,8 +34,8 @@
             display    : none;"></div>
   <div class="rounded-lg" id="msg" style="position   : absolute;
             top        : 10%;
-            left       : 25%;
-            width      : 50%;
+            left       : 30%;
+            width      : 40%;
             height     : 20%;
             z-index    : 5;
             background:white;
