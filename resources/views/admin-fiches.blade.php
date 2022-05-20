@@ -39,19 +39,19 @@ $candidatures = Candidature::latest()->get();
             }
         </script>
         <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-            <div class="mb-4 flex items-center justify-between">
+            <div class="mb-2 flex items-center justify-between">
                 <div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Fiches de Candidature</h3>
-                    <span class="text-base font-normal text-gray-500">Vous pouvez ici visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité</span>
+                    <span class="text-base font-normal text-gray-500">Vous pouvez ici visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité internationale.</span>
                 </div>
             </div>
         </div>
         <form class="m-4" id="datelimite" method="POST" action="{{ action('CandidatureController@changerdatelimite') }}">
             @csrf
-            <label for="datelimite"> Date limite de dépôt de candidature
+            <label for="datelimite"> Date limite de dépôt de candidature :
             </label>
-            <input value="<?php if ($datelimite != null) echo ($datelimite->datelimite_candidature); ?>" type="date" name="datelimite">
-            <button type="submit"> Changer </button>
+            <input value="<?php if ($datelimite != null) echo ($datelimite->datelimite_candidature); ?>" type="date" name="datelimite" class="border-4 border-gray-500 rounded-lg">
+            <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Changer </button>
         </form>
         <div class="flex flex-row">
             <div class="flex flex-col m-4 flex-grow">
