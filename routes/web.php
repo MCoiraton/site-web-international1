@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatureController;
 use App\Http\Controllers\FichiersController;
+use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Storage;
 
@@ -69,10 +70,20 @@ Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('adm
 Route::post('/admin/fiches/deleteAll', 'CandidatureController@deleteAll')->middleware('admin');
 Route::get("/admin/fiche/{email}", "CandidatureController@showAdmin")->middleware('admin');
 Route::post('/admin/fiche', "CandidatureController@storeAdmin")->name('fiche_candidature.storeAdmin')->middleware('admin');
+Route::get('/admin/articles', [ArticlesController::class, 'showListe'])->middleware('admin');
+Route::get('/admin/nouvelarticle', function(){
+    return view('admin-article');
+})->middleware('admin');
+Route::post('/admin/nouvelarticle', [ArticlesController::class, 'store'])->middleware('admin');
+Route::get('/admin/article/{id}', [ArticlesController::class, 'showEdit'])->middleware('admin');
+Route::post('/admin/article/{id}', [ArticlesController::class, 'store'])->middleware('admin');
+Route::post('/admin/deletearticle/{id}', [ArticlesController::class, 'delete'])->middleware('admin');
 
 Route::get("/admin-modification/{nom}", "DestinationController@affichageEdition")->middleware('admin');
 Route::post("/admin-modification/{nom}", ['as' => 'editDestination', 'uses' => 'DestinationController@editDestination'])->middleware('admin');
 
+Route::get("/articles", [ArticlesController::class, "showListe2"]);
+Route::get("/article/{id}", [ArticlesController::class, "show"]);
 
 Route::get('/profil', function () {
     return view('profil');

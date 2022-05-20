@@ -491,6 +491,7 @@ class ComposerStaticInit27be020ba50596aec443a4bbe4dde51d
 
     public static $classMap = array (
         'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
+        'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
         'App\\Assoblog' => __DIR__ . '/../..' . '/app/Assoblog.php',
         'App\\Assocours' => __DIR__ . '/../..' . '/app/Assocours.php',
         'App\\Assoimage' => __DIR__ . '/../..' . '/app/Assoimage.php',
@@ -1507,6 +1508,7 @@ class ComposerStaticInit27be020ba50596aec443a4bbe4dde51d
         'Faker\\Provider\\nl_BE\\Payment' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Payment.php',
         'Faker\\Provider\\nl_BE\\Person' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Person.php',
         'Faker\\Provider\\nl_BE\\PhoneNumber' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/PhoneNumber.php',
+        'Faker\\Provider\\nl_BE\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Text.php',
         'Faker\\Provider\\nl_NL\\Address' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Address.php',
         'Faker\\Provider\\nl_NL\\Color' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Color.php',
         'Faker\\Provider\\nl_NL\\Company' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Company.php',
