@@ -4,7 +4,7 @@
       <img class="h-8" src="{{ asset('img/logo-p.png')}}" alt="Logo">
       <span class="ml-3 text-xl">International Polytech Nancy</span>
     </a>
-    <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2020 Université de Lorraine —
+    <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2022 Université de Lorraine —
       <a href="#" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@polytech_nancy</a>
     </p>
     <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
