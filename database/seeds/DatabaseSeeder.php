@@ -10,6 +10,7 @@ use App\Admin;
 use App\Index;
 use App\Images_index;
 use App\VariableGlobal;
+use App\msgaccueil;
 
 
 class DatabaseSeeder extends Seeder
@@ -96,6 +97,10 @@ class DatabaseSeeder extends Seeder
             $variables=new VariableGlobal();
             $variables->datelimite_candidature=date('Y-m-d',strtotime('2099-12-31'));
             $variables->save();
+            $msgaccueil=new msgaccueil();
+            $msgaccueil->titre="";
+            $msgaccueil->contenu="";
+            $msgaccueil->save();
         }
     }
 }

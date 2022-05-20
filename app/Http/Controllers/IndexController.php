@@ -6,10 +6,34 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Index;
 use App\Images_index;
-use App\File;
+use App\msgaccueil;
 
 class IndexController extends Controller
 {
+    public function savemsgaccueil(Request $request)
+    {
+        $anciens = msgaccueil::all();
+        foreach ($anciens as $ancien) {
+            $ancien->delete();
+        }
+        $msgaccueil = new msgaccueil();
+        $msgaccueil->titre = $request->input('titre');
+        $msgaccueil->contenu = $request->input('contenu');
+        $msgaccueil->save();
+        return redirect('/admin/accueil');
+    }
+    public function removemsgaccueil()
+    {
+        $anciens = msgaccueil::all();
+        foreach ($anciens as $ancien) {
+            $ancien->delete();
+        }
+        $msgacceuil=new msgaccueil();
+        $msgacceuil->titre="";
+        $msgacceuil->contenu="";
+        $msgacceuil->save();
+        return redirect('/admin/accueil');
+    }
     public function saveIndex()
     {
         $index = new Index();
@@ -123,13 +147,15 @@ class IndexController extends Controller
     {
         $index = Index::latest()->first();
         $photos = Images_index::where('indx', 1)->get();
-        return view('index', ['index' => $index, 'photos' => $photos]);
+        $msgaccueil=msgaccueil::latest()->first();
+        return view('index', ['index' => $index, 'photos' => $photos,'msgaccueil'=>$msgaccueil]);
     }
 
     public function affichageIndMod()
     {
         $index = Index::latest()->first();
         $photos = Images_index::where('indx', 1)->oldest()->get();
-        return view('admin-index', ['index' => $index, 'photos' => $photos]);
+        $msgaccueil=msgaccueil::latest()->first();
+        return view('admin-index', ['index' => $index, 'photos' => $photos,'msgaccueil'=>$msgaccueil]);
     }
 }

@@ -17,6 +17,7 @@ return array(
     'App\\Destination' => $baseDir . '/app/Destination.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Fichier' => $baseDir . '/app/Fichier.php',
+    'App\\Http\\Controllers\\ArticlesController' => $baseDir . '/app/Http/Controllers/ArticlesController.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\CandidatureController' => $baseDir . '/app/Http/Controllers/CandidatureController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',

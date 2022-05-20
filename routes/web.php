@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatureController;
 use App\Http\Controllers\FichiersController;
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Storage;
 
@@ -78,6 +79,8 @@ Route::post('/admin/nouvelarticle', [ArticlesController::class, 'store'])->middl
 Route::get('/admin/article/{id}', [ArticlesController::class, 'showEdit'])->middleware('admin');
 Route::post('/admin/article/{id}', [ArticlesController::class, 'store'])->middleware('admin');
 Route::post('/admin/deletearticle/{id}', [ArticlesController::class, 'delete'])->middleware('admin');
+Route::post('/admin/msgaccueil', [IndexController::class, 'savemsgaccueil'])->middleware('admin');
+Route::delete('/admin/msgaccueil', [IndexController::class, 'removemsgaccueil'])->middleware('admin');
 
 Route::get("/admin-modification/{nom}", "DestinationController@affichageEdition")->middleware('admin');
 Route::post("/admin-modification/{nom}", ['as' => 'editDestination', 'uses' => 'DestinationController@editDestination'])->middleware('admin');

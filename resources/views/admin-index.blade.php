@@ -12,6 +12,11 @@
     </x-slot>
     <x-slot name='panel'>
         <script>
+            function afficher_msgaccueil(){
+                var msgaccueil = document.getElementById("msgaccueil");
+                msgaccueil.style.display = "block";
+                document.getElementById("btnmsgaccueil").style.display = "none";
+            }
             function afficherMasquer(element) {
                 img = document.getElementById(element);
                 if (img.style.display == "none") {
@@ -37,6 +42,37 @@
                         <span class="text-base font-normal text-gray-500">Vous pouvez ici modifier le contenu de la page d'accueil, comme le texte, les photos et les liens</span>
                     </div>
                 </div>
+            </div>
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+                <div class="mb-4 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Gestion du message important</h3>
+                        <span class="text-base font-normal text-gray-500">Vous pouvez ici ajouter, modifier et supprimer un message important qui s'affichera sur la page d'accueil</span>
+                    </div>
+                </div>
+                @if($msgaccueil->titre=="")
+                <span class="text-base font-normal text-gray-500">Aucun message important n'est actuellement enregistré</span>
+                <button class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2' id="btnmsgaccueil" onclick="afficher_msgaccueil()">Ajouter un message</button>
+                @endif
+                <form method="POST" action="/admin/msgaccueil" id="msgaccueil" style="<?php if($msgaccueil->titre=="") echo("display:none");?>">
+                    @csrf
+                <div class="items-center justify-center ">
+                    <div class="grid grid-cols-1 mt-5 mx-7">
+                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Titre</label>
+                        <input name="titre" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="{{$msgaccueil->titre}}" type="text" required/>
+                    </div>
+                    <div class="grid grid-cols-1 mt-5 mx-7">
+                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Contenu</label>
+                        <textarea name="contenu" style="white-space: pre-wrap" class="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" required>{{$msgaccueil->contenu}}</textarea>
+                    </div>
+                    <button type="submit" class='w-auto bg-blue-500 hover:bg-blue-700 rounded-lg shadow-xl font-medium text-white px-4 py-2 mt-5 mx-7'>Enregistrer</button>
+                </div>
+                </form>
+                <form method="POST" action="/admin/msgaccueil">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class='w-auto bg-red-500 hover:bg-red-700 rounded-lg shadow-xl font-medium text-white px-4 py-2 mt-5 mx-7'>Supprimer le message d'accueil</button>
+                </form>
             </div>
             <form method="post" enctype="multipart/form-data" action="{{action('IndexController@saveIndex')}}">
                 @csrf
