@@ -1,20 +1,25 @@
 <x-layout-admin>
     <x-slot name='tableau'>
-		<style>
+        <style>
             #gestion {
                 background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
                 --tw-text-opacity: 1;
                 color: rgba(17, 24, 39, var(--tw-text-opacity));
-            };
+            }
+
+            ;
         </style>
-	</x-slot>
+    </x-slot>
     <x-slot name='panel'>
-        Ajouter un article :
-        <a href="/admin/nouvelarticle">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Ajouter
-        </button></a>
-        <div>Liste des articles en ligne :</div>
+        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 m-4">
+            <div class="mb-2 flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Articles</h3>
+                    <span class="text-base font-normal text-gray-500">Vous pouvez ici visualiser, modifier et supprimer les articles publiés sur le site.</span>
+                </div>
+            </div>
+        </div>
+        <div class="m-4 text-bold text-md">Liste des articles publiés :</div>
         <table class="w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
@@ -41,6 +46,11 @@
                 @endforeach
             </tbody>
         </table>
-        
+
+        <a href="/admin/nouvelarticle">
+            <button class="m-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Ajouter un nouveau article
+            </button>
+        </a>
     </x-slot>
 </x-layout-admin>

@@ -108,7 +108,7 @@ $datelimite = VariableGlobal::find("1");
                 <div class="container w-3/4 max-h-full mx-auto flex items-center justify-center">
                     <div class="w-full max-w-full">
                         <h1 class="text-4xl text-gray-900 flex items-center justify-center">Fiche candidature à un échange international </h1>
-                        <p class="mt-4 mb-4">Fiche à compléter au plus tard le : <span class="text-blue-700"><?php if ($datelimite != null) echo ($datelimite->datelimite_candidature);
+                        <p class="mt-4 mb-4">Fiche à compléter au plus tard le : <span class="text-blue-700"><?php if ($datelimite != null) echo (date('d-m-Y', strtotime($datelimite->datelimite_candidature)));
                                                                                                                 else echo ("Date en attente d'être à jour"); ?></span></p>
                         <p> Si la date limite est passée veuillez contacter le service international par mail. </p>
                         @if ($datelimite && ((date('Y-m-d')< $datelimite->datelimite_candidature) || $candidature))
@@ -309,15 +309,15 @@ $datelimite = VariableGlobal::find("1");
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> value="<?php if ($candidature) echo ($candidature->choix1); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix1" class="border-black-600 border-2">
                                     <label for="S5">S5</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix1 == "S5") echo ("checked"); ?> id="choix1_S5" class="my-1" type="radio" name="semestre_choix1" value="S5" class="border-black-600 border-2">
-                                    <label for="S7">S7</label>
+                                    <label class="ml-4" for="S7">S7</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix1 == "S7") echo ("checked"); ?> id="choix1_S7" class="my-1" type="radio" name="semestre_choix1" value="S7" class="border-black-600 border-2">
-                                    <label for="S9">S9</label>
+                                    <label class="ml-4" for="S9">S9</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix1 == "S9") echo ("checked"); ?> id="choix1_S9" class="my-1" type="radio" name="semestre_choix1" value="S9" class="border-black-600 border-2">
-                                    <label for="S5+6">S5+6</label>
+                                    <label class="ml-4" for="S5+6">S5+6</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix1 == "S5+6") echo ("checked"); ?> id="choix1_S5S6" class="my-1" type="radio" name="semestre_choix1" value="S5+6" class="border-black-600 border-2">
-                                    <label for="S7+8">S7+8</label>
+                                    <label class="ml-4" for="S7+8">S7+8</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix1 == "S7+8") echo ("checked"); ?> id="choix1_S7S8" class="my-1" type="radio" name="semestre_choix1" value="S7+8" class="border-black-600 border-2">
-                                    <label for="S9+10">S9+10</label>
+                                    <label class="ml-4" for="S9+10">S9+10</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix1 == "S9+10") echo ("checked"); ?> id="choix1_S9S10" class="my-1" type="radio" name="semestre_choix1" value="S9+10" class="border-black-600 border-2">
                                 </div>
                                 <div class="mt-4">
@@ -325,15 +325,15 @@ $datelimite = VariableGlobal::find("1");
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> value="<?php if ($candidature && $candidature->choix2) echo ($candidature->choix2); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix2" class="border-black-600 border-2">
                                     <label for="S5">S5</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix2 == "S5") echo ("checked"); ?> id="choix2_S5" class="my-1" type="radio" name="semestre_choix2" value="S5" class="border-black-600 border-2">
-                                    <label for="S7">S7</label>
+                                    <label class="ml-4" for="S7">S7</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix2 == "S7") echo ("checked"); ?> id="choix2_S7" class="my-1" type="radio" name="semestre_choix2" value="S7" class="border-black-600 border-2">
-                                    <label for="S9">S9</label>
+                                    <label class="ml-4" for="S9">S9</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix2 == "S9") echo ("checked"); ?> id="choix2_S9" class="my-1" type="radio" name="semestre_choix2" value="S9" class="border-black-600 border-2">
-                                    <label for="S5+6">S5+6</label>
+                                    <label class="ml-4" for="S5+6">S5+6</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix2 == "S5+6") echo ("checked"); ?> id="choix2_S5S6" class="my-1" type="radio" name="semestre_choix2" value="S5+6" class="border-black-600 border-2">
-                                    <label for="S7+8">S7+8</label>
+                                    <label class="ml-4" for="S7+8">S7+8</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix2 == "S7+8") echo ("checked"); ?> id="choix2_S7S8" class="my-1" type="radio" name="semestre_choix2" value="S7+8" class="border-black-600 border-2">
-                                    <label for="S9+10">S9+10</label>
+                                    <label class="ml-4" for="S9+10">S9+10</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix2 == "S9+10") echo ("checked"); ?> id="choix2_S9S10" class="my-1" type="radio" name="semestre_choix2" value="S9+10" class="border-black-600 border-2">
                                 </div>
                                 <div class="mt-4">
@@ -341,15 +341,15 @@ $datelimite = VariableGlobal::find("1");
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> value="<?php if ($candidature && $candidature->choix3) echo ($candidature->choix3); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix3" class="border-black-600 border-2">
                                     <label for="S5">S5</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix3 == "S5") echo ("checked"); ?> id="choix3_S5" class="my-1" type="radio" name="semestre_choix3" value="S5" class="border-black-600 border-2">
-                                    <label for="S7">S7</label>
+                                    <label class="ml-4" for="S7">S7</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix3 == "S7") echo ("checked"); ?> id="choix3_S7" class="my-1" type="radio" name="semestre_choix3" value="S7" class="border-black-600 border-2">
-                                    <label for="S9">S9</label>
+                                    <label class="ml-4" for="S9">S9</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix3 == "S9") echo ("checked"); ?> id="choix3_S9" class="my-1" type="radio" name="semestre_choix3" value="S9" class="border-black-600 border-2">
-                                    <label for="S5+6">S5+6</label>
+                                    <label class="ml-4" for="S5+6">S5+6</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix3 == "S5+6") echo ("checked"); ?> id="choix3_S5S6" class="my-1" type="radio" name="semestre_choix3" value="S5+6" class="border-black-600 border-2">
-                                    <label for="S7+8">S7+8</label>
+                                    <label class="ml-4" for="S7+8">S7+8</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix3 == "S7+8") echo ("checked"); ?> id="choix3_S7S8" class="my-1" type="radio" name="semestre_choix3" value="S7+8" class="border-black-600 border-2">
-                                    <label for="S9+10">S9+10</label>
+                                    <label class="ml-4" for="S9+10">S9+10</label>
                                     <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->semestre_choix3 == "S9+10") echo ("checked"); ?> id="choix3_S9S10" class="my-1" type="radio" name="semestre_choix3" value="S9+10" class="border-black-600 border-2">
                                 </div>
                                 <div class="mt-4">

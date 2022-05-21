@@ -12,7 +12,7 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-  window.onload=function(){
+  window.onload = function() {
     $('#msg, #overlay-back').fadeIn(500);
   }
 
@@ -20,6 +20,7 @@
     $('#msg, #overlay-back').fadeOut(500);
   }
 </script>
+
 <body class="">
   @if($msgaccueil->titre!="")
   <div id="overlay-back" style="position   : absolute;
@@ -35,19 +36,18 @@
   <div class="rounded-lg" id="msg" style="position   : absolute;
             top        : 10%;
             left       : 30%;
-            width      : 40%;
-            height     : 20%;
+            right: 30%;
             z-index    : 5;
             background:white;
             display    : none;">
-            <div class="text-center mb-20">
-              <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">{{$msgaccueil->titre}}</h1>
-              <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">{{$msgaccueil->contenu}}</p>
-            </div>
-            <button id="msgbtn" onclick="cacher_msg()" class="flex items-center justify-center bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-full my-2">
-              <span class="text-white">OK</span>
-            </button>
-            </div>
+    <div class="text-center mb-20">
+      <h1 class="sm:text-3xl mt-4 text-2xl font-medium title-font text-blue-900 mb-4">{{$msgaccueil->titre}}</h1>
+      <p class="text-base w-auto h-auto leading-relaxed mx-auto text-gray-500">{{$msgaccueil->contenu}}</p>
+    </div>
+    <button id="msgbtn" onclick="cacher_msg()" class="flex items-center justify-center ml-5 mb-5 bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-full my-2">
+      <span class="text-white">OK</span>
+    </button>
+  </div>
   @endif
   <section class="text-gray-600 body-font bg-white m-6 rounded-lg p-6">
     <div class="swiper hero">

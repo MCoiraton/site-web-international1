@@ -16,7 +16,7 @@ class Msgaccueil extends Migration
         Schema::create('msgaccueil', function (Blueprint $table) {
             $table->increments('id');
             $table->string("titre");
-            $table->string("contenu");
+            $table->longText("contenu");
             $table->timestamps();
         });
     }

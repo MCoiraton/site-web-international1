@@ -50,7 +50,7 @@ $candidatures = Candidature::latest()->get();
             @csrf
             <label for="datelimite"> Date limite de dépôt de candidature :
             </label>
-            <input value="<?php if ($datelimite != null) echo ($datelimite->datelimite_candidature); ?>" type="date" name="datelimite" class="border-4 border-gray-500 rounded-lg">
+            <input value="<?php if ($datelimite != null) echo ($datelimite->datelimite_candidature); ?>" type="date" name="datelimite" class="border-2 p-2 border-gray-500 rounded-lg">
             <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Changer </button>
         </form>
         <div class="flex flex-row">
@@ -61,9 +61,9 @@ $candidatures = Candidature::latest()->get();
                         <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
                     </svg>
                 </div>
-                <form class="mt-4" id="deleteAll" method="POST" action="{{ action('CandidatureController@deleteAll') }}">
+                <form class="m-4" id="excel" method="post" action="fiches/exportExcel">
                     @csrf
-                    <button form="deleteAll" onclick="return confirm('Êtes-vous sûr de vouloir supprimer toutes les fiches de candidatures ? Vous ne pourrez pas revenir en arrière.')" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Supprimer les fiches de candidatures </button>
+                    <button form="excel" class="items-center hover:bg-green-700 hover:text-white bg-white text-green-700 px-3 py-2 rounded-md text-sm font-medium">To Excel</button>
                 </form>
                 <div class="overflow-x-auto border-2 flex-grow w-full border-gray-300 rounded-lg mt-2">
                     <div class="align-middle inline-block min-w-full">
@@ -114,11 +114,6 @@ $candidatures = Candidature::latest()->get();
                                             <a href="mailto:{{$candidature->email}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">
                                                 Contacter
                                             </a>
-                                            <form id="excel" method="post" action="fiches/exportExcel">
-                                                @csrf
-                                                <input type="hidden" name="email" value="{{$candidature->email}}" />
-                                                <button form="excel" class="items-center hover:bg-green-700 hover:text-white bg-white text-green-700 px-3 py-2 rounded-md text-sm font-medium">To Excel</button>
-                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -127,6 +122,10 @@ $candidatures = Candidature::latest()->get();
                         </div>
                     </div>
                 </div>
+                <form class="mt-4" id="deleteAll" method="POST" action="{{ action('CandidatureController@deleteAll') }}">
+                    @csrf
+                    <button form="deleteAll" onclick="return confirm('Êtes-vous sûr de vouloir supprimer toutes les fiches de candidatures ? Vous ne pourrez pas revenir en arrière.')" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Supprimer les fiches de candidatures </button>
+                </form>
             </div>
         </div>
     </x-slot>
