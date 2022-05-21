@@ -50,7 +50,7 @@ $candidatures = Candidature::latest()->get();
             @csrf
             <label for="datelimite"> Date limite de dépôt de candidature :
             </label>
-            <input value="<?php if ($datelimite != null) echo ($datelimite->datelimite_candidature); ?>" type="date" name="datelimite" class="border-2 p-2 border-gray-500 rounded-lg">
+            <input value="<?php if ($datelimite != null) echo ($datelimite->datelimite_candidature); ?>" type="date" name="datelimite" class="border-2 p-2 border-gray-500 rounded-lg cursor-pointer">
             <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium"> Changer </button>
         </form>
         <div class="flex flex-row">
@@ -63,7 +63,7 @@ $candidatures = Candidature::latest()->get();
                 </div>
                 <form class="m-4" id="excel" method="post" action="fiches/exportExcel">
                     @csrf
-                    <button form="excel" class="items-center hover:bg-green-700 hover:text-white bg-white text-green-700 px-3 py-2 rounded-md text-sm font-medium">To Excel</button>
+                    <button form="excel" class="items-center hover:bg-green-700 hover:text-white bg-white text-green-700 px-3 py-2 rounded-md text-sm font-medium">Générer le excel des candidatures</button>
                 </form>
                 <div class="overflow-x-auto border-2 flex-grow w-full border-gray-300 rounded-lg mt-2">
                     <div class="align-middle inline-block min-w-full">
