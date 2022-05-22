@@ -103,7 +103,7 @@
                         <h2 class="text-gray-700 text-sm font-bold mb-2">Ajouter un fichier :</h2>
                         <label class="block text-gray-600 text-sm font-semibold mb-2" for="nom"> Nom du fichier (pas besoin de mettre votre nom) :</label>
                         <input type="text" name="nom" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                        <input type="file" name="fichier" accept=".pdf" />
+                        <input id="upload" type="file" name="fichier" accept=".pdf" max-file-size="500" />
                         <button class="bg-blue-500 hover:bg-blue-700 text-white mt-4 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Upload</button>
                         @if(isset($_GET["e"]))
                             @if($_GET["e"]==1)
@@ -124,5 +124,13 @@
             z-index    : 5;
             display    : none;"></div>
         </body>
+        <script>
+             document.getElementById("upload").onchange = function() {
+                if(this.files[0].size > 2000000){
+                    alert("Le fichier est trop volumineux !");
+                    this.value = "";
+                };
+            };
+        </script>
     </x-slot>
 </x-layout-profil>
