@@ -273,7 +273,6 @@ class DestinationController extends Controller
     public function suppDestination()
     {
         $nom = $_POST['delete'];
-        Destination::where('nom', $nom)->delete();
         Assolien::where('nomdestination', $nom)->delete();
         $urls = Assoimage::where('nom', $nom)->get();
         foreach ($urls as $url) {
@@ -283,6 +282,7 @@ class DestinationController extends Controller
         Assoimage::where('nom', $nom)->delete();
         Assocours::where('nomdestination', $nom)->delete();
         Assoblog::where('nomdestination', $nom)->delete();
+        Destination::where('nom', $nom)->delete();
         return redirect('/admin/gestion');
     }
     public function affichageEdition($nom)
