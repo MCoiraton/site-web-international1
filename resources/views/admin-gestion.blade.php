@@ -58,9 +58,10 @@ $destinations=Destination::all();
                                         {{$destination->updated_at}}
                                     </td>
                                     <td class="flex flex-row m-2">
-                                        <a href='/admin-modification/{{$destination->nom}}' class="hover:bg-blue-700 hover:text-white px-3 py-2 ml-2 rounded-md text-sm font-medium">Modifier</a>
-                                        <form method="post" action="{{ action('DestinationController@suppDestination') }}">
+                                        <a href='/admin/modification/{{$destination->nom}}' class="hover:bg-blue-700 hover:text-white px-3 py-2 ml-2 rounded-md text-sm font-medium">Modifier</a>
+                                        <form method="post" action="/admin/suppression">
                                             @csrf
+                                            @method('DELETE')
                                             <input type="hidden" name="delete" value="{{$destination->nom}}"/>
                                             <button class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
                                         </form>

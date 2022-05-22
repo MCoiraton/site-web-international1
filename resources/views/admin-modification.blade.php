@@ -112,7 +112,7 @@
             };
         </script>
     <body>
-        <form method="post" enctype="multipart/form-data" action="{{ route('editDestination', $destination->nom) }}">
+        <form method="post" enctype="multipart/form-data" action="/admin/modification/{{$destination->nom}}">
                 @csrf
             <div id="suppr"></div>
             <div class="flex items-center justify-center  mt-10 mb-10">

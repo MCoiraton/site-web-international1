@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatureController;
+use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\FichiersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\IndexController;
@@ -20,15 +21,14 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/', 'IndexController@affichageIndex');
+Route::get('/', [IndexController::class,'affichageIndex']);
 
 Route::get('/admin/creation', function () {
     return view('admin-creation');
 })->middleware('admin');
-
-Route::post('admin-creation', 'DestinationController@nouvelleDestination')->middleware('admin');
-Route::post('/admin/creation', 'DestinationController@suppDestination')->middleware('admin');
-Route::post('/admin/modification', 'DestinationController@editDestination')->middleware('admin');
+Route::post('admin/creation', [DestinationController::class,'nouvelleDestination'])->middleware('admin');
+Route::delete('/admin/suppression', [DestinationController::class,'suppDestination'])->middleware('admin');
+Route::post('/admin/modification', [DestinationController::class,'editDestination'])->middleware('admin');
 
 Route::get('/admin', function () {
     return view('admin');
@@ -60,17 +60,17 @@ Route::get('/admin/fiches/annee/{annee?}', function (int $annee = null) {
     ]);
 })->middleware('admin');
 
-Route::get('/admin/accueil/', 'IndexController@affichageIndMod')->middleware('admin');
-Route::post('/admin/accueil/', 'IndexController@saveIndex')->middleware('admin');
+Route::get('/admin/accueil/', [IndexController::class,'affichageIndMod'])->middleware('admin');
+Route::post('/admin/accueil/', [IndexController::class,'saveIndex'])->middleware('admin');
 
 
-Route::post('/admin/fiches/changerdatelimite', 'CandidatureController@changerdatelimite')->middleware('admin');
-Route::post('/admin/fiches/exportExcel', 'FastExcelController@exportCandidature')->middleware('admin');
-Route::post('/admin/fiches/block', 'CandidatureController@bloquer')->middleware('admin');
-Route::post('/admin/fiches/mail', 'CandidatureController@mail')->middleware('admin');
-Route::post('/admin/fiches/deleteAll', 'CandidatureController@deleteAll')->middleware('admin');
-Route::get("/admin/fiche/{email}", "CandidatureController@showAdmin")->middleware('admin');
-Route::post('/admin/fiche', "CandidatureController@storeAdmin")->name('fiche_candidature.storeAdmin')->middleware('admin');
+Route::post('/admin/fiches/changerdatelimite', [CandidatureController::class,'changerdatelimite'])->middleware('admin');
+Route::post('/admin/fiches/exportExcel', [FastExcelController::class,'exportCandidature'])->middleware('admin');
+Route::post('/admin/fiches/block', [CandidatureController::class,'bloquer'])->middleware('admin');
+Route::post('/admin/fiches/mail', [CandidatureController::class,'mail'])->middleware('admin');
+Route::delete('/admin/fiches', [CandidatureController::class,'deleteAll'])->middleware('admin');
+Route::get("/admin/fiche/{email}", [CandidatureController::class,"showAdmin"])->middleware('admin');
+Route::post('/admin/fiche', [CandidatureController::class,"storeAdmin"])->name('fiche_candidature.storeAdmin')->middleware('admin');
 Route::get('/admin/articles', [ArticlesController::class, 'showListe'])->middleware('admin');
 Route::get('/admin/nouvelarticle', function(){
     return view('admin-article');
@@ -78,12 +78,12 @@ Route::get('/admin/nouvelarticle', function(){
 Route::post('/admin/nouvelarticle', [ArticlesController::class, 'store'])->middleware('admin');
 Route::get('/admin/article/{id}', [ArticlesController::class, 'showEdit'])->middleware('admin');
 Route::post('/admin/article/{id}', [ArticlesController::class, 'store'])->middleware('admin');
-Route::post('/admin/deletearticle/{id}', [ArticlesController::class, 'delete'])->middleware('admin');
+Route::delete('/admin/article/{id}', [ArticlesController::class, 'delete'])->middleware('admin');
 Route::post('/admin/msgaccueil', [IndexController::class, 'savemsgaccueil'])->middleware('admin');
 Route::delete('/admin/msgaccueil', [IndexController::class, 'removemsgaccueil'])->middleware('admin');
 
-Route::get("/admin-modification/{nom}", "DestinationController@affichageEdition")->middleware('admin');
-Route::post("/admin-modification/{nom}", ['as' => 'editDestination', 'uses' => 'DestinationController@editDestination'])->middleware('admin');
+Route::get("/admin/modification/{nom}", [DestinationController::class,"affichageEdition"])->middleware('admin');
+Route::post("/admin/modification/{nom}", [DestinationController::class,'editDestination'])->middleware('admin');
 
 Route::get("/articles", [ArticlesController::class, "showListe2"]);
 Route::get("/article/{id}", [ArticlesController::class, "show"]);
@@ -105,10 +105,8 @@ Route::get('/profil/cv', function () {
 })->middleware('polytech');
 Route::get('/profil/fichiers', [FichiersController::class, 'show'])->middleware('polytech');
 
+Route::get('/auth/login', [AuthController::class,"login"]);
+Route::get('/auth/logout', [AuthController::class,"logout"]);
 
-
-Route::get('/auth/login', "AuthController@login");
-Route::get('/auth/logout', "AuthController@logout");
-
-Route::get('/destinations', 'DestinationController@affichageDestinations');
-Route::get("/destination/{nom}", "DestinationController@affichageDestination");
+Route::get('/destinations', [DestinationController::class,'affichageDestinations']);
+Route::get("/destination/{nom}", [DestinationController::class,"affichageDestination"]);

@@ -37,8 +37,9 @@
                     <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">{{ $article->updated_at }}</td>
                     <td class="flex flex-row m-2">
                         <a href="/admin/article/{{$article->id}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Modifier</a>
-                        <form action="/admin/deletearticle/{{$article->id}}" method="POST" class="inline">
+                        <form action="/admin/article/{{$article->id}}" method="POST" class="inline">
                             @csrf
+                            @method('DELETE')
                             <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
                         </form>
                     </td>

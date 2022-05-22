@@ -78,7 +78,7 @@
                 btn.parentNode.remove();
             };
         </script>
-        <form method="post" enctype="multipart/form-data" action="{{ action('DestinationController@nouvelleDestination') }}">
+        <form method="post" enctype="multipart/form-data" action="">
             @csrf
             <div class="flex items-center justify-center mt-10 mb-10">
                 <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12">
