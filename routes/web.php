@@ -8,6 +8,7 @@ use App\Http\Controllers\FichiersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BlogsController;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -49,10 +50,14 @@ Route::post('/admin/utilisateurs/add', [UserController::class,'add'])->middlewar
 
 Route::get('/admin/fichiers', [FichiersController::class, 'showadmin'])->middleware('admin');
 
-Route::get('/storage/{uid}/{filename}', function ($uid,$filename) {
-    $file = Storage::disk('local')->get($uid.'/'.$filename);
+Route::get('/storage/etu/{uid}/{filename}', function ($uid,$filename) {
+    $file = Storage::disk('local')->get('etu/'.$uid.'/'.$filename);
     return response($file, 200)->header('Content-Type', 'application/pdf');
 })->middleware('filesecu:{uid}');
+Route::get('storage/blogs/{blog}', function ($blog) {
+    $file = Storage::disk('local')->get('blogs/'.$blog);
+    return response($file, 200)->header('Content-Type', 'application/pdf');
+});
 
 Route::get('/admin/fiches/annee/{annee?}', function (int $annee = null) {
     return view('admin-fiches', [
@@ -63,6 +68,9 @@ Route::get('/admin/fiches/annee/{annee?}', function (int $annee = null) {
 Route::get('/admin/accueil/', [IndexController::class,'affichageIndMod'])->middleware('admin');
 Route::post('/admin/accueil/', [IndexController::class,'saveIndex'])->middleware('admin');
 
+Route::get('/admin/blogs', [BlogsController::class,'affichage'])->middleware('admin');
+Route::post('/admin/blogs', [BlogsController::class,'addBlog'])->middleware('admin');
+Route::delete('/admin/blogs', [BlogsController::class,'deleteBlog'])->middleware('admin');
 
 Route::post('/admin/fiches/changerdatelimite', [CandidatureController::class,'changerdatelimite'])->middleware('admin');
 Route::post('/admin/fiches/exportExcel', [FastExcelController::class,'exportCandidature'])->middleware('admin');

@@ -100,7 +100,7 @@ $candidatures = Candidature::latest()->get();
                                             {{$candidature->updated_at}}
                                         </td>
                                         <td class="flex flex-row m-2">
-                                            <form id="block" method="POST" action="{{ action('CandidatureController@bloquer') }}">
+                                            <form id="block" method="POST" action="/admin/fiches/block">
                                                 @csrf
                                                 <input type="hidden" name="email" value="{{$candidature->email}}" />
                                                 <button form="block" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">

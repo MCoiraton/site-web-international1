@@ -20,7 +20,7 @@ class FichiersController extends Controller
     public function store(Request $request){
         if($request->hasFile('fichier') && $request->nom!=""){
             $uid=session()->get('uid');
-            $file = $request->file('fichier')->store("{$uid}");
+            $file = $request->file('fichier')->store("etu/{$uid}");
             $np=session()->get('prenom')." ".session()->get('nom');
             Fichier::create([
                 'nom' => $request->nom,
