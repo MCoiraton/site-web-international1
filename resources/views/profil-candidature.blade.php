@@ -104,6 +104,11 @@ $datelimite = VariableGlobal::find("1");
         </script>
 
         <body>
+            <?php if(isset($_GET['e'])){
+                if($_GET['e'] == 1){
+                    echo "<script>alert('Certains champs sont incorrects, veuillez ré-essayer !')</script>";
+                }
+            }?>
             <section class="text-gray-600 body-font pt-6">
                 <div class="container w-3/4 max-h-full mx-auto flex items-center justify-center">
                     <div class="w-full max-w-full">
