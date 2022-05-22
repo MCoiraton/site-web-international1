@@ -31,6 +31,16 @@
                 $('#'+pdf+', #overlay-back').fadeOut(500);
                 $('#'+pdf+"btn"+', #'+pdf).fadeOut(500);
             }
+            window.onload = function() {
+                var url = window.location.href;
+                var get = url.split("?");
+                if (get[1] != undefined) {
+                    var get = get[1].split("=");
+                    if (get[0] == "error") {
+                        alert("Le fichier n'a pas pu être ajouté");
+                    }
+                }
+            }
         </script>
 
         <body>

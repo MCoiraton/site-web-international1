@@ -31,6 +31,16 @@
                 document.execCommand("copy");
                 document.body.removeChild(copie);
             }
+            window.onload = function() {
+                var url = window.location.href;
+                var get = url.split("?");
+                if (get[1] != undefined) {
+                    var get = get[1].split("=");
+                    if (get[0] == "error") {
+                        alert("Le fichier n'a pas pu être ajouté");
+                    }
+                }
+            }
         </script>
         <div class="flex flex-col m-4 flex-grow">
             <div>

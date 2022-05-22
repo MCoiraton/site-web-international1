@@ -19,6 +19,9 @@ class FichiersController extends Controller
     }
     public function store(Request $request){
         if($request->hasFile('fichier') && $request->nom!=""){
+            if($request->file('fichier')->getClientOriginalExtension()!="pdf"){
+                return redirect("/profil/fichiers?error=1");
+            }
             $uid=session()->get('uid');
             $file = $request->file('fichier')->store("etu/{$uid}");
             $np=session()->get('prenom')." ".session()->get('nom');
