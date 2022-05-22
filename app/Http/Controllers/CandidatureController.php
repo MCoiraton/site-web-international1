@@ -87,8 +87,8 @@ class CandidatureController extends Controller
             }
                 $candidature->save();
         }
-        catch(Exception $e) {
-            redirect('/profil/candidature?erreur=incorrect');
+        catch(\Illuminate\Database\QueryException $e) {
+            return redirect('/profil/candidature?e=1');
         }
         return redirect('/profil/candidature');
     }
