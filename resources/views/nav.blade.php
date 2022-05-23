@@ -10,7 +10,9 @@
           <div class="flex space-x-4 md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 ">
             <a href="/" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
             <a href="/destinations" class="inline-flex items-center hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Destinations</a>
+            @if(session('isPolytech') ==true || session('isAdmin') ==true)
             <a href="/articles" class="inline-flex items-center hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Derniers articles</a>
+            @endif
             @if(session()->has('uid') && session('isAdmin'))
             <a href="/admin/accueil" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Espace Admin</a>
             @endif

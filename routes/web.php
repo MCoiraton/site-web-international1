@@ -94,8 +94,8 @@ Route::delete('/admin/msgaccueil', [IndexController::class, 'removemsgaccueil'])
 Route::get("/admin/modification/{nom}", [DestinationController::class,"affichageEdition"])->middleware('admin');
 Route::post("/admin/modification/{nom}", [DestinationController::class,'editDestination'])->middleware('admin');
 
-Route::get("/articles", [ArticlesController::class, "showListe2"]);
-Route::get("/article/{id}", [ArticlesController::class, "show"]);
+Route::get("/articles", [ArticlesController::class, "showListe2"])->middleware('polytech');
+Route::get("/article/{id}", [ArticlesController::class, "show"])->middleware('polytech');
 
 Route::get('/profil', function () {
     return view('profil');
@@ -118,4 +118,4 @@ Route::get('/auth/login', [AuthController::class,"login"]);
 Route::get('/auth/logout', [AuthController::class,"logout"]);
 
 Route::get('/destinations', [DestinationController::class,'affichageDestinations']);
-Route::get("/destination/{nom}", [DestinationController::class,"affichageDestination"]);
+Route::get("/destination/{nom}", [DestinationController::class,"affichageDestination"])->middleware('polytech');

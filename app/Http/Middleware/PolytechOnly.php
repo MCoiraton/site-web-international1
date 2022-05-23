@@ -16,7 +16,7 @@ class PolytechOnly
      */
     public function handle($request, Closure $next)
     {
-        if(!session('isPolytech')){
+        if(!session('isPolytech') && !session('isAdmin')){
             abort(403);
         }
         return $next($request);
