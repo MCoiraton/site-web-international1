@@ -10,6 +10,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogsController;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\FastExcelController;
 
 /*
 |--------------------------------------------------------------------------
