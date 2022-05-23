@@ -82,7 +82,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <button type="button" onclick='cacher_pdf("{{$fichier->nom}}")' style="position:absolute;top:3%;left:93%;width:3%;height:3%;z-index:10;display:none;" id="{{$fichier->nom}}btn"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                            <button type="button" onclick='cacher_pdf("{{$fichier->nom}}")' style="position:fixed;top:3%;left:93%;width:3%;height:3%;z-index:10;display:none;" id="{{$fichier->nom}}btn"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                 viewBox="0 0 26 26" xml:space="preserve">
                                             <g>
                                                <path style="fill:#030104;" d="M21.125,0H4.875C2.182,0,0,2.182,0,4.875v16.25C0,23.818,2.182,26,4.875,26h16.25
@@ -94,7 +94,7 @@
                                             </g>
                                                 </svg></button>
                                                     <iframe class="w-1/4 h-1/4" src="/storage/{{$fichier->url}}" type="application/pdf" frameBorder="0" scrolling="auto" height="600px" width="1000px" id="{{$fichier->nom}}" 
-                                                    style="position : absolute;
+                                                    style="position : fixed;
                                                         top      : 0;
                                                         left     : 15%;
                                                         width    : 70%;
