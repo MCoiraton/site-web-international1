@@ -30,6 +30,20 @@
                 copie.select();
                 document.execCommand("copy");
                 document.body.removeChild(copie);
+                var message=document.createElement("p");
+                document.body.appendChild(message);
+                message.innerHTML="Lien copié !";
+                message.style.color="blue";
+                message.style.fontSize="20px";
+                message.style.position="absolute";
+                message.style.top="50%";
+                message.style.left="50%";
+                message.style.backgroundColor="lightgray";
+                message.style.transform="translate(-50%,-50%)";
+                message.setAttribute("class","rounded-lg p-2");
+                setTimeout(function(){
+                    document.body.removeChild(message);
+                },2000);
             }
             window.onload = function() {
                 var url = window.location.href;
