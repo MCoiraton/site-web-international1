@@ -1,8 +1,8 @@
 À faire:
-  - remplissage des données: destinations (les trouver sur vieux blog), informations utiles (intranet)
   - widgets insta/FB
-  - progressbar espace etudiant / checklist
   - ajout des universités favories
+  - types de fichiers pdf/docx/doc/odt et préciser que c est des fichiers pour les admins
+  - message de demande modification fiche candidature
 
 
 sudo mysql.server start &&  php artisan serve --host=polytech-international.univ-lorraine.fr
