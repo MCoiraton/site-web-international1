@@ -116,7 +116,7 @@
                 @csrf
             <div id="suppr"></div>
             <div class="flex items-center justify-center  mt-10 mb-10">
-                <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12 lg:w-1/2">
+                <div class="grid bg-white rounded-lg shadow-xl w-full lg:w-3/4">
                 <div class="flex justify-center">
                     <div class="flex">
                     <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Modification de la page {{$destination->nom}}</h1>
