@@ -139,7 +139,7 @@
                                 <label class="block text-gray-700 text-md font-bold mb-2" for="email">
                                     E-mail:
                                 </label>
-                                <input value="<?php echo(session("mail")); ?>" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="mail">
+                                <input value="<?php if($candidature && $candidature->email) echo($candidature->email); ?>" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="mail">
                             </div>
                             
                             <div class="mb-4 flex">
