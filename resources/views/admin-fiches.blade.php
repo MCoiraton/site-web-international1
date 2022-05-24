@@ -63,7 +63,7 @@ $candidatures = Candidature::latest()->get();
                 </div>
                 <form class="m-4" id="excel" method="post" action="fiches/exportExcel">
                     @csrf
-                    <button form="excel" class="items-center hover:bg-green-700 hover:text-white bg-white text-green-700 px-3 py-2 rounded-md text-sm font-medium">Générer le excel des candidatures</button>
+                    <button form="excel" class="items-center hover:bg-green-700 hover:text-white bg-white text-green-700 px-3 py-2 rounded-md text-sm font-medium">Exporter au format Excel</button>
                 </form>
                 <div class="overflow-x-auto border-2 flex-grow w-full border-gray-300 rounded-lg mt-2">
                     <div class="align-middle inline-block min-w-full">
