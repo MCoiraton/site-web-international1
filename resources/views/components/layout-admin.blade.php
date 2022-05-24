@@ -54,6 +54,7 @@
                                         <span class="ml-3 whitespace-nowrap">Editer les blogs</span>
                                     </a>
                                 </li>
+                                @if(session('isAdmin'))
                                 <li>
                                     <a href="/admin/fiches" id="fiches" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         {{ $fiches ?? '' }}
@@ -83,6 +84,7 @@
                                         <span class="ml-3 flex-1 whitespace-nowrap">Utilisateurs</span>
                                     </a>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

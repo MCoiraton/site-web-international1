@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Facade\FlareClient\Http\Response;
 
-class PolytechOnly
+class EditeurOrAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,7 +15,7 @@ class PolytechOnly
      */
     public function handle($request, Closure $next)
     {
-        if(!session('isPolytech') && !session('isAdmin') && !session('isEditeur')){
+        if(!session('isAdmin') && !session('isEditeur')){
             abort(403);
         }
         return $next($request);

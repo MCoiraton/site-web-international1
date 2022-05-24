@@ -37,18 +37,18 @@ Route::get('/auth/logout', [AuthController::class,"logout"]); //Page de déconne
 //Routes admin
 Route::get('/admin', function () {
     return view('admin');
-})->middleware('admin');
+})->middleware('editeur');
     //Destinations
     Route::get('/admin/gestion', function () { //Page de gestion des destinations
         return view('admin-gestion');
-    })->middleware('admin');
+    })->middleware('editeur');
     Route::get('/admin/creation', function () { //page du formulaire de création destination
         return view('admin-creation');
-    })->middleware('admin');
-    Route::post('admin/creation', [DestinationController::class,'nouvelleDestination'])->middleware('admin'); //création de la destination
-    Route::delete('/admin/suppression', [DestinationController::class,'suppDestination'])->middleware('admin'); //suppression de la destination
-    Route::get("/admin/modification/{nom}", [DestinationController::class,"affichageEdition"])->middleware('admin'); //page de modification de la destination
-    Route::post("/admin/modification/{nom}", [DestinationController::class,'editDestination'])->middleware('admin'); //modification de la destination
+    })->middleware('editeur');
+    Route::post('admin/creation', [DestinationController::class,'nouvelleDestination'])->middleware('editeur'); //création de la destination
+    Route::delete('/admin/suppression', [DestinationController::class,'suppDestination'])->middleware('editeur'); //suppression de la destination
+    Route::get("/admin/modification/{nom}", [DestinationController::class,"affichageEdition"])->middleware('editeur'); //page de modification de la destination
+    Route::post("/admin/modification/{nom}", [DestinationController::class,'editDestination'])->middleware('editeur'); //modification de la destination
     //Candidatures
     Route::get('/admin/fiches', function () { //page de gestion des candidatures
         return view('admin-fiches');
@@ -62,29 +62,32 @@ Route::get('/admin', function () {
     Route::post('/admin/fiche/{email}', [CandidatureController::class,"storeAdmin"])->middleware('admin'); //enregistrement de la fiche d'un élève
     //Utilisateurs
     Route::get('/admin/utilisateurs', [UserController::class,'liste'])->middleware('admin'); //liste des utilisateurs
-    Route::delete('/admin/utilisateurs', [UserController::class,'delete'])->middleware('admin'); //suppression d'un admin
-    Route::post('/admin/utilisateurs', [UserController::class,'add'])->middleware('admin'); //ajout d'un admin
+    Route::delete('/admin/utilisateurs/admin', [UserController::class,'deleteAdmin'])->middleware('admin'); //suppression d'un admin
+    Route::post('/admin/utilisateurs/admin', [UserController::class,'addAdmin'])->middleware('admin'); //ajout d'un admin
+    Route::delete('/admin/utilisateurs/editeur', [UserController::class,'deleteEditeur'])->middleware('admin'); //suppression d'un editeur
+    Route::post('/admin/utilisateurs/editeur', [UserController::class,'addEditeur'])->middleware('admin'); //ajout d'un editeur
+
     //Fichiers
     Route::get('/admin/fichiers', [FichiersController::class, 'showadmin'])->middleware('admin'); //liste des fichiers d'élèves
     //Articles
-    Route::get('/admin/articles', [ArticlesController::class, 'showListe'])->middleware('admin'); //liste des articles
+    Route::get('/admin/articles', [ArticlesController::class, 'showListe'])->middleware('editeur'); //liste des articles
     Route::get('/admin/nouvelarticle', function(){ //page du formulaire d'ajout d'article
         return view('admin-article');
-    })->middleware('admin');
-    Route::post('/admin/nouvelarticle', [ArticlesController::class, 'store'])->middleware('admin'); //ajout d'un article
-    Route::get('/admin/article/{id}', [ArticlesController::class, 'showEdit'])->middleware('admin'); //page du formulaire d'édition d'article
-    Route::post('/admin/article/{id}', [ArticlesController::class, 'store'])->middleware('admin'); //édition d'un article
-    Route::delete('/admin/article/{id}', [ArticlesController::class, 'delete'])->middleware('admin'); //suppression d'un article
+    })->middleware('editeur');
+    Route::post('/admin/nouvelarticle', [ArticlesController::class, 'store'])->middleware('editeur'); //ajout d'un article
+    Route::get('/admin/article/{id}', [ArticlesController::class, 'showEdit'])->middleware('editeur'); //page du formulaire d'édition d'article
+    Route::post('/admin/article/{id}', [ArticlesController::class, 'store'])->middleware('editeur'); //édition d'un article
+    Route::delete('/admin/article/{id}', [ArticlesController::class, 'delete'])->middleware('editeur'); //suppression d'un article
     //Blogs
-    Route::get('/admin/blogs', [BlogsController::class,'affichage'])->middleware('admin'); //liste des blogs
-    Route::post('/admin/blogs', [BlogsController::class,'addBlog'])->middleware('admin');   //ajout d'un blog
-    Route::delete('/admin/blogs', [BlogsController::class,'deleteBlog'])->middleware('admin');  //suppression d'un blog
+    Route::get('/admin/blogs', [BlogsController::class,'affichage'])->middleware('editeur'); //liste des blogs
+    Route::post('/admin/blogs', [BlogsController::class,'addBlog'])->middleware('editeur');   //ajout d'un blog
+    Route::delete('/admin/blogs', [BlogsController::class,'deleteBlog'])->middleware('editeur');  //suppression d'un blog
     //Accueil
-    Route::get('/admin/accueil/', [IndexController::class,'affichageIndMod'])->middleware('admin'); //page de modification de l'accueil
-    Route::post('/admin/accueil/', [IndexController::class,'saveIndex'])->middleware('admin'); //enregistrement de l'accueil
+    Route::get('/admin/accueil/', [IndexController::class,'affichageIndMod'])->middleware('editeur'); //page de modification de l'accueil
+    Route::post('/admin/accueil/', [IndexController::class,'saveIndex'])->middleware('editeur'); //enregistrement de l'accueil
 
-    Route::post('/admin/msgaccueil', [IndexController::class, 'savemsgaccueil'])->middleware('admin'); //enregistrement du message d'accueil
-    Route::delete('/admin/msgaccueil', [IndexController::class, 'removemsgaccueil'])->middleware('admin'); //suppression du message d'accueil
+    Route::post('/admin/msgaccueil', [IndexController::class, 'savemsgaccueil'])->middleware('editeur'); //enregistrement du message d'accueil
+    Route::delete('/admin/msgaccueil', [IndexController::class, 'removemsgaccueil'])->middleware('editeur'); //suppression du message d'accueil
 //Routes élèves polytech
     //Articles (ne doivent pas être accessible aux utilisateurs non connectés)
     Route::get("/articles", [ArticlesController::class, "showListe2"])->middleware('polytech'); //liste des articles
@@ -104,7 +107,7 @@ Route::get('/admin', function () {
         Route::get('/profil/fichiers', [FichiersController::class, 'show'])->middleware('polytech'); //liste des fichiers d'élèves
         Route::post('/profil/fichiers', [FichiersController::class, 'store'])->middleware('polytech'); //enregistrement d'un fichier
         Route::delete('/profil/fichiers', [FichiersController::class, 'delete'])->middleware('polytech'); //suppression d'un fichier
-        Route::get('/storage/etu/{uid}/{filename}', function ($uid,$filename) {
+        Route::get('/storage/etu/{uid}/{filename}', function ($uid,$filename) { //affichage d'un fichier étudiant
             $file = Storage::disk('local')->get('etu/'.$uid.'/'.$filename);
             return response($file, 200)->header('Content-Type', 'application/pdf');
         })->middleware('filesecu:{uid}');

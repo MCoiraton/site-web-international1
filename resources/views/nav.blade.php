@@ -13,7 +13,7 @@
             @if(session('isPolytech') ==true || session('isAdmin') ==true)
             <a href="/articles" class="inline-flex items-center hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Derniers articles</a>
             @endif
-            @if(session()->has('uid') && session('isAdmin'))
+            @if(session()->has('uid') && (session('isAdmin') ==true || session('isEditeur') ==true))
             <a href="/admin/accueil" class="hover:bg-blue-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Espace Admin</a>
             @endif
           </div>

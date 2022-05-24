@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminsOnly;
+use App\Http\Middleware\EditeurOrAdmin;
 use App\Http\Middleware\FileSecu;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -57,6 +58,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'admin' => AdminsOnly::class,
         'filesecu' => FileSecu::class,
+        'editeur' => EditeurOrAdmin::class,
         'polytech' => \App\Http\Middleware\PolytechOnly::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
