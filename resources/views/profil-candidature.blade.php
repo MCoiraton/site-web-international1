@@ -123,27 +123,27 @@ $datelimite = VariableGlobal::find("1");
                                 <p class="mt-4">Vous avez fait une erreur ? </p>
                                 <p class="my-4">Les administrateurs du site peuvent corriger les informations pour vous ou vous débloquer le formulaire.</p>
                                 <p class="mb-2">Faites une demande ci-dessous: </p>
-                                <form action="{{ route('fiche_candidature.store') }}" method="POST">
+                                <form action="" method="POST">
                                     @csrf
                                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="message_unblocked" type="text" placeholder="Votre message...">
                                     <button class="my-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Envoyer</button>
                                 </form>
                                 <p><?php if ($candidature && $candidature->demande_unblocked) echo ("Demande bien envoyé!"); ?></p>
                             </div>
-                            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('fiche_candidature.store') }}" method="POST">
+                            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="" method="POST">
                                 @csrf
                                 <h2 class="text-xl mb-4 text-gray-700">Informations Personelles:</h2>
                                 <div class="mb-4">
                                     <label class="block text-gray-700 text-md font-bold mb-2" for="prénom">
                                         Prénom:
                                     </label>
-                                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{session('prenom')}}" <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> required name="prenom" type="text">
+                                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="<?php if ($candidature) echo ($candidature->prenom); ?>" <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> required name="prenom" type="text">
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-gray-700 text-md font-bold mb-2" for="nom">
                                         Nom:
                                     </label>
-                                    <input value="{{session('nom')}}" <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nom" type="text">
+                                    <input value="<?php if ($candidature) echo ($candidature->nom); ?>" <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nom" type="text">
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-gray-700 text-md font-bold mb-2" for="date_naissance">

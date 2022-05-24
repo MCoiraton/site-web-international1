@@ -73,8 +73,9 @@
                                                 <td class="flex flex-col">
                                                     <div class="flex flex-row">
                                                         <button type="button" class="items-center m-2 hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
-                                                        <form action="{{route('fichier.delete')}}" class="inline" method="POST">
+                                                        <form action="" class="inline" method="POST">
                                                             @csrf
+                                                            @method('DELETE')
                                                             <input type="hidden" name="id" value="{{$fichier->id}}">
                                                             <input type="hidden" name="redirect" value="/profil/fichiers">
                                                             <button type="submit" class="items-center m-2 hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
@@ -108,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <form enctype="multipart/form-data" class="mt-5" action="{{ route('fichier.store') }}" method="POST">
+                    <form enctype="multipart/form-data" class="mt-5" action="" method="POST">
                         @csrf
                         <h2 class="text-gray-700 text-sm font-bold mb-2">Ajouter un fichier :</h2>
                         <label class="block text-gray-600 text-sm font-semibold mb-2" for="nom"> Nom du fichier (pas besoin de mettre votre nom) :</label>

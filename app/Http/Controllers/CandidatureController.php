@@ -16,7 +16,8 @@ class CandidatureController extends Controller
 
     public function showAdmin($email) 
     {
-        return view('admin-fiche');
+        $candidature = Candidature::where('email', $email)->first();
+        return view('admin-fiche', ['candidature' => $candidature]);
     }
 
     public function store(Request $request) 
@@ -95,11 +96,7 @@ class CandidatureController extends Controller
 
     public function storeAdmin(Request $request) 
     {
-        if(Candidature::find(session("mail"))) 
-            $candidature = Candidature::find(session("mail"));
-        else 
-            $candidature = new Candidature();
-        $candidature->email = session("mail");
+        $candidature = Candidature::find($request->email);
         $candidature->prenom = $request->prenom;
         $candidature->nom = $request->nom;
         $candidature->date_naissance = $request->date_naissance;

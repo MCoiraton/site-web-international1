@@ -1,7 +1,3 @@
-<?php
-use App\Candidature;
-$candidature = Candidature::find(session("mail"));
-?>
 <x-layout-admin>
     <x-slot name='fiches'>
 		<style>
@@ -82,7 +78,7 @@ $candidature = Candidature::find(session("mail"));
                 <div class="container w-3/4 max-h-full mx-auto flex items-center justify-center">
                     <div class="w-full max-w-full">
                         <h1 class="text-4xl text-gray-900 flex items-center justify-center">Fiche candidature à un échange international</h1>
-                        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('fiche_candidature.storeAdmin') }}" method="POST">
+                        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="" method="POST">
                             @csrf
                             <h2 class="text-xl mb-4 text-gray-700">Informations Personelles:</h2>
                             <div class="mb-4">

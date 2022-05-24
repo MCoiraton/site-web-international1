@@ -24,15 +24,16 @@
             @foreach($admins as $admin)
             <div>
                 {{$admin->uid}}
-                <form action="{{route('deleteadmin')}}" class="inline" method="POST">
+                <form action="" class="inline" method="POST">
                     @csrf
+                    @method('DELETE')
                     <input type="hidden" name="uid" value="{{$admin->uid}}">
                     <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
                 </form>
             </div>
             @endforeach
             <div class="mt-4 ">
-                <form action="{{route('addadmin')}}" method="POST">
+                <form action="" method="POST">
                     @csrf
                     <label for="uid">Ajouter un admin par identifiant UL : </label><br>
                     <input class="p-2 m-2" type="text" name="uid" placeholder="Identifiant">
