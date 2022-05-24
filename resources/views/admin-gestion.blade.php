@@ -18,7 +18,7 @@ $destinations=Destination::all();
             <div class="mb-4 flex items-center justify-between">
                 <div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Liste des universités</h3>
-                    <span class="text-base font-normal text-gray-500">Vous pouvez içi créer, modifier, visualiser ou supprimer toutes les données des universités partenaires</span>
+                    <span class="text-base font-normal text-gray-500">Vous pouvez ici créer, modifier, visualiser ou supprimer toutes les données des universités partenaires</span>
                 </div>
             </div>
             <a href="/admin/creation" class="hover:bg-blue-700 hover:text-white px-3 py-2 mt-4 rounded-md text-sm font-medium">
