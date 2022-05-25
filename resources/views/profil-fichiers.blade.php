@@ -47,6 +47,7 @@
             <section class="text-gray-600 body-font pt-6">
                 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
                     <div class="flex-grow p-4 m-4">
+                        <h1 class="text-red-900 text-lg title-font font-medium mb-2">Déposez ici uniquement des fichiers à destination du service international, il ne s'agit pas d'un dépot de fichiers personnels.</h1>
                         <h1 class="text-gray-700 text-sm font-bold mb-2">Fichiers en ligne :</h1>
                         <div class="overflow-x-auto border-2 border-gray-300 rounded-lg mt-2">
                             <div class="align-middle inline-block min-w-full">
