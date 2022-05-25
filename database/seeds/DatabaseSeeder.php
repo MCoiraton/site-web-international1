@@ -30,7 +30,12 @@ class DatabaseSeeder extends Seeder
         $ayoub->save();
         $lucas = new Admin();
         $lucas->uid = "schwing3u";
-        $lucas->save();
+        $bunting = new Admin();
+        $bunting->uid = "bunting1";
+        $bunting->save();
+        $pincetic = new Admin();
+        $pincetic->uid = "pincetic5";
+        $pincetic->save();
         for ($j = 0; $j < 4; $j++) {
             $faker = Faker\Factory::create();
             $destination = new Destination();
