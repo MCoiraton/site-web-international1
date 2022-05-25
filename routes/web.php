@@ -54,6 +54,7 @@ Route::get('/admin', function () {
     Route::post('/admin/fiches/changerdatelimite', [CandidatureController::class,'changerdatelimite'])->middleware('admin'); //changer la date limite des candidatures
     Route::post('/admin/fiches/exportExcel', [FastExcelController::class,'exportCandidature'])->middleware('admin'); //export des candidatures
     Route::post('/admin/fiches/block', [CandidatureController::class,'bloquer'])->middleware('admin'); //blocage de la candidature
+    Route::post('/admin/fiches/unblock', [CandidatureController::class,'debloquer'])->middleware('admin'); //déblocage de la candidature
     Route::post('/admin/fiches/mail', [CandidatureController::class,'mail'])->middleware('admin'); //envoi du mail à un élève
     Route::delete('/admin/fiches', [CandidatureController::class,'deleteAll'])->middleware('admin'); //suppression de toutes les candidatures
     Route::get("/admin/fiche/{email}", [CandidatureController::class,"showAdmin"])->middleware('admin'); //affichage de la fiche d'un élève

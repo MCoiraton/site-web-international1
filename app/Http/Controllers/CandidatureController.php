@@ -166,16 +166,23 @@ class CandidatureController extends Controller
             $candidature = Candidature::find($email);
         else
             abort(404);
-        $candidature->blocked = !$candidature->blocked;
-        $candidature->demande_unblocked = !$candidature->demande_unblocked;
+        $candidature->blocked = 1;
+        $candidature->demande_unblocked = 0;
+        $candidature->message_unblocked = null;
         $candidature->save();
         return redirect('/admin/fiches');
     }
-
-    public function mail()
-    {
-        $email = $_POST['email'];
-        return redirect('https://mail.etu.univ-lorraine.fr/?view=compose&to=mailto%3A'.$email.'#1');
+    public function debloquer(Request $request){
+        $email = $request->email;
+        if(Candidature::find($email)) 
+            $candidature = Candidature::find($email);
+        else
+            abort(404);
+        $candidature->blocked = 0;
+        $candidature->demande_unblocked = 0;
+        $candidature->message_unblocked = null;
+        $candidature->save();
+        return redirect('/admin/fiches');
     }
     
     public function changerdatelimite(Request $request)

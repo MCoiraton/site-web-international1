@@ -11,6 +11,7 @@
         </style>
     </x-slot>
     <x-slot name='panel'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             //fonction chercher pour afficher uniquement les éléments de class fiche qui correspondent à la recherche qui ne sont pas dans un tableau
             function chercher() {
@@ -25,6 +26,12 @@
                         fiche.parentNode.removeAttribute("style");
                     }
                 }
+            }
+            function afficher_msg(email) {
+                $('#'+email+', #overlay-back').fadeIn(500);
+            }
+            function cacher_msg(email) {
+                $('#'+email+', #overlay-back').fadeOut(500);
             }
         </script>
         <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
@@ -75,6 +82,9 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
+                                    <tr>
+                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">Elèves qui demandent à modifier leur fiche</td>
+                                    </tr>
                                     @foreach($candidaturesM as $candidature)
                                     <tr>
                                         <td class="fiche p-4 whitespace-nowrap text-sm font-normal text-gray-900">
@@ -89,19 +99,15 @@
                                             {{$candidature->updated_at}}
                                         </td>
                                         <td class="flex flex-row m-2">
-                                            <form id="block" method="POST" action="/admin/fiches/block">
-                                                @csrf
-                                                <input type="hidden" name="email" value="{{$candidature->email}}" />
-                                                <button form="block" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">
-                                                    Débloquer
-                                                </button>
-                                            </form>
-                                            <a href="mailto:{{$candidature->email}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">
-                                                Contacter
-                                            </a>
+                                            <button type="button" onclick="afficher_msg('{{$candidature->nom}}{{$candidature->prenom}}')" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">
+                                                Voir le message
+                                            </button>
                                         </td>
                                     </tr>
                                     @endforeach
+                                    <tr>
+                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">Elèves qui ne souhaitent pas modifier leur fiche</td>
+                                    </tr>
                                     @foreach($candidaturesN as $candidature)
                                     <tr>
                                         <td class="fiche p-4 whitespace-nowrap text-sm font-normal text-gray-900">
@@ -116,7 +122,13 @@
                                             {{$candidature->updated_at}}
                                         </td>
                                         <td class="flex flex-row m-2">
-                                            <form id="block" method="POST" action="/admin/fiches/block">
+                                            <form id="block" method="POST" action="/admin/fiches/<?php
+                                            if($candidature->blocked){
+                                                echo('unblock');
+                                            }else{
+                                                echo('block');
+                                            }
+                                            ?>">
                                                 @csrf
                                                 <input type="hidden" name="email" value="{{$candidature->email}}" />
                                                 <button form="block" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">
@@ -145,5 +157,43 @@
                 </form>
             </div>
         </div>
+        @foreach($candidaturesM as $candidature)
+        <form id="{{$candidature->nom}}{{$candidature->prenom}}" method="POST" class="text-center rounded-lg border-2" action="/admin/fiches/unblock" style="
+            position:fixed;
+            top:10%;
+            left:30%;
+            width:40%;
+            height:auto;
+            background-color:white;
+            z-index:100;
+            display:none;
+            ">
+                @csrf
+                <input type="hidden" name="email" value="{{$candidature->email}}" />
+                <h1 class="text-center bold m-2 text-gray-900">
+                    Message de {{$candidature->prenom}} {{$candidature->nom}}
+                </h1>
+                <p class="text-center text-gray-600 mb-2">{{$candidature->message_unblocked}}</p>
+                <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                    Débloquer
+                </button>
+                <a href="mailto:{{$candidature->email}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">
+                    Contacter
+                </a>
+                <button type="button" onclick="cacher_msg('{{$candidature->nom}}{{$candidature->prenom}}')" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                    Annuler
+                </button>
+            </form>
+        @endforeach
+        <div id="overlay-back" style="position   : fixed;
+            top        : 0;
+            left       : 0;
+            width      : 100%;
+            height     : 100%;
+            background : #000;
+            opacity    : 0.6;
+            filter     : alpha(opacity=60);
+            z-index    : 5;
+            display    : none;"></div>
     </x-slot>
 </x-layout-admin>
