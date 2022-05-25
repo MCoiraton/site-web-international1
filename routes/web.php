@@ -50,9 +50,7 @@ Route::get('/admin', function () {
     Route::get("/admin/modification/{nom}", [DestinationController::class,"affichageEdition"])->middleware('editeur'); //page de modification de la destination
     Route::post("/admin/modification/{nom}", [DestinationController::class,'editDestination'])->middleware('editeur'); //modification de la destination
     //Candidatures
-    Route::get('/admin/fiches', function () { //page de gestion des candidatures
-        return view('admin-fiches');
-    })->middleware('admin');
+    Route::get('/admin/fiches', [CandidatureController::class,'showListe'])->middleware('admin'); //page des candidatures
     Route::post('/admin/fiches/changerdatelimite', [CandidatureController::class,'changerdatelimite'])->middleware('admin'); //changer la date limite des candidatures
     Route::post('/admin/fiches/exportExcel', [FastExcelController::class,'exportCandidature'])->middleware('admin'); //export des candidatures
     Route::post('/admin/fiches/block', [CandidatureController::class,'bloquer'])->middleware('admin'); //blocage de la candidature

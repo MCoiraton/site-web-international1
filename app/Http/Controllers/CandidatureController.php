@@ -15,6 +15,12 @@ class CandidatureController extends Controller
     $datelimite = VariableGlobal::find("1");
         return view('profil-candidature', ['candidature' => $candidature, 'datelimite' => $datelimite]);
     }
+    function showListe(){
+        $datelimite = VariableGlobal::find("1");
+        $candidaturesM = Candidature::where('demande_unblocked','=',1)->get();
+        $candidaturesN = Candidature::where('demande_unblocked','=',0)->get();
+        return view('admin-fiches', ['candidaturesM' => $candidaturesM,'candidaturesN'=>$candidaturesN, 'datelimite' => $datelimite]);
+    }
 
     public function showAdmin($email) 
     {

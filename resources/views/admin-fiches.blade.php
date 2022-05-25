@@ -1,14 +1,3 @@
-<?php
-
-use App\Candidature;
-use App\VariableGlobal;
-
-$datelimite = VariableGlobal::find("1");
-
-$annees = [];
-$candidatures = [];
-$candidatures = Candidature::latest()->get();
-?>
 <x-layout-admin>
     <x-slot name='fiches'>
         <style>
@@ -86,7 +75,34 @@ $candidatures = Candidature::latest()->get();
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                    @foreach($candidatures as $candidature)
+                                    @foreach($candidaturesM as $candidature)
+                                    <tr>
+                                        <td class="fiche p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                                            <a href="/admin/fiche/{{$candidature->email}}" class="underline text-blue-700">
+                                                {{$candidature->nom}} {{$candidature->prenom}}
+                                            </a>
+                                        </td>
+                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                                            {{$candidature->created_at}}
+                                        </td>
+                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                                            {{$candidature->updated_at}}
+                                        </td>
+                                        <td class="flex flex-row m-2">
+                                            <form id="block" method="POST" action="/admin/fiches/block">
+                                                @csrf
+                                                <input type="hidden" name="email" value="{{$candidature->email}}" />
+                                                <button form="block" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                                                    Débloquer
+                                                </button>
+                                            </form>
+                                            <a href="mailto:{{$candidature->email}}" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">
+                                                Contacter
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @foreach($candidaturesN as $candidature)
                                     <tr>
                                         <td class="fiche p-4 whitespace-nowrap text-sm font-normal text-gray-900">
                                             <a href="/admin/fiche/{{$candidature->email}}" class="underline text-blue-700">

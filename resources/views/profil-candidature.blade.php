@@ -109,7 +109,7 @@
                                                                                                                 else echo ("Date en attente d'être à jour"); ?></span></p>
                         <p> Si la date limite est passée veuillez contacter le service international par mail. </p>
                         @if ($datelimite && ((date('Y-m-d')< $datelimite->datelimite_candidature) || $candidature))
-                            <?php if (!$candidature) echo ("<p> Attention une fois la fiche de candidature envoyé elle ne pourra plus être modifié. </p>"); ?>
+                            <?php if (!$candidature) echo ("<p> Attention une fois la fiche de candidature envoyée elle ne pourra plus être modifié. </p>"); ?>
                             <div class="<?php if (!$candidature || !$candidature->blocked) echo ("hidden"); ?>">
                                 <p class="mt-4 font-bold">Vous ne pouvez plus modifier votre fiche de candidature.</p>
                                 <p class="mt-4">Vous avez fait une erreur ? </p>
@@ -120,7 +120,7 @@
                                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="message_unblocked" type="text" placeholder="Votre message...">
                                     <button class="my-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Envoyer</button>
                                 </form>
-                                <p><?php if ($candidature && $candidature->demande_unblocked) echo ("Demande bien envoyé!"); ?></p>
+                                <p><?php if ($candidature && $candidature->demande_unblocked) echo ("Demande bien envoyée!"); ?></p>
                             </div>
                             <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="" method="POST">
                                 @csrf
