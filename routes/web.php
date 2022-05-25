@@ -59,6 +59,10 @@ Route::get('/admin', function () {
     Route::delete('/admin/fiches', [CandidatureController::class,'deleteAll'])->middleware('admin'); //suppression de toutes les candidatures
     Route::get("/admin/fiche/{email}", [CandidatureController::class,"showAdmin"])->middleware('admin'); //affichage de la fiche d'un élève
     Route::post('/admin/fiche/{email}', [CandidatureController::class,"storeAdmin"])->middleware('admin'); //enregistrement de la fiche d'un élève
+
+    Route::get('/admin/editfiche', [CandidatureController::class,'showEdit'])->middleware('admin'); //page d'édition de la fiche candidature
+    Route::post('/admin/editfiche', [CandidatureController::class,'addColumn'])->middleware('admin'); //modification de la fiche candidature
+    Route::delete('/admin/editfiche', [CandidatureController::class,'removeColumn'])->middleware('admin'); //modification de la fiche candidature
     //Utilisateurs
     Route::get('/admin/utilisateurs', [UserController::class,'liste'])->middleware('admin'); //liste des utilisateurs
     Route::delete('/admin/utilisateurs/admin', [UserController::class,'deleteAdmin'])->middleware('admin'); //suppression d'un admin

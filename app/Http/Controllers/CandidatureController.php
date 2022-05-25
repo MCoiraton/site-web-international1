@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Candidature;
 use App\VariableGlobal;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+ 
+
 
 class CandidatureController extends Controller
 {
@@ -197,5 +201,43 @@ class CandidatureController extends Controller
     {
         Candidature::truncate();
         return view('admin-fiches');
+    }
+    public function showEdit(){
+        $columns=Schema::getColumnListing('candidatures');
+        return view('admin-editfiche',['columns' => $columns]);
+    }
+    public function addColumn(Request $request)
+    {
+        if($request->type!="" && $request->nom!=""){
+            $GLOBALS['nom']=$request->nom;
+            $GLOBALS['type']=$request->type;
+            Schema::table('candidatures', function (Blueprint $table) {
+                switch($GLOBALS['type']){
+                    case "string":
+                        $table->string($GLOBALS['nom'])->nullable();
+                        break;
+                    case "date":
+                        $table->date($GLOBALS['nom'])->nullable();
+                        break;
+                    case "integer":
+                        $table->integer($GLOBALS['nom'])->nullable();
+                        break;
+                    case "float":
+                        $table->float($GLOBALS['nom'])->nullable();
+                        break;
+                }
+            });
+        }
+        return redirect('/admin/editfiche');
+    }
+    function removeColumn(Request $request)
+    {
+        if($request->nom!=""){
+            $GLOBALS['nom']=$request->nom;
+            Schema::table('candidatures', function (Blueprint $table) {
+                $table->dropColumn($GLOBALS['nom']);
+            });
+        }
+        return redirect('/admin/editfiche');
     }
 }
