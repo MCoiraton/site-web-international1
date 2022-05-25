@@ -69,6 +69,7 @@ Route::get('/admin', function () {
 
     //Fichiers
     Route::get('/admin/fichiers', [FichiersController::class, 'showadmin'])->middleware('admin'); //liste des fichiers d'élèves
+    Route::delete('/admin/fichiers', [FichiersController::class, 'delete'])->middleware('admin'); //liste des fichiers d'élèves
     //Articles
     Route::get('/admin/articles', [ArticlesController::class, 'showListe'])->middleware('editeur'); //liste des articles
     Route::get('/admin/nouvelarticle', function(){ //page du formulaire d'ajout d'article
@@ -109,7 +110,8 @@ Route::get('/admin', function () {
         Route::delete('/profil/fichiers', [FichiersController::class, 'delete'])->middleware('polytech'); //suppression d'un fichier
         Route::get('/storage/etu/{uid}/{filename}', function ($uid,$filename) { //affichage d'un fichier étudiant
             $file = Storage::disk('local')->get('etu/'.$uid.'/'.$filename);
-            return response($file, 200)->header('Content-Type', 'application/pdf');
+            $ext=pathinfo($filename, PATHINFO_EXTENSION);
+            return response($file, 200)->header('Content-Type', 'application/'.$ext);
         })->middleware('filesecu:{uid}');
         //CV
         Route::get('/profil/cv', function () { //page du générateur de CV

@@ -36,7 +36,7 @@
                 <form action="/admin/utilisateurs/admin" method="POST">
                     @csrf
                     <label for="uid">Ajouter un admin par identifiant UL : </label><br>
-                    <input class="p-2 m-2" type="text" name="uid" placeholder="Identifiant">
+                    <input class="p-2 m-2 border-2 border-gray-400" type="text" name="uid" placeholder="Identifiant">
                     <button type="submit" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Ajouter</button>
                 </form>
             </div>
@@ -58,7 +58,7 @@
                 <form action="/admin/utilisateurs/editeur" method="POST">
                     @csrf
                     <label for="uid">Ajouter un éditeur par identifiant UL : </label><br>
-                    <input class="p-2 m-2" type="text" name="uid" placeholder="Identifiant">
+                    <input class="p-2 m-2 border-2 border-gray-400" type="text" name="uid" placeholder="Identifiant">
                     <button type="submit" class="items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Ajouter</button>
                 </form>
             </div>

@@ -32,25 +32,6 @@
                     document.getElementById("bouton_" + pdf).innerHTML = "v";
                 }
             }
-            //fonction pour telecharger en blob le pdf avec un nom donné
-            function telecharger_pdf(pdf, nom) {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', "/storage/" + pdf, true);
-                xhr.responseType = 'blob';
-                xhr.onload = function(e) {
-                    if (this.status == 200) {
-                        var myBlob = this.response;
-                        var blob = new Blob([myBlob], {
-                            type: 'application/pdf'
-                        });
-                        var link = document.createElement('a');
-                        link.href = window.URL.createObjectURL(blob);
-                        link.download = nom;
-                        link.click();
-                    }
-                };
-                xhr.send();
-            }
 
             function search() {
                 //doit masquer les fichiers qui ne correspondent pas à la recherche
@@ -99,14 +80,17 @@
                         <tbody class="bg-white">
                             @foreach($byuid as $fichier)
                             <tr>
-                                <td class="text-gray-600 text-sm font-semibold mb-2 p-2">{{$fichier->nom}}</td>
+                                <td class="text-gray-600 text-sm font-semibold mb-2 p-2">{{$fichier->nom}}.{{pathinfo($fichier->url, PATHINFO_EXTENSION)}}</td>
                                 <td class="text-gray-600 text-sm font-semibold mb-2 p-2">{{$fichier->created_at}}</td>
                                 <td class="flex flex-col">
                                     <div class="flex flex-row">
+                                    @if(pathinfo($fichier->url, PATHINFO_EXTENSION) == "pdf")
                                     <button type="button" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom."_".$fichier->uid}}")'>Voir</button>
-                                    <button type="button" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='telecharger_pdf("{{$fichier->url}}","{{$fichier->nom."_".$fichier->uid}}")'>Télécharger</button>
-                                    <form class="mb-4" action="{{route('fichier.delete')}}" class="inline" method="POST">
+                                    @endif
+                                    <a href="/storage/{{$fichier->url}}" class="mb-4 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Télécharger</a>
+                                    <form class="mb-4" action="" class="inline" method="POST">
                                         @csrf
+                                        @method('DELETE')
                                         <input type="hidden" name="id" value="{{$fichier->id}}">
                                         <input type="hidden" name="redirect" value="/admin/fichiers">
                                         <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">Supprimer</button>
@@ -114,6 +98,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @if(pathinfo($fichier->url, PATHINFO_EXTENSION) == "pdf")
                             <button type="button" onclick='cacher_pdf("{{$fichier->nom."_".$fichier->uid}}")' style="position:fixed;top:3%;left:93%;width:3%;height:3%;z-index:10;display:none;" id="{{$fichier->nom."_".$fichier->uid}}btn"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 26 26" xml:space="preserve">
                             <g>
@@ -132,6 +117,7 @@
                                         height   : 100%;
                                         z-index  : 10;
                                         display  : none;" ></iframe>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

@@ -19,11 +19,12 @@ class FichiersController extends Controller
     }
     public function store(Request $request){
         if($request->hasFile('fichier') && $request->nom!=""){
-            if($request->file('fichier')->getClientOriginalExtension()!="pdf"){
+            $extension=$request->file('fichier')->getClientOriginalExtension();
+            if($extension!="pdf" && $extension!="doc" && $extension!="docx" && $extension!="odt"){
                 return redirect("/profil/fichiers?error=1");
             }
             $uid=session()->get('uid');
-            $file = $request->file('fichier')->store("etu/{$uid}");
+            $file = Storage::putFileAs('etu/'.$uid, $request->file('fichier'), $request->nom.'.'.$extension);
             $np=session()->get('prenom')." ".session()->get('nom');
             Fichier::create([
                 'nom' => $request->nom,

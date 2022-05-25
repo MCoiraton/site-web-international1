@@ -68,11 +68,14 @@
                                         <tbody class="bg-white">
                                             @foreach($fichiers as $fichier)
                                             <tr>
-                                                <td class="text-gray-600 text-sm font-semibold mb-2 p-2">{{$fichier->nom}}</td>
+                                                <td class="text-gray-600 text-sm font-semibold mb-2 p-2">{{$fichier->nom}}.{{pathinfo($fichier->url, PATHINFO_EXTENSION)}}</td>
                                                 <td class="text-gray-600 text-sm font-semibold mb-2 p-2">{{$fichier->created_at}}</td>
                                                 <td class="flex flex-col">
                                                     <div class="flex flex-row">
+                                                        @if(pathinfo($fichier->url, PATHINFO_EXTENSION) == "pdf")
                                                         <button type="button" class="items-center m-2 hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium" onclick='afficher_pdf("{{$fichier->nom}}")'>Voir</button>
+                                                        @endif
+                                                        <a href="/storage/{{$fichier->url}}" class="m-2 items-center hover:bg-blue-700 hover:text-white bg-white text-blue-700 px-3 py-2 rounded-md text-sm font-medium">Télécharger</a>
                                                         <form action="" class="inline" method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -83,6 +86,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @if(pathinfo($fichier->url, PATHINFO_EXTENSION) == "pdf")
                                             <button type="button" onclick='cacher_pdf("{{$fichier->nom}}")' style="position:fixed;top:3%;left:93%;width:3%;height:3%;z-index:10;display:none;" id="{{$fichier->nom}}btn"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                 viewBox="0 0 26 26" xml:space="preserve">
                                             <g>
@@ -102,6 +106,7 @@
                                                         height   : 100%;
                                                         z-index  : 10;
                                                         display  : none;" ></iframe>
+                                            @endif
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -114,7 +119,7 @@
                         <h2 class="text-gray-700 text-sm font-bold mb-2">Ajouter un fichier :</h2>
                         <label class="block text-gray-600 text-sm font-semibold mb-2" for="nom"> Nom du fichier (pas besoin de mettre votre nom) :</label>
                         <input type="text" name="nom" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                        <input id="upload" type="file" name="fichier" accept=".pdf" max-file-size="500" />
+                        <input id="upload" type="file" name="fichier" accept=".pdf,.doc,.docx,.odt" max-file-size="500" />
                         <button class="bg-blue-500 hover:bg-blue-700 text-white mt-4 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Upload</button>
                         @if(isset($_GET["e"]))
                             @if($_GET["e"]==1)
