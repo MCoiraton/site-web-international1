@@ -100,9 +100,7 @@ Route::get('/admin', function () {
         return view('profil');
     })->middleware('polytech');
         //Candidature
-        Route::get('/profil/candidature', function () { //page de candidature
-            return view('profil-candidature');
-        })->middleware('polytech');
+        Route::get('/profil/candidature', [CandidatureController::class,'show'])->middleware('polytech'); //affichage de la candidature
         Route::post('/profil/candidature', [CandidatureController::class, 'store'])->middleware('polytech'); //enregistrement de la candidature
         //Fichiers
         Route::get('/profil/fichiers', [FichiersController::class, 'show'])->middleware('polytech'); //liste des fichiers d'élèves

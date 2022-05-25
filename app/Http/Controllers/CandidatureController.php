@@ -11,7 +11,9 @@ class CandidatureController extends Controller
 {
     public function show() 
     {
-        return view('fiche_candidature');
+    $candidature = Candidature::find(session("mail"));
+    $datelimite = VariableGlobal::find("1");
+        return view('profil-candidature', ['candidature' => $candidature, 'datelimite' => $datelimite]);
     }
 
     public function showAdmin($email) 

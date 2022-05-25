@@ -1,11 +1,3 @@
-<?php
-
-use App\Candidature;
-use App\VariableGlobal;
-
-$candidature = Candidature::find(session("mail"));
-$datelimite = VariableGlobal::find("1");
-?>
 <x-layout-profil>
     <x-slot name='tableau'>
         <style>
