@@ -197,7 +197,7 @@
                 <h1 class="text-center bold m-2 text-gray-900">
                     Message de {{$candidature->prenom}} {{$candidature->nom}}
                 </h1>
-                <p class="text-center text-gray-600 mb-2">{{$candidature->message_unblocked}}</p>
+                <p class="text-center text-gray-600 mb-2 ml-2 mr-2">{{$candidature->message_unblocked}}</p>
                 <button type="submit" class="items-center hover:bg-red-700 hover:text-white bg-white text-red-700 px-3 py-2 rounded-md text-sm font-medium">
                     Débloquer
                 </button>
