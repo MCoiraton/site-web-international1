@@ -316,10 +316,16 @@
                                     <label class="ml-4" for="S9+10">S9+10</label>
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix3 == "S9+10") echo ("checked"); ?> id="9" type="radio" name="semestre_choix3" value="S9+10" class="choixS my-1 border-black-600 border-2">
                                 </div>
-                                <div class="mt-4">
-                                    <label for="date_signature">Date :</label>
-                                    <input @if($blocked) disabled @endif value="<?php if ($candidature) echo ($candidature->date_actuelle); ?>" class="mt-2 border-2 border-gray-500 rounded p-1" type="date" name="date_signature" class="border-black-600 border-2" required>
+                                @foreach($ajouts as $ajout)
+                                @if($ajout->nom!="email")
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-md font-bold mb-2" for="{{str_replace("_"," ",$ajout->nom)}}">
+                                        {{str_replace("_"," ",$ajout->nom)}} :
+                                    </label>
+                                    <input value="" @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="ajout[]" type="{{$ajout->type}}">
                                 </div>
+                                @endif
+                                @endforeach
                                 <div class="mt-4">
                                     <label for="signature">Signature (mettre ses initiales) :</label>
                                     <input @if($blocked) disabled @endif value="<?php if ($candidature) echo ($candidature->signature); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="signature" class="border-black-600 border-2" required>

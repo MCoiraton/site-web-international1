@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $ayoub->save();
         $lucas = new Admin();
         $lucas->uid = "schwing3u";
+        $lucas->save();
         $bunting = new Admin();
         $bunting->uid = "bunting1";
         $bunting->save();

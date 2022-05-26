@@ -48,7 +48,6 @@ class CreateCandidaturesTable extends Migration
             $table->string('semestre_choix2')->nullable()->default(null);
             $table->string('choix3')->nullable()->default(null);
             $table->string('semestre_choix3')->nullable()->default(null);
-            $table->date('date_actuelle');
             $table->string('signature');
             $table->boolean('blocked');
             $table->boolean('demande_unblocked')->default(false);
@@ -62,6 +61,9 @@ class CreateCandidaturesTable extends Migration
             $table->string('nom_spe')->primary();
             $table->string('nom_filiere');
             $table->foreign('nom_filiere')->references('nom_filiere')->on('filieres');
+        });
+        Schema::create('candidatures_ajout',function(Blueprint $table){
+            $table->string('email')->primary();
         });
     }
 

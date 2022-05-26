@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Candidature;
 use App\VariableGlobal;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use App\Filieres;
 use App\Specialites; 
+use App\CandidatureAjout;
 
 
 class CandidatureController extends Controller
@@ -19,7 +21,33 @@ class CandidatureController extends Controller
     $candidature = Candidature::find(session("mail"));
     $datelimite = VariableGlobal::find("1");
     $specialites=Specialites::all()->groupBy('nom_filiere');
-        return view('profil-candidature', ['candidature' => $candidature, 'datelimite' => $datelimite, 'specialites' => $specialites]);
+    $ajouts=Schema::getColumnListing('candidatures_ajout');
+    $ajoutsO=[];
+    foreach($ajouts as $ajout){
+        $app=app();
+        $ajoutO=$app->make('stdClass');
+        $ajoutO->nom=$ajout;
+        $type=Schema::getColumnType('candidatures_ajout',$ajout);
+        switch($type){
+            case "integer":
+                $ajoutO->type="number";
+                break;
+            case "string":
+                $ajoutO->type="text";
+                break;
+            case "boolean":
+                $ajoutO->type="checkbox";
+                break;
+            case "date":
+                $ajoutO->type="date";
+                break;
+            default:
+                $ajoutO->type="text";
+                break;
+        }
+        array_push($ajoutsO,$ajoutO);
+    }
+        return view('profil-candidature', ['candidature' => $candidature, 'datelimite' => $datelimite, 'specialites' => $specialites, 'ajouts' => $ajoutsO]);
     }
     function showListe(){
         $datelimite = VariableGlobal::find("1");
@@ -32,7 +60,33 @@ class CandidatureController extends Controller
     {
         $candidature = Candidature::where('email', $email)->first();
         $specialites=Specialites::all()->groupBy('nom_filiere');
-        return view('admin-fiche', ['candidature' => $candidature,'specialites' => $specialites]);
+        $ajouts=Schema::getColumnListing('candidatures_ajout');
+        $ajoutsO=[];
+        foreach($ajouts as $ajout){
+            $app=app();
+            $ajoutO=$app->make('stdClass');
+            $ajoutO->nom=$ajout;
+            $type=Schema::getColumnType('candidatures_ajout',$ajout);
+            switch($type){
+                case "integer":
+                    $ajoutO->type="number";
+                    break;
+                case "string":
+                    $ajoutO->type="text";
+                    break;
+                case "boolean":
+                    $ajoutO->type="checkbox";
+                    break;
+                case "date":
+                    $ajoutO->type="date";
+                    break;
+                default:
+                    $ajoutO->type="text";
+                    break;
+            }
+            array_push($ajoutsO,$ajoutO);
+        }
+        return view('admin-fiche', ['candidature' => $candidature,'specialites' => $specialites, 'ajouts' => $ajoutsO]);
     }
 
     public function store(Request $request) 
@@ -43,6 +97,12 @@ class CandidatureController extends Controller
             $candidature = new Candidature();
         try{
             if($candidature->blocked!=true) {
+                $ajouts=Schema::getColumnListing('candidatures_ajout');
+                DB::delete('delete from candidatures_ajout where email=?',[session("mail")]);
+                DB::insert('insert into candidatures_ajout (email) values (?)', [session("mail")]);
+                for($i=0;$i<count($request->ajout);$i++){
+                    DB::update('update candidatures_ajout set '.$ajouts[$i+1].'=? where email=?', [$request->ajout[$i],session("mail")]);
+                }
                 $candidature->email = session("mail");
                 $candidature->prenom = $request->prenom;
                 $candidature->nom = $request->nom;
@@ -92,7 +152,6 @@ class CandidatureController extends Controller
                         $candidature->semestre_choix3 = $request->semestre_choix3;
                     }
                 }
-                $candidature->date_actuelle = $request->date_signature;
                 $candidature->signature = $request->signature;
                 $candidature->blocked = true;
                 $candidature->demande_unblocked = false;
@@ -103,7 +162,7 @@ class CandidatureController extends Controller
             }
                 $candidature->save();
         }
-        catch(\Illuminate\Database\QueryException $e) {
+        catch(\Illuminate\Database\QueryException $e) { //
             return redirect('/profil/candidature?e=1');
         }
         return redirect('/profil/candidature');
@@ -160,7 +219,6 @@ class CandidatureController extends Controller
                 $candidature->semestre_choix3 = $request->semestre_choix3;
             }
         }
-        $candidature->date_actuelle = $request->date_signature;
         $candidature->signature = $request->signature;
         $candidature->save();
         return view('admin-fiches');
@@ -200,13 +258,13 @@ class CandidatureController extends Controller
         $datelimite->save();
         return redirect('/admin/fiches');
     }
-    public function deleteAll(Request $request) 
+    public function deleteAll() 
     {
         Candidature::truncate();
-        return view('admin-fiches');
+        return redirect('/admin/fiches');
     }
     public function showEdit(){
-        $columns=Schema::getColumnListing('candidatures');
+        $columns=Schema::getColumnListing('candidatures_ajout');
         $filieres=Filieres::all();
         $specialites=Specialites::all();
         return view('admin-editfiche',['columns' => $columns, 'filieres' => $filieres, 'specialites' => $specialites]);
@@ -231,19 +289,19 @@ class CandidatureController extends Controller
     }
     public function deleteFiliere(Request $request){
         $filiere = Filieres::find($request->nom);
-        $filiere->delete();
         $specialites=Specialites::where('nom_filiere',$request->nom)->get();
         foreach($specialites as $spe){
             $spe->delete();
         }
+        $filiere->delete();
         return redirect('/admin/editfiche');
     }
     public function addColumn(Request $request)
     {
         if($request->type!="" && $request->nom!=""){
-            $GLOBALS['nom']=$request->nom;
+            $GLOBALS['nom']=str_replace(" ","_",$request->nom);
             $GLOBALS['type']=$request->type;
-            Schema::table('candidatures', function (Blueprint $table) {
+            Schema::table('candidatures_ajout', function (Blueprint $table) {
                 switch($GLOBALS['type']){
                     case "string":
                         $table->string($GLOBALS['nom'])->nullable();
@@ -266,7 +324,7 @@ class CandidatureController extends Controller
     {
         if($request->nom!=""){
             $GLOBALS['nom']=$request->nom;
-            Schema::table('candidatures', function (Blueprint $table) {
+            Schema::table('candidatures_ajout', function (Blueprint $table) {
                 $table->dropColumn($GLOBALS['nom']);
             });
         }

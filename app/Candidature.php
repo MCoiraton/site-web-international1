@@ -45,7 +45,6 @@ class Candidature extends Model
         'semestre_choix2',
         'choix3',
         'semestre_choix3',
-        'date_actuelle',
         'signature'
     ];
 }
