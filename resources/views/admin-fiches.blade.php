@@ -37,8 +37,8 @@
         <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
             <div class="mb-2 flex items-center justify-between">
                 <div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Fiches de Candidature</h3>
-                    <span class="text-base font-normal text-gray-500">Vous pouvez ici visualiser et bloquer ou débloquer la modification des fiches de candidature soumises par les étudiants souhaitant partir en mobilité internationale.</span>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Fiches de Candidatures</h3>
+                    <span class="text-base font-normal text-gray-500">Vous pouvez ici visualiser et bloquer ou débloquer la modification des fiches de candidatures soumises par les étudiants souhaitant partir en mobilité internationale.</span>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
                                 </thead>
                                 <tbody class="bg-white">
                                     <tr>
-                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">Elèves qui demandent à modifier leur fiche</td>
+                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">Élèves qui demandent à modifier leur fiche</td>
                                     </tr>
                                     @foreach($candidaturesM as $candidature)
                                     <tr>
@@ -106,7 +106,7 @@
                                     </tr>
                                     @endforeach
                                     <tr>
-                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">Elèves qui ne souhaitent pas modifier leur fiche</td>
+                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">Élèves qui ne souhaitent pas modifier leur fiche</td>
                                     </tr>
                                     @foreach($candidaturesN as $candidature)
                                     @if($candidature->blocked)
@@ -138,7 +138,7 @@
                                     @endif
                                     @endforeach
                                     <tr>
-                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">Elèves autorisés à modifier leurs fiches</td>
+                                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">Élèves autorisés à modifier leurs fiches</td>
                                     </tr>
                                     @foreach($candidaturesN as $candidature)
                                     @if(!$candidature->blocked)

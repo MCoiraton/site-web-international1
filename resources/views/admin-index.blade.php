@@ -47,7 +47,7 @@
             <div class="mt-4 flex flex-col items-center bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                 <div class="mb-4 flex items-center justify-between">
                     <div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Message de communication</h3>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Message Important</h3>
                         <span class="text-base font-normal text-gray-500">Vous pouvez ici ajouter, modifier et supprimer un message important qui s'affichera sur la page d'accueil</span>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <form method="POST" action="/admin/msgaccueil">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class='m-2 bg-red-500 hover:bg-red-700 rounded-lg shadow-xl font-medium text-white px-4 py-2 mt-5'>Supprimer le message d'accueil</button>
+                        <button type="submit" class='m-2 bg-red-500 hover:bg-red-700 rounded-lg shadow-xl font-medium text-white px-4 py-2 mt-5'>Supprimer le message important</button>
                     </form>
                 </div>
                 <form class="w-full" method="POST" action="/admin/msgaccueil" id="msgaccueil" style="<?php if ($msgaccueil->titre == "") echo ("display:none"); ?>">
@@ -87,7 +87,7 @@
                     <div class="grid bg-white rounded-lg shadow-xl w-full md:w-11/12">
                         <div class="flex justify-center">
                             <div class="flex">
-                                <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Modification de la page d'acceuil</h1>
+                                <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Modification de la page d'accueil</h1>
                             </div>
                         </div>
 
@@ -118,7 +118,7 @@
                             </textarea>
                         </div>
                         <div class="flex mt-4 ml-4">
-                            <h1 class="text-gray-600 font-bold md:text-xl text-xl">Modification contenu rubriques</h1>
+                            <h1 class="text-gray-600 font-bold md:text-xl text-xl">Modification du contenu des rubriques</h1>
                         </div>
                         <div class="grid grid-cols-1 mt-5 mx-7">
                             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-bold">Titre Rubrique n°1</label>
