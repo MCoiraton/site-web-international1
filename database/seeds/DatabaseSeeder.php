@@ -11,6 +11,8 @@ use App\Index;
 use App\Images_index;
 use App\VariableGlobal;
 use App\msgaccueil;
+use App\Filieres;
+use App\Specialites;
 
 
 class DatabaseSeeder extends Seeder
@@ -86,7 +88,8 @@ class DatabaseSeeder extends Seeder
                 $assocours->contenu = $faker->text(50);
                 $assocours->save();
             }
-            $index = new Index();
+        }
+        $index = new Index();
             $index->titre = 'Site Intranet des Relations Internationales de POLYTECH Nancy';
             $index->description = 'Polytech Nancy offre une vaste liste de destinations internationales pour ses étudiants qui souhaitent effectuer un séjour à l\'étranger, et les accompagne dans toutes les démarches pour garantir leur réussite.';
             $index->titreRubrique1 = 'Description générale';
@@ -106,6 +109,42 @@ class DatabaseSeeder extends Seeder
             $msgaccueil->titre="";
             $msgaccueil->contenu="";
             $msgaccueil->save();
-        }
+            $filieres=new Filieres();
+            $filieres->nom_filiere="IA2R";
+            $filieres->save();
+            $filieres=new Filieres();
+            $filieres->nom_filiere="EMME";
+            $filieres->save();
+            $filieres=new Filieres();
+            $filieres->nom_filiere="M3";
+            $filieres->save();
+            $specialites=new Specialites();
+            $specialites->nom_spe="SIA";
+            $specialites->nom_filiere="IA2R";
+            $specialites->save();
+            $specialites=new Specialites();
+            $specialites->nom_spe="SIR";
+            $specialites->nom_filiere="IA2R";
+            $specialites->save();
+            $specialites=new Specialites();
+            $specialites->nom_spe="MFE";
+            $specialites->nom_filiere="EMME";
+            $specialites->save();
+            $specialites=new Specialites();
+            $specialites->nom_spe="MSM";
+            $specialites->nom_filiere="EMME";
+            $specialites->save();
+            $specialites=new Specialites();
+            $specialites->nom_spe="IE";
+            $specialites->nom_filiere="EMME";
+            $specialites->save();
+            $specialites=new Specialites();
+            $specialites->nom_spe="MSS";
+            $specialites->nom_filiere="M3";
+            $specialites->save();
+            $specialites=new Specialites();
+            $specialites->nom_spe="MCL";
+            $specialites->nom_filiere="M3";
+            $specialites->save();
     }
 }

@@ -69,7 +69,11 @@ Route::get('/admin', function () {
     Route::post('/admin/utilisateurs/admin', [UserController::class,'addAdmin'])->middleware('admin'); //ajout d'un admin
     Route::delete('/admin/utilisateurs/editeur', [UserController::class,'deleteEditeur'])->middleware('admin'); //suppression d'un editeur
     Route::post('/admin/utilisateurs/editeur', [UserController::class,'addEditeur'])->middleware('admin'); //ajout d'un editeur
-
+    //Filieres et spécialités
+    Route::post('/admin/filiere', [CandidatureController::class,'addFiliere'])->middleware('admin'); //ajout d'une filiere
+    Route::delete('/admin/filiere', [CandidatureController::class,'deleteFiliere'])->middleware('admin'); //suppression d'une filiere
+    Route::post('/admin/specialite', [CandidatureController::class,'addSpe'])->middleware('admin'); //ajout d'une spécialité
+    Route::delete('/admin/specialite', [CandidatureController::class,'deleteSpe'])->middleware('admin'); //suppression d'une spécialité
     //Fichiers
     Route::get('/admin/fichiers', [FichiersController::class, 'showadmin'])->middleware('admin'); //liste des fichiers d'élèves
     Route::delete('/admin/fichiers', [FichiersController::class, 'delete'])->middleware('admin'); //liste des fichiers d'élèves

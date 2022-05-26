@@ -8,7 +8,8 @@ use App\Candidature;
 use App\VariableGlobal;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
- 
+use App\Filieres;
+use App\Specialites; 
 
 
 class CandidatureController extends Controller
@@ -204,7 +205,36 @@ class CandidatureController extends Controller
     }
     public function showEdit(){
         $columns=Schema::getColumnListing('candidatures');
-        return view('admin-editfiche',['columns' => $columns]);
+        $filieres=Filieres::all();
+        $specialites=Specialites::all();
+        return view('admin-editfiche',['columns' => $columns, 'filieres' => $filieres, 'specialites' => $specialites]);
+    }
+    public function addSpe(Request $request){
+        $specialite = new Specialites();
+        $specialite->nom_spe = $request->nom;
+        $specialite->nom_filiere = $request->filiere;
+        $specialite->save();
+        return redirect('/admin/editfiche');
+    }
+    public function deleteSpe(Request $request){
+        $specialite = Specialites::find($request->nom);
+        $specialite->delete();
+        return redirect('/admin/editfiche');
+    }
+    public function addFiliere(Request $request){
+        $filiere = new Filieres();
+        $filiere->nom_filiere = $request->nom;
+        $filiere->save();
+        return redirect('/admin/editfiche');
+    }
+    public function deleteFiliere(Request $request){
+        $filiere = Filieres::find($request->nom);
+        $filiere->delete();
+        $specialites=Specialites::where('nom_filiere',$request->nom)->get();
+        foreach($specialites as $spe){
+            $spe->delete();
+        }
+        return redirect('/admin/editfiche');
     }
     public function addColumn(Request $request)
     {

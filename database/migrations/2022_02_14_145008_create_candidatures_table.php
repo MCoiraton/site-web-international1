@@ -55,6 +55,14 @@ class CreateCandidaturesTable extends Migration
             $table->string('message_unblocked')->nullable()->default(null);
             $table->timestamps();
         });
+        Schema::create('filieres', function (Blueprint $table) {
+            $table->string('nom_filiere')->primary();
+        });
+        Schema::create('specialites', function (Blueprint $table) {
+            $table->string('nom_spe')->primary();
+            $table->string('nom_filiere');
+            $table->foreign('nom_filiere')->references('nom_filiere')->on('filieres');
+        });
     }
 
     /**
@@ -65,5 +73,7 @@ class CreateCandidaturesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('candidatures');
+        Schema::dropIfExists('filieres');
+        Schema::dropIfExists('specialites');
     }
 }
