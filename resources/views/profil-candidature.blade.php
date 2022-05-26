@@ -322,7 +322,7 @@
                                     <label class="block text-gray-700 text-md font-bold mb-2" for="{{str_replace("_"," ",$ajout->nom)}}">
                                         {{str_replace("_"," ",$ajout->nom)}} :
                                     </label>
-                                    <input value="" @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="ajout[]" type="{{$ajout->type}}">
+                                    <input value="{{$ajout->value}}" @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="ajout[]" type="{{$ajout->type}}">
                                 </div>
                                 @endif
                                 @endforeach

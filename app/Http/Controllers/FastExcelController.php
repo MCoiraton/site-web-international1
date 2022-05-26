@@ -10,11 +10,13 @@ use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Common\Entity\Style\CellAlignment;
 use Box\Spout\Common\Entity\Style\Border;
 use Box\Spout\Writer\Common\Creator\Style\BorderBuilder;
+use Illuminate\Support\Facades\DB;
 
 class FastExcelController extends Controller
 {
     public function exportCandidature(Request $request) {
         $candidatures=Candidature::all();
+        $ajouts=DB::select("SELECT * FROM candidatures_ajout");
         $border = (new BorderBuilder())
             ->setBorderBottom()
             ->setBorderRight()
@@ -37,12 +39,10 @@ class FastExcelController extends Controller
         ->headerStyle($header_style)
         ->rowsStyle($rows_style)
         ->download("fichier_Excel_candidats_mobilité_internationale.xlsx",function ($candidature) {  
-            $boursier;
+            $boursier="Oui";
             if($candidature['boursier']==0) $boursier="Non";
-            else $boursier="Oui";
-            $deja_parti_erasmus;
+            $deja_parti_erasmus="Oui";
             if($candidature['deja_parti_erasmus']==0) $deja_parti_erasmus="Non";
-            else $deja_parti_erasmus="Oui";
             $langues=$candidature['langue1'].", ".$candidature['langue2'].", ".$candidature['langue3'];
             return [
                     "Nom" => ($candidature['nom']),
@@ -63,7 +63,8 @@ class FastExcelController extends Controller
                     "Destination 2" => ($candidature['choix2']),
                     "Durée séjour destination 2" => ($candidature['semestre_choix2']),
                     "Destination 3" => ($candidature['choix3']),
-                    "Durée séjour destination 3" => ($candidature['semestre_choix3'])
+                    "Durée séjour destination 3" => ($candidature['semestre_choix3']),
+                    
             ];  
         });
     }

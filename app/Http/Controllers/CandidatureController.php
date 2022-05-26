@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use App\Filieres;
 use App\Specialites; 
-use App\CandidatureAjout;
 
 
 class CandidatureController extends Controller
@@ -28,6 +27,7 @@ class CandidatureController extends Controller
         $ajoutO=$app->make('stdClass');
         $ajoutO->nom=$ajout;
         $type=Schema::getColumnType('candidatures_ajout',$ajout);
+        $ajoutO->value=DB::select("SELECT ".$ajout." FROM candidatures_ajout WHERE email=?",[session("mail")])[0]->$ajout;
         switch($type){
             case "integer":
                 $ajoutO->type="number";
@@ -66,6 +66,7 @@ class CandidatureController extends Controller
             $app=app();
             $ajoutO=$app->make('stdClass');
             $ajoutO->nom=$ajout;
+            $ajoutO->value=DB::select("SELECT ".$ajout." FROM candidatures_ajout WHERE email=?",[$email])[0]->$ajout;
             $type=Schema::getColumnType('candidatures_ajout',$ajout);
             switch($type){
                 case "integer":
@@ -172,6 +173,14 @@ class CandidatureController extends Controller
 
     public function storeAdmin(Request $request) 
     {
+        if(isset($request->ajout)){
+            $ajouts=Schema::getColumnListing('candidatures_ajout');
+            DB::delete('delete from candidatures_ajout where email=?',[$request->email]);
+            DB::insert('insert into candidatures_ajout (email) values (?)', [$request->email]);
+            for($i=0;$i<count($request->ajout);$i++){
+                DB::update('update candidatures_ajout set '.$ajouts[$i+1].'=? where email=?', [$request->ajout[$i],$request->email]);
+            }
+        }
         $candidature = Candidature::find($request->email);
         $candidature->prenom = $request->prenom;
         $candidature->nom = $request->nom;
@@ -301,6 +310,12 @@ class CandidatureController extends Controller
     public function addColumn(Request $request)
     {
         if($request->type!="" && $request->nom!=""){
+            $columns=Schema::getColumnListing('candidatures_ajout');
+            foreach($columns as $column){
+                if($column==str_replace(" ","_",$request->nom)){
+                    return redirect('/admin/editfiche')->with('error','Cette colonne existe déjà');
+                }
+            }
             $GLOBALS['nom']=str_replace(" ","_",$request->nom);
             $GLOBALS['type']=$request->type;
             Schema::table('candidatures_ajout', function (Blueprint $table) {
