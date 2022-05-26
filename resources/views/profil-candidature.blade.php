@@ -50,34 +50,16 @@
                 document.getElementById("annee_actuelle_4A").disabled = false;
             }
 
-            function choixEMME() {
-                document.getElementById("SIR").disabled = true;
-                document.getElementById("SIA").disabled = true;
-                document.getElementById("MCL").disabled = true;
-                document.getElementById("MSS").disabled = true;
-                document.getElementById("MFE").disabled = false;
-                document.getElementById("MSM").disabled = false;
-                document.getElementById("IE").disabled = false;
-            }
-
-            function choixIA2R() {
-                document.getElementById("SIR").disabled = false;
-                document.getElementById("SIA").disabled = false;
-                document.getElementById("MFE").disabled = true;
-                document.getElementById("MSM").disabled = true;
-                document.getElementById("IE").disabled = true;
-                document.getElementById("MCL").disabled = true;
-                document.getElementById("MSS").disabled = true;
-            }
-
-            function choixM3() {
-                document.getElementById("MCL").disabled = false;
-                document.getElementById("MSS").disabled = false;
-                document.getElementById("MFE").disabled = true;
-                document.getElementById("MSM").disabled = true;
-                document.getElementById("IE").disabled = true;
-                document.getElementById("SIR").disabled = true;
-                document.getElementById("SIA").disabled = true;
+            function setfiliere(filiere){ 
+                var filieres = document.getElementsByClassName("specialite");
+                for(var i = 0; i < filieres.length; i++){
+                    filieres[i].disabled = true;
+                }
+                for(var i = 0; i < filieres.length; i++){
+                    if(filieres[i].classList.contains(filiere)){
+                        filieres[i].disabled = false;
+                    }
+                }
             }
 
             function deja_parti_erasmus_oui() {
@@ -229,10 +211,10 @@
                                     <label class="flex-row text-gray-700 text-md font-bold mb-2 mr-4" for="diplome">Diplôme choisi: </label>
                                     @foreach($specialites as $spes)
                                     <p class="ml-28">
-                                        <input class="my-1" type="radio" name="diplome" onchange="" @if($blocked) disabled @endif @if($candidature && $candidature->diplome_choisi == $spes[0]->nom_filiere) checked @endif value="{{$spes[0]->nom_filiere}}" class="border-black-600 border-2">
+                                        <input class="my-1" type="radio" name="diplome" onchange="setfiliere('{{$spes[0]->nom_filiere}}')" @if($blocked) disabled @endif @if($candidature && $candidature->diplome_choisi == $spes[0]->nom_filiere) checked @endif value="{{$spes[0]->nom_filiere}}" class="border-black-600 border-2">
                                         <label class="ml-2 mr-4 text-gray-900 underline" for="diplome">{{$spes[0]->nom_filiere}}</label>
                                         @foreach($spes as $spe)
-                                        <input @if($blocked) disabled @endif @if($candidature && $candidature->specialisation == $spe->nom_spe) checked @endif id="{{$spe->nom_spe}}" class="my-1" type="radio" name="parcours" value="{{$spe->nom_spe}}" class="border-black-600 border-2">
+                                        <input class="my-1 specialite {{$spe->nom_filiere}}" @if($blocked) disabled @endif @if($candidature && $candidature->specialisation == $spe->nom_spe) checked @endif id="{{$spe->nom_spe}}" type="radio" name="parcours" value="{{$spe->nom_spe}}" class="border-black-600 border-2">
                                         <label class="ml-2 mr-4" for="parcours">{{$spe->nom_spe}}</label>
                                         @endforeach
                                     </p>
