@@ -54,6 +54,7 @@
                 var filieres = document.getElementsByClassName("specialite");
                 for(var i = 0; i < filieres.length; i++){
                     filieres[i].disabled = true;
+                    filieres[i].checked = false;
                 }
                 for(var i = 0; i < filieres.length; i++){
                     if(filieres[i].classList.contains(filiere)){
