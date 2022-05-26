@@ -13,52 +13,41 @@
             function choixtelportable(){
                 document.getElementsByName("tel_fixe")[0].required=false;
             }
-            function annee_entree_1A() {
-                document.getElementById("annee_actuelle_2A").disabled=false;
-                document.getElementById("annee_actuelle_3A").disabled=false;
-                document.getElementById("annee_actuelle_4A").disabled=false;
+            function anneeE(annee){
+                var anneeA = document.getElementsByClassName("anneeA");
+                for(var i = 0; i < anneeA.length; i++){
+                    if(anneeA[i].id < annee){
+                        anneeA[i].disabled = true;
+                        anneeA[i].checked = false;
+                    }else{
+                        anneeA[i].disabled = false;
+                    }
+                }
             }
-            function annee_entree_2A() {
-                document.getElementById("annee_actuelle_2A").disabled=false;
-                document.getElementById("annee_actuelle_3A").disabled=false;
-                document.getElementById("annee_actuelle_4A").disabled=false;
+            function anneeA(annee){
+                var choixS = document.getElementsByClassName("choixS");
+                for(var i = 0; i < choixS.length; i++){
+                    if(choixS[i].id == 2*annee + 1){
+                        choixS[i].disabled = false; 
+                    }else{
+                        choixS[i].disabled = true;
+                        choixS[i].checked = false;
+                    }
+                }
+
             }
-            function annee_entree_3A() {
-                document.getElementById("annee_actuelle_2A").disabled=true;
-                document.getElementById("annee_actuelle_3A").disabled=false;
-                document.getElementById("annee_actuelle_4A").disabled=false;
-            }
-            function annee_entree_4A() {
-                document.getElementById("annee_actuelle_2A").disabled=true;
-                document.getElementById("annee_actuelle_3A").disabled=true;
-                document.getElementById("annee_actuelle_4A").disabled=false;
-            }
-            function choixEMME(){
-                document.getElementById("SIR").disabled=true;
-                document.getElementById("SIA").disabled=true;
-                document.getElementById("MCL").disabled=true;
-                document.getElementById("MSS").disabled=true;
-                document.getElementById("MFE").disabled=false;
-                document.getElementById("MSM").disabled=false;
-                document.getElementById("IE").disabled=false;
-            }
-            function choixIA2R(){
-                document.getElementById("SIR").disabled=false;
-                document.getElementById("SIA").disabled=false;
-                document.getElementById("MFE").disabled=true;
-                document.getElementById("MSM").disabled=true;
-                document.getElementById("IE").disabled=true;
-                document.getElementById("MCL").disabled=true;
-                document.getElementById("MSS").disabled=true;
-            }
-            function choixM3(){
-                document.getElementById("MCL").disabled=false;
-                document.getElementById("MSS").disabled=false;
-                document.getElementById("MFE").disabled=true;
-                document.getElementById("MSM").disabled=true;
-                document.getElementById("IE").disabled=true;
-                document.getElementById("SIR").disabled=true;
-                document.getElementById("SIA").disabled=true;
+
+            function setfiliere(filiere){ 
+                var filieres = document.getElementsByClassName("specialite");
+                for(var i = 0; i < filieres.length; i++){
+                    filieres[i].disabled = true;
+                    filieres[i].checked = false;
+                }
+                for(var i = 0; i < filieres.length; i++){
+                    if(filieres[i].classList.contains(filiere)){
+                        filieres[i].disabled = false;
+                    }
+                }
             }
             function deja_parti_erasmus_oui() {
                 document.getElementsByName("dest_deja_parti")[0].disabled=false;
@@ -160,35 +149,33 @@
                             <h2 class="text-xl mb-4 text-gray-700">Informations Scolarité:</h2>
                             <div class="mb-4 flex">
                                 <label class="flex-row text-gray-700 text-md font-bold mb-2 mr-4" for="annee_entree">Année d'entrée à Polytech: </label>
-                                <input class="my-1" onchange="annee_entree_1A()" <?php if($candidature && $candidature->annee_entree=="1A") echo("checked");?> type="radio" name="annee_entree" value="1A" class="border-black-600 border-2">
+                                <input class="my-1" type="radio" name="annee_entree" onchange="anneeE(1)" value="1A" <?php if ($candidature && $candidature->annee_entree == "1A") echo ("checked"); ?> class="border-black-600 border-2">
                                 <label class="ml-2 mr-4" for="1A">1A</label>
-                                <input class="my-1" type="radio" name="annee_entree" onchange="annee_entree_2A()" value="2A" <?php if($candidature && $candidature->annee_entree=="2A") echo("checked");?> class="border-black-600 border-2">
+                                <input class="my-1" type="radio" name="annee_entree" onchange="anneeE(2)" value="2A" <?php if ($candidature && $candidature->annee_entree == "2A") echo ("checked"); ?> class="border-black-600 border-2">
                                 <label class="ml-2 mr-4" for="2A">2A</label>
-                                <input class="my-1" type="radio" name="annee_entree" onchange="annee_entree_3A()" value="3A" <?php if($candidature && $candidature->annee_entree=="3A") echo("checked");?> class="border-black-600 border-2">
+                                <input class="my-1" type="radio" name="annee_entree" onchange="anneeE(3)" value="3A" <?php if ($candidature && $candidature->annee_entree == "3A") echo ("checked"); ?> class="border-black-600 border-2">
                                 <label class="ml-2 mr-4" for="3A">3A</label>
-                                <input class="my-1" type="radio" name="annee_entree" onchange="annee_entree_4A()" value="4A" <?php if($candidature && $candidature->annee_entree=="4A") echo("checked");?> class="border-black-600 border-2">
+                                <input class="my-1" type="radio" name="annee_entree" onchange="anneeE(4)" value="4A" <?php if ($candidature && $candidature->annee_entree == "4A") echo ("checked"); ?> class="border-black-600 border-2">
                                 <label class="ml-2 mr-4" for="4A">4A</label>
                             </div>
                             <div class="mb-4 flex">
                                 <label class="flex-row text-gray-700 text-md font-bold mb-2 mr-4" for="annee_actuelle">Année d'études actuelle: </label>
-                                <input <?php if($candidature && $candidature->annee_actuelle=="2A") echo("checked");?> class="my-1" type="radio" name="annee_actuelle" value="2A" class="border-black-600 border-2">
+                                <input <?php if ($candidature && $candidature->annee_actuelle == "2A") echo ("checked"); ?> onchange="anneeA(2)" type="radio" name="annee_actuelle" value="2A" id="2" class="anneeA my-1 border-black-600 border-2">
                                 <label class="ml-2 mr-4" for="2A">2A</label>
-                                <input <?php if($candidature && $candidature->annee_actuelle=="3A") echo("checked");?> class="my-1" type="radio" name="annee_actuelle" value="3A" class="border-black-600 border-2">
+                                <input <?php if ($candidature && $candidature->annee_actuelle == "3A") echo ("checked"); ?> onchange="anneeA(3)" type="radio" name="annee_actuelle" value="3A" id="3" class="anneeA my-1 border-black-600 border-2">
                                 <label class="ml-2 mr-4" for="3A">3A</label>
-                                <input <?php if($candidature && $candidature->annee_actuelle=="4A") echo("checked");?> class="my-1" type="radio" name="annee_actuelle" value="4A" class="border-black-600 border-2">
+                                <input <?php if ($candidature && $candidature->annee_actuelle == "4A") echo ("checked"); ?> onchange="anneeA(4)" type="radio" name="annee_actuelle" value="4A" id="4" class="anneeA my-1 border-black-600 border-2">
                                 <label class="ml-2 mr-4" for="4A">4A</label>
-                                <input <?php if($candidature && $candidature->annee_actuelle=="5A") echo("checked");?> class="my-1" type="radio" name="annee_actuelle" value="5A" class="border-black-600 border-2">
-                                <label class="ml-2 mr-4" for="5A">5A</label>
-                            </div> 
+                            </div>
 
                             <div class="mb-4 flex-col">
                                 <label class="flex-row text-gray-700 text-md font-bold mb-2 mr-4" for="diplome">Diplôme choisi: </label>
                                 @foreach($specialites as $spes)
                                 <p class="ml-28">
-                                    <input class="my-1" type="radio" name="diplome" onchange="" @if($candidature && $candidature->diplome_choisi == $spes[0]->nom_filiere) checked @endif value="{{$spes[0]->nom_filiere}}" class="border-black-600 border-2">
+                                    <input class="my-1" type="radio" name="diplome" onchange="setfiliere('{{$spes[0]->nom_filiere}}')" @if($candidature && $candidature->diplome_choisi == $spes[0]->nom_filiere) checked @endif value="{{$spes[0]->nom_filiere}}" class="border-black-600 border-2">
                                     <label class="ml-2 mr-4 text-gray-900 underline" for="diplome">{{$spes[0]->nom_filiere}}</label>
                                     @foreach($spes as $spe)
-                                    <input @if($candidature && $candidature->specialisation == $spe->nom_spe) checked @endif id="{{$spe->nom_spe}}" class="my-1" type="radio" name="parcours" value="{{$spe->nom_spe}}" class="border-black-600 border-2">
+                                    <input class="my-1 specialite {{$spe->nom_filiere}}" @if($candidature && $candidature->specialisation == $spe->nom_spe) checked @endif id="{{$spe->nom_spe}}" type="radio" name="parcours" value="{{$spe->nom_spe}}" class="border-black-600 border-2">
                                     <label class="ml-2 mr-4" for="parcours">{{$spe->nom_spe}}</label>
                                     @endforeach
                                 </p>
@@ -243,51 +230,51 @@
 
                             <div class="mt-4">
                                 <label for="choix1">Choix 1 :</label>
-                                <input value="<?php if($candidature) echo($candidature->choix1); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix1" class="border-black-600 border-2">
+                                <input value="<?php if ($candidature) echo ($candidature->choix1); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix1" class="border-black-600 border-2">
                                 <label for="S5">S5</label>
-                                <input <?php if($candidature && $candidature->semestre_choix1=="S5") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S5" class="border-black-600 border-2">
-                                <label for="S7">S7</label>
-                                <input <?php if($candidature && $candidature->semestre_choix1=="S7") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S7" class="border-black-600 border-2">
-                                <label for="S9">S9</label>
-                                <input <?php if($candidature && $candidature->semestre_choix1=="S9") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S9" class="border-black-600 border-2">
-                                <label for="S5+6">S5+6</label>
-                                <input <?php if($candidature && $candidature->semestre_choix1=="S5+6") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S5+6" class="border-black-600 border-2">
-                                <label for="S7+8">S7+8</label>
-                                <input <?php if($candidature && $candidature->semestre_choix1=="S7+8") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S7+8" class="border-black-600 border-2">
-                                <label for="S9+10">S9+10</label>
-                                <input <?php if($candidature && $candidature->semestre_choix1=="S9+10") echo("checked");?> class="my-1" type="radio" name="semestre_choix1" value="S9+10" class="border-black-600 border-2">
+                                <input <?php if ($candidature && $candidature->semestre_choix1 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix1" value="S5" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S7">S7</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix1 == "S7") echo ("checked"); ?> id="7" type="radio" name="semestre_choix1" value="S7" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S9">S9</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix1 == "S9") echo ("checked"); ?> id="9" type="radio" name="semestre_choix1" value="S9" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S5+6">S5+6</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix1 == "S5+6") echo ("checked"); ?> id="5" type="radio" name="semestre_choix1" value="S5+6" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S7+8">S7+8</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix1 == "S7+8") echo ("checked"); ?> id="7" type="radio" name="semestre_choix1" value="S7+8" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S9+10">S9+10</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix1 == "S9+10") echo ("checked"); ?> id="9" type="radio" name="semestre_choix1" value="S9+10" class="choixS my-1 border-black-600 border-2">
                             </div>
                             <div class="mt-4">
                                 <label for="choix2">Choix 2 :</label>
-                                <input value="<?php if($candidature && $candidature->choix2) echo($candidature->choix2); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix2" class="border-black-600 border-2">
+                                <input value="<?php if ($candidature && $candidature->choix2) echo ($candidature->choix2); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix2" class="border-black-600 border-2">
                                 <label for="S5">S5</label>
-                                <input <?php if($candidature && $candidature->semestre_choix2=="S5") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S5" class="border-black-600 border-2">
-                                <label for="S7">S7</label>
-                                <input <?php if($candidature && $candidature->semestre_choix2=="S7") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S7" class="border-black-600 border-2">
-                                <label for="S9">S9</label>
-                                <input <?php if($candidature && $candidature->semestre_choix2=="S9") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S9" class="border-black-600 border-2">
-                                <label for="S5+6">S5+6</label>
-                                <input <?php if($candidature && $candidature->semestre_choix2=="S5+6") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S5+6" class="border-black-600 border-2">
-                                <label for="S7+8">S7+8</label>
-                                <input <?php if($candidature && $candidature->semestre_choix2=="S7+8") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S7+8" class="border-black-600 border-2">
-                                <label for="S9+10">S9+10</label>
-                                <input <?php if($candidature && $candidature->semestre_choix2=="S9+10") echo("checked");?> class="my-1" type="radio" name="semestre_choix2" value="S9+10" class="border-black-600 border-2">
+                                <input <?php if ($candidature && $candidature->semestre_choix2 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix2" value="S5" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S7">S7</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix2 == "S7") echo ("checked"); ?> id="7" type="radio" name="semestre_choix2" value="S7" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S9">S9</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix2 == "S9") echo ("checked"); ?> id="9" type="radio" name="semestre_choix2" value="S9" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S5+6">S5+6</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix2 == "S5+6") echo ("checked"); ?> id="5" type="radio" name="semestre_choix2" value="S5+6" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S7+8">S7+8</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix2 == "S7+8") echo ("checked"); ?> id="7" type="radio" name="semestre_choix2" value="S7+8" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S9+10">S9+10</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix2 == "S9+10") echo ("checked"); ?> id="9" type="radio" name="semestre_choix2" value="S9+10" class="choixS my-1 border-black-600 border-2">
                             </div>
                             <div class="mt-4">
                                 <label for="choix3">Choix 3 :</label>
-                                <input value="<?php if($candidature && $candidature->choix3) echo($candidature->choix3); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix3" class="border-black-600 border-2">
+                                <input value="<?php if ($candidature && $candidature->choix3) echo ($candidature->choix3); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix3" class="border-black-600 border-2">
                                 <label for="S5">S5</label>
-                                <input <?php if($candidature && $candidature->semestre_choix3=="S5") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S5" class="border-black-600 border-2">
-                                <label for="S7">S7</label>
-                                <input <?php if($candidature && $candidature->semestre_choix3=="S7") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S7" class="border-black-600 border-2">
-                                <label for="S9">S9</label>
-                                <input <?php if($candidature && $candidature->semestre_choix3=="S9") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S9" class="border-black-600 border-2">
-                                <label for="S5+6">S5+6</label>
-                                <input <?php if($candidature && $candidature->semestre_choix3=="S5+6") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S5+6" class="border-black-600 border-2">
-                                <label for="S7+8">S7+8</label>
-                                <input <?php if($candidature && $candidature->semestre_choix3=="S7+8") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S7+8" class="border-black-600 border-2">
-                                <label for="S9+10">S9+10</label>
-                                <input <?php if($candidature && $candidature->semestre_choix3=="S9+10") echo("checked");?> class="my-1" type="radio" name="semestre_choix3" value="S9+10" class="border-black-600 border-2">
+                                <input <?php if ($candidature && $candidature->semestre_choix3 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix3" value="S5" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S7">S7</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix3 == "S7") echo ("checked"); ?> id="7" type="radio" name="semestre_choix3" value="S7" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S9">S9</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix3 == "S9") echo ("checked"); ?> id="9" type="radio" name="semestre_choix3" value="S9" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S5+6">S5+6</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix3 == "S5+6") echo ("checked"); ?> id="5" type="radio" name="semestre_choix3" value="S5+6" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S7+8">S7+8</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix3 == "S7+8") echo ("checked"); ?> id="7" type="radio" name="semestre_choix3" value="S7+8" class="choixS my-1 border-black-600 border-2">
+                                <label class="ml-4" for="S9+10">S9+10</label>
+                                <input <?php if ($candidature && $candidature->semestre_choix3 == "S9+10") echo ("checked"); ?> id="9" type="radio" name="semestre_choix3" value="S9+10" class="choixS my-1 border-black-600 border-2">
                             </div>
                             <div class="mt-4">
                                     <p>Fiche à renvoyer par mail au Service International au plus tard le : </p>
@@ -303,8 +290,6 @@
                     </div>
                 </div>
             </section>
-
-        </body>
-        
+        </body>  
     </x-slot>
 </x-layout-admin>
