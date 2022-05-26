@@ -95,13 +95,13 @@ class DatabaseSeeder extends Seeder
             $index->description = 'Polytech Nancy offre une vaste liste de destinations internationales pour ses étudiants qui souhaitent effectuer un séjour à l\'étranger, et les accompagne dans toutes les démarches pour garantir leur réussite.';
             $index->titreRubrique1 = 'Description générale';
             $index->paragrapheRubrique1 = 'Voici une explication assez générale et rapide sur les échanges Erasmus: qu’est-ce que c’est, qui sont les personnes éligibles, quelles sont les procédures, etc.. Vous trouverez les informations ...';
-            $index->lienRubrique1 = 'www.lien1.com';
+            $index->lienRubrique1 = 'https://polytech-nancy.univ-lorraine.fr';
             $index->titreRubrique2 = 'Avant de partir';
             $index->paragrapheRubrique2 = 'Pour le choix des cours dans l’université étrangère, allez sur le site web de l’université et le programme des études se trouve généralement dans la rubrique Studies, Master Programmes, ...';
-            $index->lienRubrique2 = 'www.lien2.com';
+            $index->lienRubrique2 = 'https://polytech-nancy.univ-lorraine.fr';
             $index->titreRubrique3 = 'Contacts et liens utiles';
             $index->paragrapheRubrique3 = 'GÖTEBORG, SUEDE Groupe Facebook Français à Göteborg Erasmus 2014/2015 (vous pouvez voir des annonces de logements qui se libèrent) Erasmus 2015/2016 Annonces de logements Voyages Scandinavian ...';
-            $index->lienRubrique3 = 'www.lien3.com';
+            $index->lienRubrique3 = 'https://polytech-nancy.univ-lorraine.fr';
             $index->save();
             $variables=new VariableGlobal();
             $variables->datelimite_candidature=date('Y-m-d',strtotime('2099-12-31'));
