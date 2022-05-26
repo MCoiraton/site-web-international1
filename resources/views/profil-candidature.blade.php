@@ -100,13 +100,15 @@
                 if($_GET['e'] == 1){
                     echo "<script>alert('Certains champs sont incorrects, veuillez ré-essayer !')</script>";
                 }
-            }?>
+            }
+            $blocked=false;
+            if($candidature && $candidature->blocked) $blocked=true;
+            ?>
             <section class="text-gray-600 body-font pt-6">
                 <div class="container w-3/4 max-h-full mx-auto flex items-center justify-center">
                     <div class="w-full max-w-full">
                         <h1 class="text-4xl text-gray-900 flex items-center justify-center">Fiche candidature à un échange international </h1>
-                        <p class="mt-4 mb-4">Fiche à compléter au plus tard le : <span class="text-blue-700"><?php if ($datelimite != null) echo (date('d-m-Y', strtotime($datelimite->datelimite_candidature)));
-                                                                                                                else echo ("Date en attente d'être à jour"); ?></span></p>
+                        <p class="mt-4 mb-4">Fiche à compléter au plus tard le : <span class="text-blue-700">{{date('d-m-Y', strtotime($datelimite->datelimite_candidature))}}</span></p>
                         <p> Si la date limite est passée veuillez contacter le service international par mail. </p>
                         @if ($datelimite && ((date('Y-m-d')< $datelimite->datelimite_candidature) || $candidature))
                             <?php if (!$candidature) echo ("<p> Attention une fois la fiche de candidature envoyée elle ne pourra plus être modifié. </p>"); ?>
@@ -225,34 +227,16 @@
 
                                 <div class="mb-4 flex-col">
                                     <label class="flex-row text-gray-700 text-md font-bold mb-2 mr-4" for="diplome">Diplôme choisi: </label>
+                                    @foreach($specialites as $spes)
                                     <p class="ml-28">
-                                        <input class="my-1" type="radio" name="diplome" onchange="choixEMME()" <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> value="EMME" <?php if ($candidature && $candidature->diplome_choisi == "EMME") echo ("checked"); ?> class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4 text-gray-900 underline" for="EMME">EMME</label>
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->specialisation == "MFE") echo ("checked"); ?> id="MFE" class="my-1" type="radio" name="parcours" value="MFE" class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4" for="MFE">MFE</label>
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->specialisation == "MSM") echo ("checked"); ?> id="MSM" class="my-1" type="radio" name="parcours" value="MSM" class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4" for="MSM">MSM</label>
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->specialisation == "IE") echo ("checked"); ?> id="IE" class="my-1" type="radio" name="parcours" value="IE" class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4" for="IE">IE</label>
+                                        <input class="my-1" type="radio" name="diplome" onchange="" @if($blocked) disabled @endif @if($candidature && $candidature->diplome_choisi == $spes[0]->nom_filiere) checked @endif value="{{$spes[0]->nom_filiere}}" class="border-black-600 border-2">
+                                        <label class="ml-2 mr-4 text-gray-900 underline" for="diplome">{{$spes[0]->nom_filiere}}</label>
+                                        @foreach($spes as $spe)
+                                        <input @if($blocked) disabled @endif @if($candidature && $candidature->specialisation == $spe->nom_spe) checked @endif id="{{$spe->nom_spe}}" class="my-1" type="radio" name="parcours" value="{{$spe->nom_spe}}" class="border-black-600 border-2">
+                                        <label class="ml-2 mr-4" for="parcours">{{$spe->nom_spe}}</label>
+                                        @endforeach
                                     </p>
-
-                                    <p class="ml-28">
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> class="my-1" type="radio" name="diplome" onchange="choixIA2R()" value="IA2R" <?php if ($candidature && $candidature->diplome_choisi == "IA2R") echo ("checked"); ?> class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4 text-gray-900 underline" for="IA2R">IA2R</label>
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->specialisation == "SIA") echo ("checked"); ?> id="SIA" class="my-1" type="radio" name="parcours" value="SIA" class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4" for="SIA">SIA</label>
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->specialisation == "SIR") echo ("checked"); ?> id="SIR" class="my-1" type="radio" name="parcours" value="SIR" class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4" for="SIR">SIR</label>
-                                    </p>
-
-                                    <p class="ml-28">
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> class="my-1" type="radio" name="diplome" onchange="choixM3()" value="M3" <?php if ($candidature && $candidature->diplome_choisi == "M3") echo ("checked"); ?> class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4 text-gray-900 underline" for="M3">M3</label>
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->specialisation == "MSS") echo ("checked"); ?> id="MSS" class="my-1" type="radio" name="parcours" value="MSS" class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4" for="MSS">MSS</label>
-                                        <input <?php if ($candidature && $candidature->blocked) echo ("disabled"); ?> <?php if ($candidature && $candidature->specialisation == "MCL") echo ("checked"); ?> id="MCL" class="my-1" type="radio" name="parcours" value="MCL" class="border-black-600 border-2">
-                                        <label class="ml-2 mr-4" for="MCL">MCL</label>
-                                    </p>
+                                    @endforeach
                                 </div>
                                 <div>
                                     <label class="ml-2 mr-4 text-gray-700 text-md font-bold" for="langues">Langues parlées:</label>

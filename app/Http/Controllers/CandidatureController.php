@@ -18,7 +18,8 @@ class CandidatureController extends Controller
     {
     $candidature = Candidature::find(session("mail"));
     $datelimite = VariableGlobal::find("1");
-        return view('profil-candidature', ['candidature' => $candidature, 'datelimite' => $datelimite]);
+    $specialites=Specialites::all()->groupBy('nom_filiere');
+        return view('profil-candidature', ['candidature' => $candidature, 'datelimite' => $datelimite, 'specialites' => $specialites]);
     }
     function showListe(){
         $datelimite = VariableGlobal::find("1");
@@ -30,7 +31,8 @@ class CandidatureController extends Controller
     public function showAdmin($email) 
     {
         $candidature = Candidature::where('email', $email)->first();
-        return view('admin-fiche', ['candidature' => $candidature]);
+        $specialites=Specialites::all()->groupBy('nom_filiere');
+        return view('admin-fiche', ['candidature' => $candidature,'specialites' => $specialites]);
     }
 
     public function store(Request $request) 
