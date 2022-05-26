@@ -97,11 +97,13 @@ class CandidatureController extends Controller
             $candidature = new Candidature();
         try{
             if($candidature->blocked!=true) {
-                $ajouts=Schema::getColumnListing('candidatures_ajout');
-                DB::delete('delete from candidatures_ajout where email=?',[session("mail")]);
-                DB::insert('insert into candidatures_ajout (email) values (?)', [session("mail")]);
-                for($i=0;$i<count($request->ajout);$i++){
-                    DB::update('update candidatures_ajout set '.$ajouts[$i+1].'=? where email=?', [$request->ajout[$i],session("mail")]);
+                if(isset($request->ajout)){
+                    $ajouts=Schema::getColumnListing('candidatures_ajout');
+                    DB::delete('delete from candidatures_ajout where email=?',[session("mail")]);
+                    DB::insert('insert into candidatures_ajout (email) values (?)', [session("mail")]);
+                    for($i=0;$i<count($request->ajout);$i++){
+                        DB::update('update candidatures_ajout set '.$ajouts[$i+1].'=? where email=?', [$request->ajout[$i],session("mail")]);
+                    }
                 }
                 $candidature->email = session("mail");
                 $candidature->prenom = $request->prenom;
@@ -221,7 +223,7 @@ class CandidatureController extends Controller
         }
         $candidature->signature = $request->signature;
         $candidature->save();
-        return view('admin-fiches');
+        return redirect("/admin/fiches");
     }
 
     public function bloquer(Request $request)
