@@ -17,6 +17,8 @@ class FastExcelController extends Controller
     public function exportCandidature(Request $request) {
         $candidatures=Candidature::all();
         $ajouts=DB::select("SELECT * FROM candidatures_ajout");
+        $candidatures=$candidatures->toArray() + $ajouts;
+        $champ_ajoute = DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'candidatures_ajout'");
         $border = (new BorderBuilder())
             ->setBorderBottom()
             ->setBorderRight()
@@ -44,6 +46,14 @@ class FastExcelController extends Controller
             $deja_parti_erasmus="Oui";
             if($candidature['deja_parti_erasmus']==0) $deja_parti_erasmus="Non";
             $langues=$candidature['langue1'].", ".$candidature['langue2'].", ".$candidature['langue3'];
+            /*foreach($champ_ajoute as $champ) {
+                $nom_champ=$champ['COLUMN_NAME'];
+                $ajout+=$nom_champ;
+                $ajout+=" => ";
+                $donnee=$candidature['$nom_champ'];
+                $ajout+=$donnee;
+                $ajout+=",";
+            }*/
             return [
                     "Nom" => ($candidature['nom']),
                     "Prénom" => ($candidature['prenom']),
@@ -64,7 +74,7 @@ class FastExcelController extends Controller
                     "Durée séjour destination 2" => ($candidature['semestre_choix2']),
                     "Destination 3" => ($candidature['choix3']),
                     "Durée séjour destination 3" => ($candidature['semestre_choix3']),
-                    
+                    "Pourquoi" => ($candidature['pourquoi']),
             ];  
         });
     }
