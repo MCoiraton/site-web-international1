@@ -27,7 +27,12 @@ class CandidatureController extends Controller
         $ajoutO=$app->make('stdClass');
         $ajoutO->nom=$ajout;
         $type=Schema::getColumnType('candidatures_ajout',$ajout);
-        $ajoutO->value=DB::select("SELECT ".$ajout." FROM candidatures_ajout WHERE email=?",[session("mail")])[0]->$ajout;
+        $query=DB::select("SELECT ".$ajout." FROM candidatures_ajout WHERE email=?",[session("mail")]);
+        if(count($query)>0){
+            $ajoutO->value=$query[0]->$ajout;
+        }else{
+            $ajoutO->value="";
+        }
         switch($type){
             case "integer":
                 $ajoutO->type="number";
@@ -66,7 +71,12 @@ class CandidatureController extends Controller
             $app=app();
             $ajoutO=$app->make('stdClass');
             $ajoutO->nom=$ajout;
-            $ajoutO->value=DB::select("SELECT ".$ajout." FROM candidatures_ajout WHERE email=?",[$email])[0]->$ajout;
+            $query=DB::select("SELECT ".$ajout." FROM candidatures_ajout WHERE email=?",[$email]);
+            if(count($query)>0){
+                $ajoutO->value=$query[0]->$ajout;
+            }else{
+                $ajoutO->value="";
+            }
             $type=Schema::getColumnType('candidatures_ajout',$ajout);
             switch($type){
                 case "integer":
