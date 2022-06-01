@@ -4,78 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Rap2hpoutre\FastExcel\FastExcel;
-use App\Candidature;
-use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
-use Box\Spout\Common\Entity\Style\CellAlignment;
-use Box\Spout\Common\Entity\Style\Border;
-use Box\Spout\Writer\Common\Creator\Style\BorderBuilder;
-use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CandidatureExport;
 
 class FastExcelController extends Controller
 {
     public function exportCandidature(Request $request) {
-        $candidatures=Candidature::all();
-        $ajouts=DB::select("SELECT * FROM candidatures_ajout");
-        $candidatures=$candidatures->toArray() + $ajouts;
-        $champ_ajoute = DB::select("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'candidatures_ajout'");
-        $border = (new BorderBuilder())
-            ->setBorderBottom()
-            ->setBorderRight()
-            ->setBorderTop()
-            ->setBorderLeft()
-            ->build();
-        $header_style= (new StyleBuilder())
-            ->setBackgroundColor("FFFF99")
-            ->setCellAlignment(CellAlignment::CENTER)
-            ->setBorder($border)
-            ->setShouldWrapText()
-            ->build();
-        $rows_style = (new StyleBuilder())
-            ->setCellAlignment(CellAlignment::CENTER)
-            ->setBorder($border)
-            ->build();
-
-
-        return (fastexcel($candidatures))
-        ->headerStyle($header_style)
-        ->rowsStyle($rows_style)
-        ->download("fichier_Excel_candidats_mobilité_internationale.xlsx",function ($candidature) {  
-            $boursier="Oui";
-            if($candidature['boursier']==0) $boursier="Non";
-            $deja_parti_erasmus="Oui";
-            if($candidature['deja_parti_erasmus']==0) $deja_parti_erasmus="Non";
-            $langues=$candidature['langue1'].", ".$candidature['langue2'].", ".$candidature['langue3'];
-            /*foreach($champ_ajoute as $champ) {
-                $nom_champ=$champ['COLUMN_NAME'];
-                $ajout+=$nom_champ;
-                $ajout+=" => ";
-                $donnee=$candidature['$nom_champ'];
-                $ajout+=$donnee;
-                $ajout+=",";
-            }*/
-            return [
-                    "Nom" => ($candidature['nom']),
-                    "Prénom" => ($candidature['prenom']),
-                    "Date de naissance" => ($candidature['date_naissance']),
-                    "Nationalité" => ($candidature['nationalite']),
-                    "E-mail" => $candidature['email'],
-                    "Boursier CROUS" => ($boursier),
-                    "Région d'origine" => ($candidature['region_origine']),
-                    "Année actuelle" => ($candidature['annee_actuelle']),
-                    "Diplôme" => ($candidature['diplome_choisi']),
-                    "Parcours" => ($candidature['specialisation']),
-                    "Langues étudiées" => ($langues),
-                    "TOEIC" => ($candidature['toeic']),
-                    "Déjà parti en Erasmus" => ($deja_parti_erasmus),
-                    "Destination 1" => ($candidature['choix1']),
-                    "Durée séjour destination 1" => ($candidature['semestre_choix1']),
-                    "Destination 2" => ($candidature['choix2']),
-                    "Durée séjour destination 2" => ($candidature['semestre_choix2']),
-                    "Destination 3" => ($candidature['choix3']),
-                    "Durée séjour destination 3" => ($candidature['semestre_choix3']),
-                    "Pourquoi" => ($candidature['pourquoi']),
-            ];  
-        });
+        return Excel::download(new CandidatureExport, 'candidatures.xlsx');
     }
 }
