@@ -1,5 +1,6 @@
 <?php
 
+use App\Candidature;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CandidatureController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogsController;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\FastExcelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ Route::get('/admin', function () {
     //Candidatures
     Route::get('/admin/fiches', [CandidatureController::class,'showListe'])->middleware('admin'); //page des candidatures
     Route::post('/admin/fiches/changerdatelimite', [CandidatureController::class,'changerdatelimite'])->middleware('admin'); //changer la date limite des candidatures
-    Route::post('/admin/fiches/exportExcel', [FastExcelController::class,'exportCandidature'])->middleware('admin'); //export des candidatures
+    Route::post('/admin/fiches/exportExcel', [CandidatureController::class,'exportExcel'])->middleware('admin'); //export des candidatures
     Route::post('/admin/fiches/block', [CandidatureController::class,'bloquer'])->middleware('admin'); //blocage de la candidature
     Route::post('/admin/fiches/unblock', [CandidatureController::class,'debloquer'])->middleware('admin'); //déblocage de la candidature
     Route::post('/admin/fiches/mail', [CandidatureController::class,'mail'])->middleware('admin'); //envoi du mail à un élève

@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Schema;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CandidatureExport implements FromCollection,WithHeadings
+class CandidatureExport implements FromCollection,WithHeadings,WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -29,13 +30,95 @@ class CandidatureExport implements FromCollection,WithHeadings
                 unset($candidatures[$j]->blocked);
                 unset($candidatures[$j]->demande_unblocked);
                 unset($candidatures[$j]->message_unblocked);
-                $signature=$candidatures[$j]->signature;
+                unset($candidatures[$j]->adresse_fixe);
+                unset($candidatures[$j]->code_postal);
+                unset($candidatures[$j]->ville);
+                unset($candidatures[$j]->annee_entree);
+                $langues=$candidatures[$j]->langue1;
+                $candidatures[$j]->langue1=$langues;
+                if($candidatures[$j]->langue2!=null) {
+                    $langues=$langues.', '.$candidatures[$j]->langue2;
+                }
+                if($candidatures[$j]->langue3!=null) {
+                    $langues=$langues.', '.$candidatures[$j]->langue3;
+                }
+                unset($candidatures[$j]->langue2);
+                unset($candidatures[$j]->langue3);
+                unset($candidatures[$j]->annee_langue1);
+                unset($candidatures[$j]->annee_langue2);
+                unset($candidatures[$j]->annee_langue3);
+                unset($candidatures[$j]->tel_fixe);
+                unset($candidatures[$j]->portable);
+                if($candidatures[$j]->boursier==1) {
+                    $candidatures[$j]->boursier='Oui';
+                }
+                else {
+                    $candidatures[$j]->boursier='Non';
+                }
+                unset($candidatures[$j]->date_erasmus);
+                unset($candidatures[$j]->destination_erasmus);
+                if($candidatures[$j]->deja_parti_erasmus==1) {
+                    $candidatures[$j]->deja_parti_erasmus='Oui';
+                }
+                else {
+                    $candidatures[$j]->deja_parti_erasmus='Non';
+                }
                 unset($candidatures[$j]->signature);
-                $candidatures[$j]->signature=$signature;
+                unset($candidatures[$j]->annee_toeic);
             }
         }
+        $GLOBALS['candidatures']=$candidatures;
         return $candidatures;
     }
+    public function styles(Worksheet $sheet){
+        //change le style de la première ligne uniquement sur les cases remplies
+        $sheet->getStyle('A1:Z1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 12,
+            ],
+            'alignment' => [
+                'wrapText' => true,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'color' => [
+                    'argb' => 'FFE991',
+                ],
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ]);
+        for($i=2;$i<count($GLOBALS['candidatures'])+2;$i++) {
+            $sheet->getStyle('A'.$i.':Z'.$i)->applyFromArray([
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => '000000'],
+                    ],
+                ],
+            ]);
+        }
+        $sheet->getRowDimension('1')->setRowHeight(42);
+        $sheet->getColumnDimension('D')->setWidth(12);
+        $sheet->getColumnDimension('E')->setWidth(12);
+        $sheet->getColumnDimension('J')->setWidth(12);
+        $sheet->getColumnDimension('G')->setWidth(12);
+        $sheet->getColumnDimension('O')->setWidth(12);
+        $sheet->getColumnDimension('Q')->setWidth(12);
+        $sheet->getColumnDimension('S')->setWidth(12);
+    }
+
     public function headings(): array
     {
         $array= [
@@ -44,28 +127,14 @@ class CandidatureExport implements FromCollection,WithHeadings
             'Prenom',
             'Date de naissance',
             'Nationalité',
-            'Adresse',
-            'Code postal',
-            'Ville',
-            'Téléphone fixe',
-            'Téléphone portable',
             'Boursier CROUS',
             'Région d\'origine',
-            'Année entrée',
             'Année actuelle',
             'Diplôme',
             'Parcours',
-            'Langue 1',
-            'Année d\'études 1',
-            'Langue 2',
-            'Année d\'études 2',
-            'Langue 3',
-            'Année d\'études 3',
+            'Langues étudiées',
             'Score Toeic',
-            'Année Toeic',
             'Deja parti Erasmus',
-            'Destination Erasmus',
-            'Date Erasmus',
             'Choix 1',
             'Semestre choix 1',
             'Choix 2',
@@ -79,7 +148,6 @@ class CandidatureExport implements FromCollection,WithHeadings
                 array_push($array,str_replace('_',' ',$champ));
             }
         }
-        array_push($array,'Signature');
         return $array;
     }
 }

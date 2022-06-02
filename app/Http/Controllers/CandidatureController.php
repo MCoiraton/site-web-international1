@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use App\Filieres;
 use App\Specialites; 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CandidatureExport;
 
 
 class CandidatureController extends Controller
@@ -356,5 +358,8 @@ class CandidatureController extends Controller
             });
         }
         return redirect('/admin/editfiche');
+    }
+    public function exportExcel() {
+        return Excel::download(new CandidatureExport, 'candidatures.xlsx');
     }
 }
