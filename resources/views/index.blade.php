@@ -81,7 +81,7 @@
           <div class="flex-grow">
             <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{{$index->titreRubrique1}}</h2>
             <p class="leading-relaxed text-base">{{$index->paragrapheRubrique1}}</p>
-            <a href="http://{{($index->lienRubrique1)}}" class="mt-3 text-blue-500 inline-flex items-center">En savoir plus...
+            <a href="{{$index->lienRubrique1}}" class="mt-3 text-blue-500 inline-flex items-center">En savoir plus...
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
               </svg>
@@ -102,7 +102,7 @@
           <div class="flex-grow">
             <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{{$index->titreRubrique2}}</h2>
             <p class="leading-relaxed text-base">{{$index->paragrapheRubrique2}}</p>
-            <a href="http://{{$index->lienRubrique2}}" class="mt-3 text-blue-500 inline-flex items-center">En savoir plus...
+            <a href="{{$index->lienRubrique2}}" class="mt-3 text-blue-500 inline-flex items-center">En savoir plus...
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
               </svg>
@@ -121,7 +121,7 @@
           <div class="flex-grow">
             <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{{$index->titreRubrique3}}</h2>
             <p class="leading-relaxed text-base">{{$index->paragrapheRubrique3}}</p>
-            <a href="http://{{$index->lienRubrique3}}" class="mt-3 text-blue-500 inline-flex items-center">En savoir plus...
+            <a href="{{$index->lienRubrique3}}" class="mt-3 text-blue-500 inline-flex items-center">En savoir plus...
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
               </svg>
