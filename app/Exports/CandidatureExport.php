@@ -71,8 +71,39 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
         return $candidatures;
     }
     public function styles(Worksheet $sheet){
-        //change le style de la première ligne uniquement sur les cases remplies
-        $sheet->getStyle('A1:Z1')->applyFromArray([
+        //colonnes de bases vont jusqu'à S
+        $ajouts=Schema::getColumnListing('candidatures_ajout');
+        $taille="S";
+        switch(count($ajouts)-1) {
+            case 0:
+                $taille="S";
+                break;
+            case 1:
+                $taille="T";
+                break;
+            case 2:
+                $taille="U";
+                break;
+            case 3:
+                $taille="V";
+                break;
+            case 4:
+                $taille="W";
+                break;
+            case 5:
+                $taille="X";
+                break;
+            case 6:
+                $taille="Y";
+                break;
+            case 7:
+                $taille="Z";
+                break;
+            default:
+                $taille="S";
+                break;
+        }
+        $sheet->getStyle('A1:'.$taille.'1')->applyFromArray([
             'font' => [
                 'bold' => true,
                 'size' => 12,
@@ -96,7 +127,7 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
             ],
         ]);
         for($i=2;$i<count($GLOBALS['candidatures'])+2;$i++) {
-            $sheet->getStyle('A'.$i.':Z'.$i)->applyFromArray([
+            $sheet->getStyle('A'.$i.':'.$taille.$i)->applyFromArray([
                 'alignment' => [
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
