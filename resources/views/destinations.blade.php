@@ -29,7 +29,7 @@ $destinations = Destination::all();
             <div class="flex flex-wrap ">
                 @foreach($destinations as $destination)
                 <div class="xl:w-1/4 md:w-1/2 p-4">
-                    @if(session('isPolytech') == true || (session('isAdmin') == true))
+                    @if(session('isPolytech') == true || (session('isAdmin') == true || session('isEditeur') == true))
                     <a href="/destination/{{$destination->nom}}">
                     @else
                     <p>
@@ -40,7 +40,7 @@ $destinations = Destination::all();
                             <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{$destination->nom}}</h2>
                             <p class="leading-relaxed text-base truncate">{{$destination->intro}}</p>
                         </div>
-                    @if(session('isPolytech') == true || (session('isAdmin') == true))
+                    @if(session('isPolytech') == true || (session('isAdmin') == true || session('isEditeur') == true))
                     </a>
                     @else
                     </p>
