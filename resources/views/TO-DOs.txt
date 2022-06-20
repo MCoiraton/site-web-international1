@@ -5,7 +5,7 @@
   - message de demande modification fiche candidature
 
 
-sudo mysql.server start &&  php artisan serve --host=polytech-international.univ-lorraine.fr
+sudo mysql.server stop && sudo mysql.server start &&  php artisan serve --host=polytech-international.univ-lorraine.fr
 
 
   - style radio fiche candidature (done)

@@ -13,7 +13,7 @@
     @include("nav")
     <div class="flex flex-row">
         <div class="bg-white p-4 m-6 rounded-lg ">
-            <aside id="sidebar" class="w-64" aria-label="Sidebar">
+            <aside id="sidebar" class="w-72" aria-label="Sidebar">
                 <div class="relative flex-1 flex flex-col rounded-lg bg-white pt-0">
                     <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                         <div class="flex-1 px-3 bg-white divide-y space-y-1">
