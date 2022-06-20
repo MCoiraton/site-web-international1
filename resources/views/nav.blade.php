@@ -12,12 +12,12 @@
         <li>
           <a href="/destinations" class="block py-2 pr-4 pl-3 hover:bg-blue-500 hover:text-white px-3 rounded-md text-sm font-medium">Destinations</a>
         </li>
-        @if(session('isPolytech') ==true && session('isEditeur') ==true)
+        @if( (session('isPolytech') ==true && session('isEditeur') ==true) || session('isAdmin')==true )
         <li>
           <a href="/articles" class="block py-2 pr-4 pl-3 hover:bg-blue-500 hover:text-white px-3 rounded-md text-sm font-medium">Articles</a>
         </li>
         @endif
-        @if(session()->has('uid') && (session('isAdmin')))
+        @if(session()->has('uid') && (session('isAdmin') || session('isEditeur')))
         <li>
           <a href="/admin/accueil" class="block py-2 pr-4 pl-3 hover:bg-blue-500 hover:text-white px-3 rounded-md text-sm font-medium">Espace Admin</a>
         </li>
