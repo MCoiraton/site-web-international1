@@ -23,7 +23,12 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
         for($i=0;$i<count($champs_ajout);$i++) {
             for($j=0;$j<count($candidatures);$j++) {
                 if(count($champs_ajout)>1) {
-                    $candidatures[$j]->{$champs_ajout[$i]}=$ajouts[$j]->{$champs_ajout[$i]};
+                    if(isset($ajouts[$j]->{$champs_ajout[$i]})) {
+                        $candidatures[$j]->{$champs_ajout[$i]}=$ajouts[$j]->{$champs_ajout[$i]};
+                    }
+                    else{
+                        $candidatures[$j]->{$champs_ajout[$i]}="";
+                    }
                 }
                 unset($candidatures[$j]->created_at);
                 unset($candidatures[$j]->updated_at);

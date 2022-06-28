@@ -78,11 +78,11 @@
             </table>
             <h3 class="text-2xl mt-6 font-semibold">Blogs/Presentations réalisés par nos étudiants</h3>
             @foreach($blogs as $blog)
-            <a href="//{{$blog->lien}}"><p class="mt-4 mb-6 underline">{{$blog->nom}}</p></a>
+            <a href="{{$blog->lien}}"><p class="mt-4 mb-6 underline">{{$blog->nom}}</p></a>
             @endforeach
             <h3 class="text-2xl mt-6 font-semibold">Documentation, liens utiles.</h3>
             @foreach($liens as $lien)
-            <a href="//{{$lien->lien}}"><p class="mt-4 mb-6 underline">{{$lien->nom}}</p></a>
+            <a href="{{$lien->lien}}"><p class="mt-4 mb-6 underline">{{$lien->nom}}</p></a>
             @endforeach
             <h3 class="text-2xl mt-6 font-semibold">Astuces et informations complémentaires</h3>
             <p class="mt-4 mb-6"><?php echo($destination->astucesinfos) ?></p>
