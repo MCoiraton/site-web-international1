@@ -22,4 +22,4 @@ Il est documenté sur le site officiel de Laravel.
 Pour exporter les données en excel, nous utilisons la fonction exports de intégré à Laravel. Elle est documentée sur le site officiel de Laravel et est disponible dans le fichier app/Exports/CandidatureExport.php.
 
 Pour accéder au serveur qui héberge le site, vous devez utiliser le VPN de l'université de Lorraine.
-Vous pourrez ensuite vous connecter en SSH (port 22) avec les identifiants correspondants.
+Vous pourrez ensuite vous connecter en SSH (port 22) avec les identifiants correspondants à demander à Mme Bunting ou Mme Schmitt.
