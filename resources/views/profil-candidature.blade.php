@@ -76,6 +76,15 @@
                 document.getElementsByName("dest_deja_parti")[0].disabled = true;
                 document.getElementsByName("date_deja_parti")[0].disabled = true;
             }
+            function listeDestination(filiere,semestres){
+                var destination=$destination;
+                for(var i=0;i<destination.length;i++){
+                    if (destination[i].semestre==semestres && destination[i].spécialité==filiere){
+                        destination[i].disabled=false;
+                    }
+                    else destination[i].disabled=true;
+                }
+            }
         </script>
 
         <body>
@@ -276,7 +285,16 @@
 
                                 <div class="mt-4">
                                     <label for="choix1">Choix 1 :</label>
-                                    <input @if($blocked) disabled @endif value="<?php if ($candidature) echo ($candidature->choix1); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix1" class="border-black-600 border-2">
+                                    <select @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix1" class="border-black-600 border-2" >
+                                        <option value="<?php if ($candidature) echo ($candidature->choix1); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix1" class="border-black-600 border-2">
+                                            <?php if ($candidature) echo ($candidature->choix1); ?>
+                                        </option>
+                                        @foreach($destination as $dest)
+                                            <option value="{{$dest->nom}}">
+                                                {{$dest->nom}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     <label for="S5">S5</label>
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix1 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix1" value="S5" class="choixS my-1 border-black-600 border-2">
                                     <label class="ml-4" for="S7">S7</label>
@@ -292,7 +310,16 @@
                                 </div>
                                 <div class="mt-4">
                                     <label for="choix2">Choix 2 :</label>
-                                    <input @if($blocked) disabled @endif value="<?php if ($candidature && $candidature->choix2) echo ($candidature->choix2); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix2" class="border-black-600 border-2">
+                                    <select @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix2" class="border-black-600 border-2" >
+                                        <option value="<?php if ($candidature) echo ($candidature->choix2); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix2" class="border-black-600 border-2">
+                                            <?php if ($candidature) echo ($candidature->choix2); ?>
+                                        </option>
+                                        @foreach($destination as $dest)
+                                            <option value="{{$dest->nom}}">
+                                                {{$dest->nom}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     <label for="S5">S5</label>
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix2 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix2" value="S5" class="choixS my-1 border-black-600 border-2">
                                     <label class="ml-4" for="S7">S7</label>
@@ -308,7 +335,16 @@
                                 </div>
                                 <div class="mt-4">
                                     <label for="choix3">Choix 3 :</label>
-                                    <input @if($blocked) disabled @endif value="<?php if ($candidature && $candidature->choix3) echo ($candidature->choix3); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix3" class="border-black-600 border-2">
+                                    <select @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix3" class="border-black-600 border-2" >
+                                        <option value="<?php if ($candidature) echo ($candidature->choix3); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix3" class="border-black-600 border-2">
+                                            <?php if ($candidature) echo ($candidature->choix3); ?>
+                                        </option>
+                                        @foreach($destination as $dest)
+                                            <option value="{{$dest->nom}}">
+                                                {{$dest->nom}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     <label for="S5">S5</label>
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix3 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix3" value="S5" class="choixS my-1 border-black-600 border-2">
                                     <label class="ml-4" for="S7">S7</label>
@@ -324,7 +360,16 @@
                                 </div>
                                 <div class="mt-4">
                                     <label for="choix4">Choix 4 :</label>
-                                    <input @if($blocked) disabled @endif value="<?php if ($candidature && $candidature->choix4) echo ($candidature->choix4); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix4" class="border-black-600 border-2">
+                                    <select @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix4" class="border-black-600 border-2" >
+                                        <option value="<?php if ($candidature) echo ($candidature->choix4); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix4" class="border-black-600 border-2">
+                                            <?php if ($candidature) echo ($candidature->choix4); ?>
+                                        </option>
+                                        @foreach($destination as $dest)
+                                            <option value="{{$dest->nom}}">
+                                                {{$dest->nom}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     <label for="S5">S5</label>
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix4 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix4" value="S5" class="choixS my-1 border-black-600 border-2">
                                     <label class="ml-4" for="S7">S7</label>
@@ -340,7 +385,16 @@
                                 </div>
                                 <div class="mt-4">
                                     <label for="choix5">Choix 5 :</label>
-                                    <input @if($blocked) disabled @endif value="<?php if ($candidature && $candidature->choix5) echo ($candidature->choix5); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix5" class="border-black-600 border-2">
+                                    <select @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix5" class="border-black-600 border-2" >
+                                        <option value="<?php if ($candidature) echo ($candidature->choix5); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix5" class="border-black-600 border-2">
+                                            <?php if ($candidature) echo ($candidature->choix5); ?>
+                                        </option>
+                                        @foreach($destination as $dest)
+                                            <option value="{{$dest->nom}}">
+                                                {{$dest->nom}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     <label for="S5">S5</label>
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix5 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix5" value="S5" class="choixS my-1 border-black-600 border-2">
                                     <label class="ml-4" for="S7">S7</label>

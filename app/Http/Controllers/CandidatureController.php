@@ -13,7 +13,7 @@ use App\Filieres;
 use App\Specialites; 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CandidatureExport;
-
+use App\Destination;
 
 class CandidatureController extends Controller
 {
@@ -23,6 +23,7 @@ class CandidatureController extends Controller
     $datelimite = VariableGlobal::find("1");
     $specialites=Specialites::all()->groupBy('nom_filiere');
     $ajouts=Schema::getColumnListing('candidatures_ajout');
+    $destination=Destination::all();
     $ajoutsO=[];
     foreach($ajouts as $ajout){
         $app=app();
@@ -54,7 +55,7 @@ class CandidatureController extends Controller
         }
         array_push($ajoutsO,$ajoutO);
     }
-        return view('profil-candidature', ['candidature' => $candidature, 'datelimite' => $datelimite, 'specialites' => $specialites, 'ajouts' => $ajoutsO]);
+        return view('profil-candidature', ['candidature' => $candidature, 'datelimite' => $datelimite, 'specialites' => $specialites, 'ajouts' => $ajoutsO,'destination'=>$destination]);
     }
     function showListe(){
         $datelimite = VariableGlobal::find("1");
@@ -67,6 +68,7 @@ class CandidatureController extends Controller
     {
         $candidature = Candidature::where('email', $email)->first();
         $specialites=Specialites::all()->groupBy('nom_filiere');
+        $destination=Destination::all();
         $ajouts=Schema::getColumnListing('candidatures_ajout');
         $ajoutsO=[];
         foreach($ajouts as $ajout){
@@ -99,7 +101,7 @@ class CandidatureController extends Controller
             }
             array_push($ajoutsO,$ajoutO);
         }
-        return view('admin-fiche', ['candidature' => $candidature,'specialites' => $specialites, 'ajouts' => $ajoutsO]);
+        return view('admin-fiche', ['candidature' => $candidature,'specialites' => $specialites, 'ajouts' => $ajoutsO,'destination'=>$destination]);
     }
 
     public function store(Request $request) 

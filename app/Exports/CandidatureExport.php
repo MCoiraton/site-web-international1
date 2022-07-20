@@ -152,6 +152,10 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
         }
         $sheet->getRowDimension('1')->setRowHeight(42);
         $sheet->getColumnDimension('A')->setWidth(34);
+        $sheet->getColumnDimension('P')->setWidth(20);
+        $sheet->getColumnDimension('R')->setWidth(20);
+        $sheet->getColumnDimension('T')->setWidth(20);
+        $sheet->getColumnDimension('V')->setWidth(20);
         $sheet->getColumnDimension('F')->setWidth(12);
         $sheet->getColumnDimension('G')->setWidth(12);
         $sheet->getColumnDimension('L')->setWidth(12);

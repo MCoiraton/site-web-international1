@@ -85,6 +85,16 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="/admin/algorithme" id="algorithme" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                        {{ $algorithme ?? '' }}
+                                        <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 -1.5 27 27" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="m24.749 0h-22.498c-1.243 0-2.25 1.007-2.25 2.25v14.999c0 1.243 1.007 2.25 2.25 2.25h8.999l-.75 2.25h-3.376c-.621 0-1.125.504-1.125 1.125s.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125s-.504-1.125-1.125-1.125h-3.375l-.75-2.249h8.999c1.242 0 2.25-1.007 2.25-2.249v-15.001c0-1.243-1.007-2.25-2.25-2.25zm-.751 16.499h-20.999v-13.499h20.999z" />
+                                        </svg>
+
+                                        <span class="ml-3 whitespace-nowrap">Algorithme de voeux</span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="/admin/utilisateurs" id="utilisateurs" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                                         {{ $utilisateurs ?? '' }}
                                         <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
