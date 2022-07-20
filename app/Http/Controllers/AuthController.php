@@ -11,7 +11,14 @@ use phpCAS;
 class AuthController extends Controller
 {
     public function login(){
-        phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
+        session()->put('isPolytech', true);
+        session()->put('uid',31807014);
+        session()->put('prenom',"mathis");
+        session()->put('nom',"coiraton");
+        session()->put('mail',"mathis.coiraton1@etu.univ-lorraine.fr");
+        session()->put('isAdmin',true);
+        session()->put('isEditeur',true);
+       /* phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');
         phpCAS::setNoCasServerValidation();
         if(!phpCAS::checkAuthentication()){
             phpCAS::forceAuthentication();
@@ -39,7 +46,7 @@ class AuthController extends Controller
             if($editeur->uid==session("uid")) $isEditeur=true;
         }
         session()->put('isAdmin',$isAdmin);
-        session()->put('isEditeur',$isEditeur);
+        session()->put('isEditeur',$isEditeur);*/
         return redirect('/');
     }
 

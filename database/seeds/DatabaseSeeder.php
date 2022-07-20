@@ -87,6 +87,7 @@ class DatabaseSeeder extends Seeder
                 $assocours->ects = $faker->numberBetween(1, 10);
                 $assocours->nombre = $faker->numberBetween(5, 100);
                 $assocours->contenu = $faker->text(50);
+                $assocours->specialite = $faker ->text(10);
                 $assocours->save();
             }
         }

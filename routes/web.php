@@ -10,6 +10,7 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\ResultatsController;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -123,3 +124,5 @@ Route::get('/admin', function () {
         Route::get('/profil/cv', function () { //page du générateur de CV
             return view('profil-cv');
         })->middleware('polytech');
+        //résultats affectations
+        Route::get('profil/resultat',[ResultatsController::class,'show'])->middleware(('polytech'));//affichage du résultat de l'affectation

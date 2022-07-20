@@ -119,6 +119,7 @@ class CandidatureController extends Controller
                     }
                 }
                 $candidature->email = session("mail");
+                $candidature->id = session("uid");
                 $candidature->prenom = $request->prenom;
                 $candidature->nom = $request->nom;
                 $candidature->date_naissance = $request->date_naissance;
@@ -165,6 +166,14 @@ class CandidatureController extends Controller
                     if($request->choix3) {
                         $candidature->choix3 = $request->choix3;
                         $candidature->semestre_choix3 = $request->semestre_choix3;
+                        if($request->choix4) {
+                            $candidature->choix4 = $request->choix4;
+                            $candidature->semestre_choix4 = $request->semestre_choix4;
+                            if($request->choix5) {
+                                $candidature->choix5 = $request->choix5;
+                                $candidature->semestre_choix5 = $request->semestre_choix5;
+                            }
+                        }
                     }
                 }
                 $candidature->signature = $request->signature;
@@ -194,6 +203,7 @@ class CandidatureController extends Controller
             }
         }
         $candidature = Candidature::find($request->email);
+        $candidature->id=$request->id;
         $candidature->prenom = $request->prenom;
         $candidature->nom = $request->nom;
         $candidature->date_naissance = $request->date_naissance;
@@ -240,6 +250,14 @@ class CandidatureController extends Controller
             if($request->choix3) {
                 $candidature->choix3 = $request->choix3;
                 $candidature->semestre_choix3 = $request->semestre_choix3;
+                if($request->choix4) {
+                    $candidature->choix4 = $request->choix4;
+                    $candidature->semestre_choix4 = $request->semestre_choix4;
+                    if($request->choix5) {
+                        $candidature->choix5 = $request->choix5;
+                        $candidature->semestre_choix5 = $request->semestre_choix5;
+                    }
+                }
             }
         }
         $candidature->signature = $request->signature;

@@ -20,6 +20,7 @@ class Assocours extends Migration
             $table->foreign('nomdestination')->references('nom')->on('destination');
             $table->string('titre');
             $table->integer('semestre');
+            $table->string('specialite');
             $table->integer('ects');
             $table->integer('nombre');
             $table->longText('contenu');

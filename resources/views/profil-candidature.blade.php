@@ -170,6 +170,12 @@
                                     </label>
                                     <input value="{{session('mail')}}" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="mail">
                                 </div>
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-md font-bold mb-2" for="uid">
+                                        Numéro de dossier:
+                                    </label>
+                                    <input value="{{session('uid')}}" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="uid" type="number">
+                                </div>
 
                                 <div class="mb-4 flex">
                                     <label class="flex-row text-gray-700 text-md font-bold mb-2 mr-4" for="boursier">Boursier national: </label>
@@ -263,7 +269,7 @@
                                 </div>
 
                                 <div class="mt-6">
-                                    <h2>Indiquez par ordre de préférence 3 destinations:</h2>
+                                    <h2>Indiquez par ordre de préférence 5 destinations:</h2>
                                     <p class="text-sm text-gray-500">*Liste des destinations disponible sur le Site Web de Polytech Nancy, menu "INTERNATIONAL", "Etudes à l’étranger", et dans l’Intranet
                                         de Polytech Nancy menu "9. International"</p>
                                 </div>
@@ -315,6 +321,38 @@
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix3 == "S7+8") echo ("checked"); ?> id="7" type="radio" name="semestre_choix3" value="S7+8" class="choixS my-1 border-black-600 border-2">
                                     <label class="ml-4" for="S9+10">S9+10</label>
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix3 == "S9+10") echo ("checked"); ?> id="9" type="radio" name="semestre_choix3" value="S9+10" class="choixS my-1 border-black-600 border-2">
+                                </div>
+                                <div class="mt-4">
+                                    <label for="choix4">Choix 4 :</label>
+                                    <input @if($blocked) disabled @endif value="<?php if ($candidature && $candidature->choix4) echo ($candidature->choix4); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix4" class="border-black-600 border-2">
+                                    <label for="S5">S5</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix4 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix4" value="S5" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S7">S7</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix4 == "S7") echo ("checked"); ?> id="7" type="radio" name="semestre_choix4" value="S7" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S9">S9</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix4 == "S9") echo ("checked"); ?> id="9" type="radio" name="semestre_choix4" value="S9" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S5+6">S5+6</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix4 == "S5+6") echo ("checked"); ?> id="5" type="radio" name="semestre_choix4" value="S5+6" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S7+8">S7+8</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix4 == "S7+8") echo ("checked"); ?> id="7" type="radio" name="semestre_choix4" value="S7+8" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S9+10">S9+10</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix4 == "S9+10") echo ("checked"); ?> id="9" type="radio" name="semestre_choix4" value="S9+10" class="choixS my-1 border-black-600 border-2">
+                                </div>
+                                <div class="mt-4">
+                                    <label for="choix5">Choix 5 :</label>
+                                    <input @if($blocked) disabled @endif value="<?php if ($candidature && $candidature->choix5) echo ($candidature->choix5); ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix5" class="border-black-600 border-2">
+                                    <label for="S5">S5</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix5 == "S5") echo ("checked"); ?> id="5" type="radio" name="semestre_choix5" value="S5" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S7">S7</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix5 == "S7") echo ("checked"); ?> id="7" type="radio" name="semestre_choix5" value="S7" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S9">S9</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix5 == "S9") echo ("checked"); ?> id="9" type="radio" name="semestre_choix5" value="S9" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S5+6">S5+6</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix5 == "S5+6") echo ("checked"); ?> id="5" type="radio" name="semestre_choix5" value="S5+6" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S7+8">S7+8</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix5 == "S7+8") echo ("checked"); ?> id="7" type="radio" name="semestre_choix5" value="S7+8" class="choixS my-1 border-black-600 border-2">
+                                    <label class="ml-4" for="S9+10">S9+10</label>
+                                    <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix5 == "S9+10") echo ("checked"); ?> id="9" type="radio" name="semestre_choix5" value="S9+10" class="choixS my-1 border-black-600 border-2">
                                 </div>
                                 @foreach($ajouts as $ajout)
                                 @if($ajout->nom!="email")

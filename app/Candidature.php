@@ -13,6 +13,8 @@ class Candidature extends Model
     protected $connection = 'mysql';
     protected $fillable = [
         'email',
+        'id',
+        'score',
         'prenom',
         'nom',
         'date_naissance',
@@ -41,10 +43,19 @@ class Candidature extends Model
         'date_erasmus',
         'choix1',
         'semestre_choix1',
+        'resultat_1',
         'choix2',
         'semestre_choix2',
+        'resultat_2',
         'choix3',
         'semestre_choix3',
-        'signature'
+        'resultat_3',
+        'choix4',
+        'semestre_choix4',
+        'resultat_4',
+        'choix5',
+        'semestre_choix5',
+        'resultat_5',
+        'signature'        
     ];
 }

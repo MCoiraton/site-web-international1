@@ -16,6 +16,8 @@ class CreateCandidaturesTable extends Migration
 //mettre les conditions et donc ne pas utiliser la forme de tableau
         Schema::create('candidatures', function (Blueprint $table) {
             $table->string('email')->primary();
+            $table->integer('id')->nullable();
+            $table->integer('score')->nullable()->default(null);
             $table->string('prenom');
             $table->string('nom');
             $table->date('date_naissance');
@@ -44,10 +46,19 @@ class CreateCandidaturesTable extends Migration
             $table->date('date_erasmus')->nullable()->default(null);
             $table->string('choix1');
             $table->string('semestre_choix1');
+            $table->boolean('resultat_1')->nullable()->default(null);
             $table->string('choix2')->nullable()->default(null);
             $table->string('semestre_choix2')->nullable()->default(null);
+            $table->boolean('resultat_2')->nullable()->default(null);
             $table->string('choix3')->nullable()->default(null);
             $table->string('semestre_choix3')->nullable()->default(null);
+            $table->boolean('resultat_3')->nullable()->default(null);
+            $table->string('choix4')->nullable()->default(null);
+            $table->string('semestre_choix4')->nullable()->default(null);
+            $table->boolean('resultat_4')->nullable()->default(null);
+            $table->string('choix5')->nullable()->default(null);
+            $table->string('semestre_choix5')->nullable()->default(null);
+            $table->boolean('resultat_5')->nullable()->default(null);
             $table->string('signature');
             $table->boolean('blocked');
             $table->boolean('demande_unblocked')->default(false);

@@ -70,6 +70,11 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
                 }
                 unset($candidatures[$j]->signature);
                 unset($candidatures[$j]->annee_toeic);
+                unset($candidatures[$j]->resultat_1);
+                unset($candidatures[$j]->resultat_2);
+                unset($candidatures[$j]->resultat_3);
+                unset($candidatures[$j]->resultat_4);
+                unset($candidatures[$j]->resultat_5);
             }
         }
         $GLOBALS['candidatures']=$candidatures;
@@ -78,34 +83,34 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
     public function styles(Worksheet $sheet){
         //colonnes de bases vont jusqu'à S
         $ajouts=Schema::getColumnListing('candidatures_ajout');
-        $taille="S";
+        $taille="Y";
         switch(count($ajouts)-1) {
             case 0:
-                $taille="S";
-                break;
-            case 1:
-                $taille="T";
-                break;
-            case 2:
-                $taille="U";
-                break;
-            case 3:
-                $taille="V";
-                break;
-            case 4:
-                $taille="W";
-                break;
-            case 5:
-                $taille="X";
-                break;
-            case 6:
                 $taille="Y";
                 break;
-            case 7:
+            case 1:
                 $taille="Z";
                 break;
+            case 2:
+                $taille="AA";
+                break;
+            case 3:
+                $taille="AB";
+                break;
+            case 4:
+                $taille="AC";
+                break;
+            case 5:
+                $taille="AD";
+                break;
+            case 6:
+                $taille="AE";
+                break;
+            case 7:
+                $taille="AF";
+                break;
             default:
-                $taille="S";
+                $taille="Y";
                 break;
         }
         $sheet->getStyle('A1:'.$taille.'1')->applyFromArray([
@@ -146,19 +151,24 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
             ]);
         }
         $sheet->getRowDimension('1')->setRowHeight(42);
-        $sheet->getColumnDimension('D')->setWidth(12);
-        $sheet->getColumnDimension('E')->setWidth(12);
-        $sheet->getColumnDimension('J')->setWidth(12);
+        $sheet->getColumnDimension('A')->setWidth(34);
+        $sheet->getColumnDimension('F')->setWidth(12);
         $sheet->getColumnDimension('G')->setWidth(12);
-        $sheet->getColumnDimension('O')->setWidth(12);
+        $sheet->getColumnDimension('L')->setWidth(12);
+        $sheet->getColumnDimension('I')->setWidth(12);
         $sheet->getColumnDimension('Q')->setWidth(12);
         $sheet->getColumnDimension('S')->setWidth(12);
+        $sheet->getColumnDimension('U')->setWidth(12);
+        $sheet->getColumnDimension('X')->setWidth(12);
+        $sheet->getColumnDimension('Y')->setWidth(12);
     }
 
     public function headings(): array
     {
         $array= [
             'Email',
+            'num etudiant',
+            'score',
             'Nom',
             'Prenom',
             'Date de naissance',
@@ -176,7 +186,11 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
             'Choix 2',
             'Semestre choix 2',
             'Choix 3',
-            'Semestre choix 3'
+            'Semestre choix 3',
+            'Choix 4',
+            'Semestre choix 4',
+            'Choix 5',
+            'Semestre choix 5'
         ];
         $champs_ajout = Schema::getColumnListing('candidatures_ajout');
         foreach($champs_ajout as $champ){

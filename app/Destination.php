@@ -10,5 +10,5 @@ class Destination extends Model
     protected $table='destination';
     protected $primaryKey='id';
     protected $connection = 'mysql';
-    protected $fillable=["nom","intro","temoignages","astucesinfos"];
+    protected $fillable=["nom","intro","temoignages","astucesinfos","semestre","spécialité"];
 }
