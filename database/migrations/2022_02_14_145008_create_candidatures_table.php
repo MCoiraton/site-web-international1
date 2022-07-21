@@ -16,7 +16,7 @@ class CreateCandidaturesTable extends Migration
 //mettre les conditions et donc ne pas utiliser la forme de tableau
         Schema::create('candidatures', function (Blueprint $table) {
             $table->string('email')->primary();
-            $table->integer('id')->nullable();
+            $table->integer('id');
             $table->integer('score')->nullable()->default(null);
             $table->string('prenom');
             $table->string('nom');

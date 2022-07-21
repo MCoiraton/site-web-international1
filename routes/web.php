@@ -11,6 +11,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\ResultatsController;
+use App\Http\Controllers\AlgorithmeController;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -98,7 +99,10 @@ Route::get('/admin', function () {
 
     Route::post('/admin/msgaccueil', [IndexController::class, 'savemsgaccueil'])->middleware('editeur'); //enregistrement du message d'accueil
     Route::delete('/admin/msgaccueil', [IndexController::class, 'removemsgaccueil'])->middleware('editeur'); //suppression du message d'accueil
-//Routes élèves polytech
+    //Algo
+    Route::get('/admin/algorithme', [AlgorithmeController::class, 'show'])->middleware('admin');//page d'accès au controle de l'algo
+
+    //Routes élèves polytech
     //Articles (ne doivent pas être accessible aux utilisateurs non connectés)
     Route::get("/articles", [ArticlesController::class, "showListe2"])->middleware('polytech'); //liste des articles
     Route::get("/article/{id}", [ArticlesController::class, "show"])->middleware('polytech'); //affichage d'un article

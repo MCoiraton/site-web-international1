@@ -180,10 +180,10 @@
                                     <input value="{{session('mail')}}" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="mail">
                                 </div>
                                 <div class="mb-4">
-                                    <label class="block text-gray-700 text-md font-bold mb-2" for="uid">
+                                    <label class="block text-gray-700 text-md font-bold mb-2" for="id">
                                         Numéro de dossier:
                                     </label>
-                                    <input value="{{session('uid')}}" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="uid" type="number">
+                                    <input value="{{session('uid')}}" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="id" type="number">
                                 </div>
 
                                 <div class="mb-4 flex">
@@ -289,9 +289,9 @@
                                         <option value="<?php if ($candidature) echo ($candidature->choix1); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix1" class="border-black-600 border-2">
                                             <?php if ($candidature) echo ($candidature->choix1); ?>
                                         </option>
-                                        @foreach($destination as $dest)
-                                            <option value="{{$dest->nom}}">
-                                                {{$dest->nom}}
+                                        @foreach($cours as $dest)
+                                            <option value="{{$dest->code}}">
+                                                {{$dest->code}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -314,9 +314,9 @@
                                         <option value="<?php if ($candidature) echo ($candidature->choix2); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix2" class="border-black-600 border-2">
                                             <?php if ($candidature) echo ($candidature->choix2); ?>
                                         </option>
-                                        @foreach($destination as $dest)
-                                            <option value="{{$dest->nom}}">
-                                                {{$dest->nom}}
+                                        @foreach($cours as $dest)
+                                            <option value="{{$dest->code}}">
+                                                {{$dest->code}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -339,9 +339,9 @@
                                         <option value="<?php if ($candidature) echo ($candidature->choix3); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix3" class="border-black-600 border-2">
                                             <?php if ($candidature) echo ($candidature->choix3); ?>
                                         </option>
-                                        @foreach($destination as $dest)
-                                            <option value="{{$dest->nom}}">
-                                                {{$dest->nom}}
+                                        @foreach($cours as $dest)
+                                            <option value="{{$dest->code}}">
+                                                {{$dest->code}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -364,9 +364,9 @@
                                         <option value="<?php if ($candidature) echo ($candidature->choix4); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix4" class="border-black-600 border-2">
                                             <?php if ($candidature) echo ($candidature->choix4); ?>
                                         </option>
-                                        @foreach($destination as $dest)
-                                            <option value="{{$dest->nom}}">
-                                                {{$dest->nom}}
+                                        @foreach($cours as $dest)
+                                            <option value="{{$dest->code}}">
+                                                {{$dest->code}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -383,15 +383,15 @@
                                     <label class="ml-4" for="S9+10">S9+10</label>
                                     <input @if($blocked) disabled @endif <?php if ($candidature && $candidature->semestre_choix4 == "S9+10") echo ("checked"); ?> id="9" type="radio" name="semestre_choix4" value="S9+10" class="choixS my-1 border-black-600 border-2">
                                 </div>
-                                <div class="mt-4">
+                                <div class="mt-4">  
                                     <label for="choix5">Choix 5 :</label>
                                     <select @if($blocked) disabled @endif required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix5" class="border-black-600 border-2" >
                                         <option value="<?php if ($candidature) echo ($candidature->choix5); ?>" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="choix5" class="border-black-600 border-2">
                                             <?php if ($candidature) echo ($candidature->choix5); ?>
                                         </option>
-                                        @foreach($destination as $dest)
-                                            <option value="{{$dest->nom}}">
-                                                {{$dest->nom}}
+                                        @foreach($cours as $dest)
+                                            <option value="{{$dest->code}}">
+                                                {{$dest->code}}
                                             </option>
                                         @endforeach
                                     </select>
