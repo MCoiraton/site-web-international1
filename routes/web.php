@@ -101,6 +101,7 @@ Route::get('/admin', function () {
     Route::delete('/admin/msgaccueil', [IndexController::class, 'removemsgaccueil'])->middleware('editeur'); //suppression du message d'accueil
     //Algo
     Route::get('/admin/algorithme', [AlgorithmeController::class, 'show'])->middleware('admin');//page d'accès au controle de l'algo
+    Route::get('/admin/algorithme/run',[AlgorithmeController::class,'run'])->middleware('admin');//run l'algorithme
 
     //Routes élèves polytech
     //Articles (ne doivent pas être accessible aux utilisateurs non connectés)

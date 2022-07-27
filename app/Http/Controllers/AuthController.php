@@ -12,10 +12,10 @@ class AuthController extends Controller
 {
     public function login(){
         session()->put('isPolytech', true);
-        session()->put('uid',31807014);
-        session()->put('prenom',"mathis");
+        session()->put('uid',31809214);
+        session()->put('prenom',"charle");
         session()->put('nom',"coiraton");
-        session()->put('mail',"mathis.coiraton1@etu.univ-lorraine.fr");
+        session()->put('mail',"mathis.coiraton3@etu.univ-lorraine.fr");
         session()->put('isAdmin',true);
         session()->put('isEditeur',true);
        /* phpCAS::client(CAS_VERSION_2_0,'auth.univ-lorraine.fr',443,'');

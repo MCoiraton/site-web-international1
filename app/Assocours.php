@@ -10,5 +10,5 @@ class Assocours extends Model
     protected $primaryKey='id';
     public $timestamps = false;
     protected $connection = 'mysql';
-    protected $fillable=["code","nomdestination","titre","semestre","ects","nombre","contenu"];
+    protected $fillable=["code","nomdestination","titre","semestre","ects","nombre","contenu","inscrits"];
 }

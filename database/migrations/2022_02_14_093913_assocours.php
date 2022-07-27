@@ -24,6 +24,7 @@ class Assocours extends Migration
             $table->integer('ects');
             $table->integer('nombre');
             $table->longText('contenu');
+            $table->longText('inscrits')->nullable()->default(null);
         });
     }
 
