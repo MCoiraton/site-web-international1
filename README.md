@@ -16,7 +16,7 @@ De même, la documentation officielle de Tailwind CSS est très complète et sim
 Pour la connexion au CAS de l'université de Lorraine, nous utilisons le plugin phpCAS. C'est un plugin PHP qui permet de se connecter à un serveur CAS. 
 Le code utilisé pour réaliser la connexion est dans app/Http/Controllers/AuthController.php.
 Pour utiliser la connexion au CAS en local, vous devez modifier le fichier hosts de Windows. Laragon permet également de gérer le fichier hosts plus siumplement.
-* il est aussi possible de modifier directement les variables de sessions pour contourner directement le CAS dans app/Http/Controllers/AuthController.php. *
+*il est aussi possible de modifier directement les variables de sessions pour contourner directement le CAS dans app/Http/Controllers/AuthController.php.*
 
 Pour utiliser la base de données, laravel intègre un système de modèles qui permet de manipuler les données sous forme d'objets. Celui-ci s'appelle Eloquent.
 Il est documenté sur le site officiel de Laravel.
