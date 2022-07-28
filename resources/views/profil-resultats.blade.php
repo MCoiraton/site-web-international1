@@ -34,6 +34,8 @@
                             <div>
                                 @if($resultat==null)
                                     <p>Votre affectation est en attente</p>
+                                @elseif($resultat==false)
+                                    <p>Vous n'avez pas reçu de réponse favorable</p>
                                 @else
                                     <p>Vous avez obtenu votre voeu en position {{$position}}:</p>
                                     <h3 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">{{$resultat}}</h3>

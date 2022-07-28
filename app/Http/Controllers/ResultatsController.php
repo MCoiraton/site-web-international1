@@ -23,6 +23,9 @@ class ResultatsController extends Controller {
         }elseif($candidature->resultat_5==true){
             $resultat=$candidature->choix5;
             $position=5;
+        }elseif($candidature->resultat_1==false && $candidature->resultat_2==false && $candidature->resultat_3==false && $candidature->resultat_4==false && $candidature->resultat_5==false){
+            $resultat=false;
+            $position=null;
         }else{
             $resultat=null;
             $position=null;

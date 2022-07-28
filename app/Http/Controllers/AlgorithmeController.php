@@ -88,7 +88,14 @@ class AlgorithmeController extends Controller
                 }
                 if ($i == 5 || ${'choix' . $i} == null) {
                     //si tout les voeux du candidat n'ont pas de réponse favorable, on le suprime de la liste des candidats
+                    $cand->resultat_1=false;
+                    $cand->resultat_2=false;
+                    $cand->resultat_3=false;
+                    $cand->resultat_4=false;
+                    $cand->resultat_5=false;
+                    $cand->save();
                     array_diff($listeCandidats, array($cand));
+                    break;
                 }
             }
         }
