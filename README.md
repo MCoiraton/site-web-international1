@@ -1,61 +1,29 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Pour utiliser ce site en local, vous devez avoir la version 7.4 de php installé. La version 8 ou supérieur cause des problèmes et rend le site inutilisable.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Nous vous conseillons d'utiliser laragon si vous êtes sous Windows. C'est un logiciel similaire à Uwamp qui permet de faire fonctionner le site en local.
+Si vous êtes sous Linux ou Mac, vous pouvez utiliser un logiciel tel que WAMP, MAMP ou XAMP; vous pouvez également installer apache2, php7.4 et mysql-server.
 
-## About Laravel
+Avant de pouvoir utiliser le site en local, vous devez créer et remplir la base de données.
+Pour cela, executez la commande suivante depuis le répertoire du site :
+php artisan migrate:fresh --seed
+Il va créer et remplir la base de données avec des données de test.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Ce site utilise le framework Laravel. C'est un framework PHP open source qui permet de créer des sites web faciles à utiliser et à maintenir.
+Pour plus d'informations sur le framework Laravel, la documentation officielle est très complète et assez simple à utiliser.
+Pour les styles, nous utilisons Tailwind CSS qui est un framework CSS open source qui permet de créer des sites web avec des styles riches et personnalisés.
+De même, la documentation officielle de Tailwind CSS est très complète et simple à utiliser.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Pour la connexion au CAS de l'université de Lorraine, nous utilisons le plugin phpCAS. C'est un plugin PHP qui permet de se connecter à un serveur CAS. 
+Le code utilisé pour réaliser la connexion est dans app/Http/Controllers/AuthController.php.
+Pour utiliser la connexion au CAS en local, vous devez modifier le fichier hosts de Windows. Laragon permet également de gérer le fichier hosts plus siumplement.
+* il est aussi possible de modifier directement les variables de sessions pour contourner directement le CAS dans app/Http/Controllers/AuthController.php. *
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Pour utiliser la base de données, laravel intègre un système de modèles qui permet de manipuler les données sous forme d'objets. Celui-ci s'appelle Eloquent.
+Il est documenté sur le site officiel de Laravel.
 
-## Learning Laravel
+Pour exporter les données en excel, nous utilisons la fonction exports de intégré à Laravel. Elle est documentée sur le site officiel de Laravel et est disponible dans le fichier app/Exports/CandidatureExport.php.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Pour accéder au serveur qui héberge le site, vous devez utiliser le VPN de l'université de Lorraine.
+Vous pourrez ensuite vous connecter en SSH (port 22) avec les identifiants correspondants à demander à Mme Bunting ou Mme Schmitt.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Pour importer les scores des élèves sous forme d'un excel, la fonction import de FastExcel (https://github.com/rap2hpoutre/fast-excel) a été utiliser. L'excel doit comporter au moin deux colonnes nommée exactement "id" et "scores", sans majuscule et sans guillemets.
