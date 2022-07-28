@@ -102,6 +102,7 @@ Route::get('/admin', function () {
     //Algo
     Route::get('/admin/algorithme', [AlgorithmeController::class, 'show'])->middleware('admin');//page d'accès au controle de l'algo
     Route::get('/admin/algorithme/run',[AlgorithmeController::class,'run'])->middleware('admin');//run l'algorithme
+    Route::post('/admin/algorithme',[AlgorithmeController::class,'readExcelFile'])->middleware('admin');//attribue les scores suivant un excel
 
     //Routes élèves polytech
     //Articles (ne doivent pas être accessible aux utilisateurs non connectés)

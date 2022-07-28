@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Candidature;
-use App\Destination;
 use App\Assocours;
+use Rap2hpoutre\FastExcel\Facades\FastExcel;
+use Illuminate\Http\Request;
 
 class AlgorithmeController extends Controller
 {
@@ -94,7 +95,25 @@ class AlgorithmeController extends Controller
         return redirect('/admin/algorithme');
     }
 
-    function cmp($a, $b)
+    function readExcelFile(Request $request)
     {
+        //fonction permettait de récupérer les scores des élèves
+        if($request->hasFile('fichier'))
+        {
+            $column_id="id";
+            $column_score="score";
+            FastExcel::import( $request->file('fichier'), function ($data) use($column_id,$column_score)
+            {
+                if(isset($data[$column_score])){
+                    $candidat= Candidature::where('id','=',$data[$column_id])->first();
+                    $candidat->score=$data[$column_score];
+
+                    $candidat->save();
+                }
+
+            });
+            return redirect('/admin/algorithme');
+        }
+        return redirect("/admin/algorithme?error=1");
     }
 }
