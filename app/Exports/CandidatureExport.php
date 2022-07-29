@@ -171,7 +171,7 @@ class CandidatureExport implements FromCollection,WithHeadings,WithStyles
     {
         $array= [
             'Email',
-            'num etudiant',
+            'id',
             'score',
             'Nom',
             'Prenom',
